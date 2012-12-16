@@ -15,9 +15,6 @@ vicious = require("vicious")
 -- Revelation library
 require("revelation")
 
--- Load Debian menu entries
-require("debian.menu")
-
 -- Loads Shifty automatic tags management library
 require('shifty')
 
@@ -36,13 +33,16 @@ require("widgets.fs")
 require("widgets.mem")
 require("widgets.net")
 require("widgets.mpd")
+
+-- Loads conig modules
+require("cfg.shifty")
 -- }}}
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 -- beautiful.init("/usr/share/awesome/themes/default/theme.lua")
-config = awful.util.getdir("config")
-themes = config .. "/themes/"
+confdir = awful.util.getdir("config")
+themes = confdir .. "/themes/"
 themename     = "wombat"
 beautiful.init(themes .. themename .. "/theme.lua")
 
@@ -79,134 +79,10 @@ layouts =
 }
 -- }}}
 
--- {{{ Tags
--- Define a tag table which hold all screen tags.
--- tags = {
---     settings = {
---         { names = {"1:web", "2:mail", "3:term", "4:dev", "5:notag", "6:fs", "7:im"} ,
---           layout = {layouts[4], layouts[4], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2]},
---         },
---         { names = {"1:web", "3:term", "3:im"} ,
---           layout = {layouts[4], layouts[2], layouts[2]},
---         },
---     }
--- }
--- for s = 1, screen.count() do
---     -- tags[s] = awful.tag(tags.names, s, tags.layout)
---     tags[s] = awful.tag(tags.settings[s].names, s, tags.settings[s].layout)
--- end
--- }}}
-
 -- {{{ Shifty settings
-shifty.config.tags = {
-    ["1:www"] = {
-        init = true,
-        position = 1,
-        exclusive = true,
-        mwfact = 0.70,
-    },
-    ["2:mail"] = {
-        init = true,
-        position = 2,
-        exclusive = true,
-        mwfact = 0.70,
-    },
-    ["3:term"] = {
-        init = true,
-        position = 3,
-        },
-    ["4:dev"] = {
-        init = true,
-        position = 4,
-    },
-    ["5:notag"] = {
-        init = true,
-        position = 5,
-    },
-    ["6:fs"] = {
-        init = true,
-        position = 6,
-    },
-     ["7:im"] = {
-         init = true,
-         position = 7,
-     },
-    ["8:off"] = {
-        init = true,
-        position = 8,
-    },
-}
-
-shifty.config.apps = {
-    {
-        match = { "Dialog", "dialog", "Download" },
-        float = true,
-        honorsizehints = true,
-    },
-    {
-        match = { "Iceweasel.*", "Firefox.*" },
-        tag = "1:www",
-        screen = screen.count(),
-    },
-    {
-        match = { "Thunderbird.*" },
-        tag = "2:mail",
-    },
-    {
-        match = { "Npviewer.bin" },
-        tag = "1:www",
-        float = true,
-    },
-    {
-        match = { "Gvim" },
-        tag = "4:dev",
-    },
-    {
-        match = { "XTerm", "Terminator" },
-        tag = "3:term",
-		opacity = 0.9,
-    },
-    {
-        match = { "Empathy" },
-        tag = "7:im",
-    },
-    {
-        match = { "contact_list" },
-        geometry = { 100,100,nil,nil },
-    },
-    {
-        match = {     "LibreOffice.*" },
-        tag = "8:off",
-    },
-    {
-        match = { "Nautilus", "File-roller", "Baobab" },
-        tag = "6:fs",
-    },
-    {
-        match = { "gcolor2" },
-        geometry = { 100,100,nil,nil },
-    },
-    {
-        match = { "MPlayer" },
-        float = true,
-    },
-    {
-        match = { "" },
-        buttons = {
-            button({ }, 1, function (c) client.focus = c; c:raise() end),
-            button({ modkey }, 1, function (c) awful.mouse.client.move() end),
-            button({ modkey }, 3, function (c) awful.mouse.client.resize() end),
-		},
-    },
-}
-
-shifty.config.defaults = {
-    run = function(tag) naughty.notify({ text = tag.name }) end,
-    layout = awful.layout.suit.tile,
-    ncol = 1,
-    floatBars=true,
-}
-
+shifty.config.tags = cfg.shifty.tags()
+shifty.config.apps = cfg.shifty.apps()
+shifty.config.defaults = cfg.shifty.defaults()
 shifty.init()
 -- }}}
 
@@ -220,11 +96,10 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
-                                    { "open terminal", terminal }
-                                  }
-                        })
+mymainmenu = awful.menu({ items = {
+	{ "awesome", myawesomemenu, beautiful.awesome_icon },
+	{ "open terminal", terminal }, }
+    })
 
 mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
                                      menu = mymainmenu })
@@ -626,7 +501,7 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 
 -- Runs programs
 -- utils.process.run_once("/usr/lib/gnome-settings-daemon/gnome-settings-daemon")
---utils.process.run_once("gnome-keyring-daemon")
+-- utils.process.run_once("gnome-keyring-daemon")
 -- utils.process.run_once("gnome-volume-control-applet")
 -- utils.process.run_once("gnome-power-manager")
 -- utils.process.run_once("gnome-screensaver")
