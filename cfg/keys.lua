@@ -5,15 +5,53 @@ local shifty = shifty
 local utils = utils
 local awesome = awesome
 local client = client
-local modkey = modkey
-local terminal = terminal
-local editor = editor
+local naughty = require("naughty")
+
 
 module("cfg.keys")
+
+-- Module level variables
+modkey = nil
+terminal = nil
+editor = nil
+
+local initialized = false
+
+
+-- {{{ Error
+-- Displayes an error messages as a naughty notification, and on the console
+local function err(errmsg)
+    local title = "Key bindings initialization error"
+    naughty.notify({ title = title,
+        text = errmsg,
+        preset = naughty.config.presets.critical
+        })
+    return print("E: " .. title .. ": " .. errmsg)
+end
+
+
+-- {{{  Module initialization
+function init()
+    if not modkey then
+        err("Modkey has not been set.")
+    end
+    if not terminal then
+        err("Terminal has not been set.")
+    end
+    if not editor then
+        err("Editor has not been set.")
+    end
+    initialized = true
+end
+-- }}}
 
 
 -- {{{ Global key bindings
 function globalkeys()
+    if not initialized then
+        err("Molule has not been initialized.")
+    end
+
     keys = awful.util.table.join(
         awful.key({ modkey, }, "Left",   awful.tag.viewprev),
         awful.key({ modkey, }, "Right",  awful.tag.viewnext),
@@ -176,6 +214,10 @@ end
 
 -- {{{ Global key bindings
 function clientkeys()
+    if not initialized then
+        err("Molule has not been initialized.")
+    end
+
     return awful.util.table.join(
         awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
         awful.key({ modkey,           }, "q",      function (c) c:kill()                         end),

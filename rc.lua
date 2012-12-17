@@ -36,6 +36,9 @@ require("widgets.mem")
 require("widgets.net")
 require("widgets.mpd")
 
+require("cfg.shifty")
+require("cfg.keys")
+
 -- }}}
 
 -- {{{ Variable definitions
@@ -80,8 +83,10 @@ layouts =
 -- }}}
 
 -- {{{ Configuration modules (depend on previous variables)
-require("cfg.shifty")
-require("cfg.keys")
+cfg.keys.modkey = modkey
+cfg.keys.terminal = terminal
+cfg.keys.editor = editor
+cfg.keys.init()
 -- }}}
 
 -- {{{ Shifty settings
