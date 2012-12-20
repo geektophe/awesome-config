@@ -5,6 +5,7 @@ local shifty = shifty
 local utils = utils
 local awesome = awesome
 local client = client
+local mouse = mouse
 local naughty = require("naughty")
 
 
@@ -14,6 +15,7 @@ module("cfg.keys")
 modkey = nil
 terminal = nil
 editor = nil
+promptbox = nil
 
 local initialized = false
 
@@ -40,6 +42,9 @@ function init()
     end
     if not editor then
         err("Editor has not been set.")
+    end
+    if not promptbox then
+        err("Promptbox has not been set.")
     end
     initialized = true
 end
@@ -135,7 +140,7 @@ function globalkeys()
         awful.key({ modkey,           }, "i",     utils.client.info),
 
         -- Prompt
-        awful.key({ modkey },            "l",     function () mypromptbox[mouse.screen]:run() end)
+        awful.key({ modkey },            "l",     function () promptbox[mouse.screen]:run() end)
     )
 
     -- Tags access keys

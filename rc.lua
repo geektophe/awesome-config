@@ -46,7 +46,7 @@ require("cfg.keys")
 -- beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 confdir = awful.util.getdir("config")
 themes = confdir .. "/themes/"
-themename     = "wombat"
+themename = "wombat-bo"
 beautiful.init(themes .. themename .. "/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
@@ -83,10 +83,6 @@ layouts =
 -- }}}
 
 -- {{{ Configuration modules (depend on previous variables)
-cfg.keys.modkey = modkey
-cfg.keys.terminal = terminal
-cfg.keys.editor = editor
-cfg.keys.init()
 -- }}}
 
 -- {{{ Shifty settings
@@ -237,6 +233,12 @@ root.buttons(awful.util.table.join(
 -- }}}
 
 -- {{{ Key bindings
+cfg.keys.modkey = modkey
+cfg.keys.terminal = terminal
+cfg.keys.editor = editor
+cfg.keys.promptbox = mypromptbox
+cfg.keys.init()
+
 globalkeys = cfg.keys.globalkeys()
 root.keys(globalkeys)
 shifty.config.globalkeys = globalkeys
@@ -281,10 +283,17 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- utils.process.run_once("gnome-volume-control-applet")
 -- utils.process.run_once("gnome-power-manager")
 -- utils.process.run_once("gnome-screensaver")
-utils.process.run_once("nm-applet")
 -- utils.process.run_once("update-notifier")
 utils.process.run_once("parcellite")
 utils.process.run_once("dropboxd")
 utils.process.run_once("xcompmgr -cF")
+
+-- Configures screen
+if config.hostname == "thor" then
+	utils.process.run("xrandr --output DVI-0 --auto --output DVI-1 --auto --right-of DVI-0")
+else
+	utils.process.run_once("nm-applet")
+end
+
 -- Reinitializes wallapper replaced by gnome-settings-daemon
 -- awful.util.spawn("awsetbg -f " .. themes .. themename .. "/background.jpg")
