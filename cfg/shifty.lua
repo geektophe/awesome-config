@@ -98,6 +98,7 @@ function apps()
         {
             match = { "gcolor2" },
             geometry = { 100,100,nil,nil },
+            tag = "1:www",
         },
         {
             match = { "MPlayer" },
