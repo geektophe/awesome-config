@@ -55,6 +55,7 @@ function apps()
             match = { "Dialog", "dialog", "Download" },
             float = true,
             honorsizehints = true,
+            floatBars=true,
         },
         {
             match = { "Iceweasel.*", "Firefox.*" },
@@ -98,7 +99,7 @@ function apps()
         {
             match = { "gcolor2" },
             geometry = { 100,100,nil,nil },
-            tag = "1:www",
+            tag = "",
         },
         {
             match = { "MPlayer" },
@@ -120,7 +121,8 @@ function defaults()
     return {
         run = function(tag) naughty.notify({ text = tag.name }) end,
         layout = awful.layout.suit.tile,
-        ncol = 1,
         floatBars=true,
+        ncol = 1,
     }
 end
+-- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

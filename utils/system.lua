@@ -30,3 +30,4 @@ function is_executable(prg)
     return process.cmd_output( "which " .. prg ) ~= ""
 end
 --}}}
+-- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

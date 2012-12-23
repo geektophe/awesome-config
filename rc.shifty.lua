@@ -583,3 +583,4 @@ utils.process.run_once("gnome-screensaver")
 utils.process.run_once("parcellite")
 -- Reinitializes wallapper replaced by gnome-settings-daemon
 awful.util.spawn("awsetbg -f " .. themes .. themename .. "/background.jpg")
+-- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

@@ -73,3 +73,4 @@ function widget_update(widget, args)
    end
 end
 -- }}}
+-- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

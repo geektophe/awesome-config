@@ -39,3 +39,4 @@ function icon_down()
     neticon.image = image(beautiful.widget_net)
     return neticon
 end
+-- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

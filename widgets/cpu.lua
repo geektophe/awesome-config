@@ -52,3 +52,4 @@ function icon()
     cpuicon.image = image(beautiful.widget_cpu)
     return cpuicon
 end
+-- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

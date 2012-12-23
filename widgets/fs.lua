@@ -48,3 +48,4 @@ function icon()
     fsicon.image = image(beautiful.widget_disk)
     return fsicon
 end
+-- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

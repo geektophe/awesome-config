@@ -492,3 +492,4 @@ end
 function set_current_order(order)
    current_request_table.params.order = order
 end
+-- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

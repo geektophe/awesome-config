@@ -92,3 +92,4 @@ function cmd_output(cmd)
     return outp
 end
 --}}}
+-- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

@@ -127,3 +127,4 @@ function toggle(prog, vert, horiz, width, height, sticky, screen)
 end
 
 setmetatable(_M, { __call = function(_, ...) return toggle(...) end })
+-- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

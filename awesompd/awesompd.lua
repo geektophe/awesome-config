@@ -1022,3 +1022,4 @@ end
 function awesompd:command_toggle()
    return self:command_playpause()
 end
+-- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

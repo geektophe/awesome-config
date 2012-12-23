@@ -1,12 +1,12 @@
 -- Key bindings definition
 
-local awful = awful
-local shifty = shifty
 local utils = utils
 local awesome = awesome
 local client = client
 local mouse = mouse
+local shifty = require("shifty")
 local naughty = require("naughty")
+local awful = require("awful")
 
 
 module("cfg.keys")
