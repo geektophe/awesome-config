@@ -53,13 +53,15 @@ theme.bg_urgent = "#34353488"
 theme.border_width  = "1"
 theme.border_normal = "#ffffff"
 theme.border_focus  = "#ffffff"
-theme.border_marked = "#CC9393"
+theme.border_marked = "#ffffff"
 -- }}}
 
 -- {{{ Titlebars
 theme.titlebar_bg_focus  = "#FF6B0175"
 theme.titlebar_bg_normal = "#00000075"
 -- }}}
+
+-- {{{ Titlebars
 
 -- There are other variable sets
 -- overriding the default one when
