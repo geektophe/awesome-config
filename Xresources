@@ -1,0 +1,25 @@
+!
+! XTerm settings
+!
+
+XTerm*background:         black
+XTerm*foreground:         white
+XTerm*cursorColor:        white
+XTerm*geometry:           80x25
+!XTerm*faceName:           terminus:normal:pixelsize=12
+!XTerm*faceName:           Dejavu Sans Mono:normal:pixelsize=12
+xterm*font:              -*-dina-medium-r-*-*-16-*-*-*-*-*-*-*
+XTerm*dynamicColors:      true
+XTerm*utf8:               2
+XTerm*eightBitInput:      true
+XTerm*saveLines:          5120
+XTerm*scrollTtyKeypress:  true
+XTerm*scrollTtyOutput:    false
+XTerm*scrollBar:          true
+XTerm*rightScrollBar:     true
+XTerm*jumpScroll:         true
+XTerm*multiScroll:        true
+XTerm*toolBar:            true
+!*customization:           -color
+XTerm*tremName:           xterm-256color
+xterm*loginshell:         true
