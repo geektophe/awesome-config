@@ -1,13 +1,13 @@
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
     -- Add a titlebar
-    awful.titlebar.add(c, { modkey = modkey })
+    -- awful.titlebar.add(c, { modkey = modkey })
 
     -- Enable sloppy focus
     c:add_signal("mouse::enter",
         function(c)
             if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-                and awful.client.focus.filter(c) then
+               and awful.client.focus.filter(c) then
                 client.focus = c
             end
         end)
@@ -23,9 +23,17 @@ client.add_signal("manage", function (c, startup)
             awful.placement.no_offscreen(c)
         end
     end
+    c.default_opacity = c.opacity
 end)
 
-client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.add_signal("focus", function(c)
+    c.border_color = beautiful.border_focus
+    -- c.opacity = c.default_opacity
+end)
+
+client.add_signal("unfocus", function(c)
+    c.border_color = beautiful.border_normal
+    -- c.opacity = math.max(c.opacity - 0.5, 0.5)
+end)
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

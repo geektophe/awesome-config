@@ -86,7 +86,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "i",     utils.client.info),
 
     -- Prompt
-    awful.key({ modkey },            "l",     function () promptbox[mouse.screen]:run() end)
+    awful.key({ modkey },            "l",     function () mypromptbox[mouse.screen]:run() end)
 )
 
 -- Tags access keys
@@ -124,7 +124,10 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey,           }, "q",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
-    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
+    awful.key({ modkey, "Control" }, "Return", function (c)
+        c:swap(awful.client.getmaster())
+        c.raise()
+    end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "l",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "m",      function (c) c.minimized = not c.minimized    end),
@@ -142,5 +145,6 @@ root.keys(globalkeys)
 shifty.config.globalkeys = globalkeys
 shifty.config.clientkeys = clientkeys
 -- }}}
+
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

@@ -1,5 +1,3 @@
--- wombat (matching the vim colorscheme), awesome3 theme, by zhuravlik
-
 --{{{ Main
 require("awful.util")
 
@@ -8,20 +6,20 @@ theme = {}
 home          = os.getenv("HOME")
 config        = awful.util.getdir("config")
 shared        = "/usr/share/awesome"
+
 if not awful.util.file_readable(shared .. "/icons/awesome16.png") then
     shared    = "/usr/share/local/awesome"
 end
+
 sharedicons   = shared .. "/icons"
 sharedthemes  = shared .. "/themes"
 themes        = config .. "/themes"
-themename     = "gits"
-if not awful.util.file_readable(themes .. themename .. "/theme.lua") then
-       themes = sharedthemes
-end
+themename     = "/gits"
 themedir      = themes .. themename
 
-wallpaper1    = themedir .. "/background1.jpg"
-theme.wallpaper_cmd = { "awsetbg " .. wallpaper1 }
+wallpaper    = themedir .. "/background2.jpg"
+
+theme.wallpaper_cmd = { "awsetbg " .. wallpaper }
 
 if awful.util.file_readable(config .. "/vain/init.lua") then
     theme.useless_gap_width  = "3"
@@ -32,31 +30,27 @@ end
 theme.font      = "sans 8"
 
 -- {{{ Colors
-theme.fg_normal = "#cccccc"
-theme.fg_focus  = "#8d8a4b"
+theme.fg_normal = "#ffffff"
+theme.bg_normal = "#405156aa"
+theme.fg_focus  = "#ffffff"
+theme.bg_focus  = "#137112aa"
 theme.fg_urgent = "#929392"
-theme.bg_normal = "#1c1d1c88"
-theme.bg_focus  = "#0c0d0c88"
 theme.bg_urgent = "#34353488"
 -- }}}
 
 -- {{{ Borders
 theme.border_width  = "1"
---theme.border_width  = "2"
---theme.border_normal = "#34353488"
---theme.border_normal = "#2d4113"
---theme.border_normal = "#586c2d"
-theme.border_normal = "#727352"
-theme.border_focus  = "#586c2d"
---theme.border_focus  = "#a2bf36"
---theme.border_focus  = "#6886c1"
-theme.border_marked = "#CC9393"
+theme.border_normal = "#777777"
+theme.border_focus  = "#ffffff"
+theme.border_marked = "#ffffff"
 -- }}}
 
 -- {{{ Titlebars
-theme.titlebar_bg_focus  = "#3F3F3F"
-theme.titlebar_bg_normal = "#3F3F3F"
+theme.titlebar_bg_focus  = "#FF6B0175"
+theme.titlebar_bg_normal = "#00000075"
 -- }}}
+
+-- {{{ Titlebars
 
 -- There are other variable sets
 -- overriding the default one when
@@ -72,11 +66,11 @@ theme.titlebar_bg_normal = "#3F3F3F"
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
---theme.fg_widget        = "#AECF96"
---theme.fg_center_widget = "#88A175"
---theme.fg_end_widget    = "#FF5656"
---theme.bg_widget        = "#494B4F"
---theme.border_widget    = "#3F3F3F"
+theme.fg_widget        = "#AECF96"
+theme.fg_center_widget = "#88A175"
+theme.fg_end_widget    = "#FF5656"
+theme.bg_widget        = "#494B4F"
+theme.border_widget    = "#3F3F3F"
 -- }}}
 
 -- {{{ Mouse finder
@@ -88,6 +82,10 @@ theme.mouse_finder_color = "#CC9393"
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
+
+theme.menu_bg_normal = "#00000075"
+theme.menu_bg_focus = "#FF6B0175"
+theme.menu_border_width = "0"
 theme.menu_height = "15"
 theme.menu_width  = "130"
 -- }}}
@@ -144,6 +142,21 @@ theme.titlebar_maximized_button_normal_active = sharedthemes .. "/zenburn/titleb
 theme.titlebar_maximized_button_focus_inactive  = sharedthemes .. "/zenburn/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = sharedthemes .. "/zenburn/titlebar/maximized_normal_inactive.png"
 -- }}}
+-- }}}
+
+-- {{{ Widgets icons
+theme.widget_cpu       = themedir.."/icons/cpu.png"
+theme.widget_netup     = themedir.."/icons/up.png"
+theme.widget_fs        = themedir.."/icons/disk.png"
+theme.widget_vol       = themedir.."/icons/vol.png"
+theme.widget_date      = themedir.."/icons/time.png"
+theme.widget_music     = themedir.."/icons/music.png"
+theme.widget_mem       = themedir.."/icons/mem.png"
+theme.widget_net       = themedir.."/icons/down.png"
+theme.widget_disk      = themedir.."/icons/disk.png"
+theme.widget_mpd_play  = themedir.."/icons/mpd_play.png"
+theme.widget_mpd_pause = themedir.."/icons/mpd_pause.png"
+theme.widget_mpd_stop  = themedir.."/icons/mpd_stop.png"
 -- }}}
 
 return theme

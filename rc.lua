@@ -1,27 +1,18 @@
-
-
 -- {{{ Includes
 -- Sets locale
 os.setlocale("fr_FR.UTF-8")
 
 -- Standard awesome library
 require("awful")
-require("awful.autofocus")
-require("awful.rules")
+-- require("awful.autofocus")
+-- require("awful.rules")
 -- Theme handling library
 require("beautiful")
--- Notification library
-require("naughty")
--- Widgets library
-vicious = require("vicious")
 -- Revelation library
 require("revelation")
 
 -- Loads Shifty automatic tags management library
 require('shifty')
-
--- Loads Teardrop dropdown terminal
-require('teardrop')
 
 -- Loads utils libraries
 require("utils.process")
@@ -45,7 +36,7 @@ require("widgets.spacer")
 -- beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 confdir = awful.util.getdir("config")
 themes = confdir .. "/themes/"
-themename = "wombat-bo"
+themename = "gits"
 beautiful.init(themes .. themename .. "/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
