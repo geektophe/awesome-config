@@ -4,7 +4,7 @@ os.setlocale("fr_FR.UTF-8")
 
 -- Standard awesome library
 require("awful")
--- require("awful.autofocus")
+require("awful.autofocus")
 -- require("awful.rules")
 -- Theme handling library
 require("beautiful")
