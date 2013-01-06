@@ -73,9 +73,13 @@ shifty.config.apps = {
         tag = "4:dev",
     },
     {
-        match = { "XTerm", "Terminator" },
+        match = { "XTerm" },
         tag = "3:term",
         opacity = 0.8,
+    },
+    {
+        match = { "URxvt", "Terminator" },
+        tag = "3:term",
     },
     {
         match = { "Empathy" },

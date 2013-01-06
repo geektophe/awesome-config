@@ -16,7 +16,7 @@ client.add_signal("manage", function (c, startup)
         -- Set the windows at the slave,
         -- i.e. put it at the end of others instead of setting it master.
         awful.client.setslave(c)
-        utils.client.save_opacity(c)
+        utils.client.opacity_save(c)
 
         -- Put windows in a smart way, only if they do not set an initial position.
         if not c.size_hints.user_position and not c.size_hints.program_position then
@@ -25,34 +25,17 @@ client.add_signal("manage", function (c, startup)
         end
 
     end
-
-    naughty.notify({text = "Manage - Opacity: " .. c.opacity})
-    naughty.notify({text = "Manage - Default opacity: " .. utils.client.get_opacity(c)})
 end)
-
-
-function toggle_opacity(c)
-    local opacity = utils.client.get_opacity(c)
-
-    if opacity then
-        if client.focus == c then
-            c.opacity = opacity
-        else
-            c.opacity = math.max(opacity - 0.3, 0.5)
-        end
-    end
-end
-
 
 client.add_signal("focus", function(c)
     c.border_color = beautiful.border_focus
-    toggle_opacity(c)
+    utils.client.opacity_toggle(c, 0.3)
     c:raise()
 end)
 
 client.add_signal("unfocus", function(c)
     c.border_color = beautiful.border_normal
-    toggle_opacity(c)
+    utils.client.opacity_toggle(c, 0.3)
 end)
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
