@@ -23,11 +23,18 @@ function home_mp()
 		"df " .. home .. "|awk '$1~/^\\// {print $6}'")
 end
 --}}}
---
+
 --{{{ in_path
 -- Checks whether a program is in PATH
 function is_executable(prg)
     return process.cmd_output( "which " .. prg ) ~= ""
+end
+--}}}
+
+--{{{ hsotname
+-- Returns system hostname
+function hostname()
+    return utils.process.cmd_output("hostname")
 end
 --}}}
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

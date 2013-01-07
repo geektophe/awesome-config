@@ -1,5 +1,6 @@
 --{{{ Main
 require("awful.util")
+require("utils.system")
 require("utils.process")
 
 
@@ -19,13 +20,17 @@ themes        = config .. "/themes"
 themename     = "/gits"
 themedir      = themes .. themename
 
-if utils.process.cmd_output("hostname") == "thor" then
-    wallpaper    = themedir .. "/background_1600x1200.jpg"
-else
-    wallpaper    = themedir .. "/background2.jpg"
-end
+-- resolution = utils.process.cmd_output("xrandr -q|grep '^Screen 0'|awk -F, '{print $2}'|awk '{print $2$3$4}'")
+-- print ("resolution: " .. resolution)
 
-theme.wallpaper_cmd = { "awsetbg " .. wallpaper }
+-- if awful.util.file_readable(themedir .. "/background_" .. resolution ..  ".jpg") then
+--     wallpaper = themedir .. "/background_" .. resolution ..  ".jpg"
+-- else
+--     wallpaper    = themedir .. "/background_default.jpg"
+-- end
+
+wallpaper    = themedir .. "/background_default.jpg"
+theme.wallpaper_cmd = { "awsetbg -a " .. wallpaper }
 
 if awful.util.file_readable(config .. "/vain/init.lua") then
     theme.useless_gap_width  = "3"

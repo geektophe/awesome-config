@@ -11,7 +11,7 @@ local awful = require("awful")
 
 module("utils.process")
 
---{{{ Run once
+--{{{ run_once
 -- Runs a progrmam if not already running
 -- @param cmd the command to execute
 function run_once(cmd)
@@ -19,12 +19,12 @@ function run_once(cmd)
         do return nil end
     end
 
-    name = cmd_output("basename " .. cmd)
+    name = cmd_output("basename " .. cmd:match('^([^ ]+)'))
     awful.util.spawn_with_shell("pgrep -u $USER -x " .. name .. " || (" .. cmd .. " &)")
 end
 --}}}
 
---{{{ Run or raise
+--{{{ run_or_raise
 --- Spawns cmd if no client can be found matching properties
 -- If such a client can be found, pop to first tag where it is visible, and give it focus
 -- @param cmd the command to execute
@@ -84,7 +84,7 @@ function run_or_raise(cmd, properties)
 end
 --}}}
 
---{{{ Command output
+--{{{ cmd_output
 -- Executes a command and returns its stdout
 -- @param cmd the command to execute
 function cmd_output(cmd)
@@ -94,4 +94,5 @@ function cmd_output(cmd)
     return outp
 end
 --}}}
+
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
