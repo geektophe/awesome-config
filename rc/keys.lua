@@ -86,7 +86,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "i",     utils.client.info),
 
     -- Prompt
-    awful.key({ modkey },            "l",     function () promptbox[mouse.screen]:run() end)
+    awful.key({ modkey },            "l",     function () mypromptbox[mouse.screen]:run() end)
 )
 
 -- Tags access keys
@@ -113,8 +113,8 @@ for i=1, (shifty.config.maxtags or 9) do
                     local t = shifty.getpos(i)
                    awful.client.movetotag(t)
                    awful.tag.viewonly(t)
-                end
-            end))
+                    end
+                end))
 end
 -- }}}
 
@@ -124,15 +124,25 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey,           }, "q",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
-    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
+    awful.key({ modkey, "Control" }, "Return", function (c)
+        c:swap(awful.client.getmaster())
+        c.raise()
+    end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "l",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "m",      function (c) c.minimized = not c.minimized    end),
-    awful.key({ modkey,           }, "m",
-        function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c.maximized_vertical   = not c.maximized_vertical
-        end)
+    awful.key({ modkey,           }, "m",      function (c)
+        c.maximized_horizontal = not c.maximized_horizontal
+        c.maximized_vertical   = not c.maximized_vertical
+    end),
+    awful.key({ modkey,           }, "Prior", function(c)
+        utils.client.opacity_incr(c, 0.1)
+        naughty.notify({ text = "Client opacity set to: " .. c.opacity })
+    end),
+    awful.key({ modkey,           }, "Next", function(c)
+        utils.client.opacity_incr(c, -0.1)
+        naughty.notify({ text = "Client opacity set to: " .. c.opacity })
+    end)
 )
 -- }}}
 
@@ -142,5 +152,6 @@ root.keys(globalkeys)
 shifty.config.globalkeys = globalkeys
 shifty.config.clientkeys = clientkeys
 -- }}}
+
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

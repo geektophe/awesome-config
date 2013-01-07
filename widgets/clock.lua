@@ -5,7 +5,7 @@
 --
 -- Note that he theme should have widget_cpu attribute set
 
-local awful = awful
+local awful = require('awful')
 
 module("widgets.clock")
 

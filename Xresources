@@ -6,9 +6,7 @@ XTerm*background:         black
 XTerm*foreground:         white
 XTerm*cursorColor:        white
 XTerm*geometry:           80x25
-!XTerm*faceName:           terminus:normal:pixelsize=12
-!XTerm*faceName:           Dejavu Sans Mono:normal:pixelsize=12
-xterm*font:              -*-dina-medium-r-*-*-16-*-*-*-*-*-*-*
+XTerm*faceName:           Dejavu Sans Mono:normal:pixelsize=12
 XTerm*dynamicColors:      true
 XTerm*utf8:               2
 XTerm*eightBitInput:      true
@@ -23,3 +21,75 @@ XTerm*toolBar:            true
 !*customization:           -color
 XTerm*tremName:           xterm-256color
 xterm*loginshell:         true
+
+!
+! URxvt settings
+!
+
+!
+! XTerm settings
+!
+URxvt.depth: 32
+!URxvt.scrollstyle: xterm
+URxvt*loginShell: true
+
+! Font
+URxvt*font: xft:DejaVu Sans Mono:normal:pixelsize=12:antialias=true:hinting=true
+URxvt*letterSpace: -1
+
+! Scroll bar
+URxvt*scrollBar: true
+URxvt*scrollBar_right: true
+!URxvt*scrollColor: #c2dd5a
+URxvt*scrollBar_floating: true
+URxvt*scrollstyle: plain
+
+! to match gnome-terminal "Linux console" scheme
+! foreground/background
+URxvt*background: [88]#000000
+URxvt*foreground: #ffffff
+! black
+URxvt.color0  : #000000
+URxvt.color8  : #555555
+! red
+URxvt.color1  : #AA0000
+URxvt.color9  : #FF5555
+! green
+URxvt.color2  : #00AA00
+URxvt.color10 : #55FF55
+! yellow
+URxvt.color3  : #AA5500
+URxvt.color11 : #FFFF55
+! blue
+URxvt.color4  : #0000AA
+URxvt.color12 : #5555FF
+! magenta
+URxvt.color5  : #AA00AA
+URxvt.color13 : #FF55FF
+! cyan
+URxvt.color6  : #00AAAA
+URxvt.color14 : #55FFFF
+! white
+URxvt.color7  : #AAAAAA
+URxvt.color15 : #FFFFFF
+
+! Key codes
+URxvt.keysym.S-Up: \033[1;2A
+URxvt.keysym.S-Down: \033[1;2B
+URxvt.keysym.S-Right: \033[1;2C
+URxvt.keysym.S-Left: \033[1;2D
+URxvt.keysym.S-Home: \033[1;2H
+URxvt.keysym.S-End: \033[1;2F
+URxvt.keysym.C-Up: \033[1;5A
+URxvt.keysym.C-Down: \033[1;5B
+URxvt.keysym.C-Right: \033[1;5C
+URxvt.keysym.C-Left: \033[1;5D
+URxvt.keysym.C-S-Up: \033[1;6A
+URxvt.keysym.C-S-Down: \033[1;6B
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! Plugins
+URxvt.perl-ext-common: default,matcher
+URxvt.matcher.button: 2

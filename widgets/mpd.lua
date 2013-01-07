@@ -2,15 +2,15 @@
 -- Module functions are :
 --
 -- widget : returns the wiget
--- icon : returns the associated widget icon 
+-- icon : returns the associated widget icon
 --
 -- Note that he theme should have widget_music attribute set
 
 local process = require("utils.process")
 local mpd = require("utils.mpd")
 -- local awesompd = require("awesompd/awesompd")
-local awful = awful
-local vicious = vicious
+local vicious = require("vicious")
+local awful = require("awful")
 local beautiful = beautiful
 local widget_init = widget
 local image = image
@@ -34,20 +34,20 @@ function widget()
     -- mpdwidget = widget({ type = "textbox", name = "mpdwidget" })
     -- vicious.register(mpdwidget, vicious.widgets.mpd,
     --     function (widget, args)
-    --         if args["{state}"] == "Stop" then 
+    --         if args["{state}"] == "Stop" then
     --             return " - "
-    --         else 
+    --         else
     --             return args["{Artist}"]..' - '.. args["{Title}"]
     --         end
     --     end, 10)
-    
+
     -- musicwidget = awesompd:create() -- Create awesompd widget
-    -- musicwidget.font = "Liberation Mono" -- Set widget font 
+    -- musicwidget.font = "Liberation Mono" -- Set widget font
     -- musicwidget.scrolling = true -- If true, the text in the widget will be scrolled
     -- musicwidget.output_size = 30 -- Set the size of widget in symbols
     -- musicwidget.update_interval = 10 -- Set the update interval in seconds
     -- -- Set the folder where icons are located (change username to your login name)
-    -- musicwidget.path_to_icons = themes .. themename ..  "/icons" 
+    -- musicwidget.path_to_icons = themes .. themename ..  "/icons"
     -- -- Set the default music format for Jamendo streams. You can change
     -- -- this option on the fly in awesompd itself.
     -- -- possible formats: awesompd.FORMAT_MP3, awesompd.FORMAT_OGG
@@ -83,7 +83,7 @@ function widget()
     mpd.init()
     local mpdwidget = widget_init({ type = "imagebox" })
     vicious.register(mpdwidget, vicious.widgets.mpd, mpd.widget_update, 1)
-    
+
     mpdwidget:buttons(awful.util.table.join(
         awful.button({ }, 1, mpd.toggle),
         awful.button({ }, 3, function () process.run_or_raise(mpdclient) end)

@@ -2,14 +2,14 @@
 -- Module functions are :
 --
 -- widget : returns the wiget
--- icon : returns the associated widget icon 
+-- icon : returns the associated widget icon
 --
 -- Note that he theme should have widget_mem attribute set
 
 local process = require("utils.process")
 local system = require("utils.system")
-local awful = awful
-local vicious = vicious
+local vicious = require("vicious")
+local awful = require("awful")
 local beautiful = beautiful
 local widget_init = widget
 local image = image
@@ -34,7 +34,7 @@ function widget()
     memwidget:set_color("#AECF96")
     memwidget:set_gradient_colors({ "#AECF96", "#88A175", "#FF5656" })
     vicious.register(memwidget, vicious.widgets.mem, "$1")
-    
+
     memwidget.widget:buttons(awful.util.table.join(
         awful.button({ }, 1, function () process.run_or_raise(sysmonitor) end)
     ))

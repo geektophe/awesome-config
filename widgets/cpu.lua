@@ -2,15 +2,15 @@
 -- Module functions are :
 --
 -- widget : returns the wiget
--- icon : returns the associated widget icon 
+-- icon : returns the associated widget icon
 --
 -- Note that he theme should have widget_cpu attribute set
 
 local process = require("utils.process")
 local system = require("utils.system")
-local awful = awful
-local naughty = naughty
-local vicious = vicious
+local vicious = require("vicious")
+local awful = require("awful")
+local naughty = require("naughty")
 local beautiful = beautiful
 local widget_init = widget
 local image = image
@@ -38,7 +38,7 @@ function widget()
     cpuwidget:set_border_color("#727352")
     cpuwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
     vicious.register(cpuwidget, vicious.widgets.cpu, "$1")
-    
+
     cpuwidget.widget:buttons(awful.util.table.join(
         awful.button({ }, 1, function () process.run_or_raise(sysmonitor) end)
     ))

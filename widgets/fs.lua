@@ -2,14 +2,14 @@
 -- Module variables are :
 --
 -- widget : the wiget itself
--- icon : the associated widget icon 
+-- icon : the associated widget icon
 --
 -- Note that he theme should have widget_disk attribute set
 
 local system = require("utils.system")
 local process = require("utils.process")
-local awful = awful
-local vicious = vicious
+local vicious = require("vicious")
+local awful = require("awful")
 local beautiful = beautiful
 local widget_init = widget
 local image = image

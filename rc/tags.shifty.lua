@@ -1,5 +1,8 @@
 -- Shity tags and apps configuration
 
+-- {{{ Enable title bar only for floating windows
+shifty.config.float_bars = true
+-- }}}
 
 -- {{{ Tags definitions
 shifty.config.tags = {
@@ -70,9 +73,13 @@ shifty.config.apps = {
         tag = "4:dev",
     },
     {
-        match = { "XTerm", "Terminator" },
+        match = { "XTerm" },
         tag = "3:term",
-        opacity = 0.9,
+        opacity = 0.8,
+    },
+    {
+        match = { "URxvt", "Terminator" },
+        tag = "3:term",
     },
     {
         match = { "Empathy" },
@@ -101,11 +108,15 @@ shifty.config.apps = {
     },
     {
         match = { "" },
-        buttons = {
-            awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
-            awful.button({ modkey }, 1, function (c) awful.mouse.client.move() end),
-            awful.button({ modkey }, 3, function (c) awful.mouse.client.resize() end),
-        },
+        buttons = awful.util.table.join(
+            awful.button({}, 1, function (c) client.focus = c; c:raise() end),
+            awful.button({modkey}, 1, function(c)
+                    client.focus = c
+                    c:raise()
+                    awful.mouse.client.move(c)
+                end),
+            awful.button({modkey}, 3, awful.mouse.client.resize)
+            )
     },
 }
 -- }}}
@@ -115,8 +126,10 @@ shifty.config.apps = {
 shifty.config.defaults = {
     run = function(tag) naughty.notify({ text = tag.name }) end,
     layout = awful.layout.suit.tile,
-    floatBars=true,
     ncol = 1,
+    guess_name=true,
+    guess_position=true,
+    opacity=1,
 }
 -- }}}
 
@@ -133,6 +146,21 @@ shifty.taglist.buttons = awful.util.table.join(
     )
 -- }}}
 
+
+--awful.hooks.property.register(function (c, prop)
+--    -- Remove the titlebar if fullscreen
+--    if c.fullscreen then
+--        awful.titlebar.remove(c)
+--    elseif not c.fullscreen then
+--        -- Add title bar for floating apps
+--        if c.titlebar == nil and awful.client.floating.get(c) then
+--            awful.titlebar.add(c, { modkey = modkey })
+--        -- Remove title bar, if it's not floating
+--        elseif c.titlebar and not awful.client.floating.get(c) then
+--            awful.titlebar.remove(c)
+--        end
+--    end
+--end)
 
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
