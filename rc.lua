@@ -102,3 +102,5 @@ utils.rc.loadrc('signal')
 -- {{{ Programs to run at startup
 utils.rc.loadrc('programs')
 -- }}}
+
+-- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

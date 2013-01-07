@@ -1,5 +1,7 @@
 --{{{ Main
 require("awful.util")
+require("utils.process")
+
 
 theme = {}
 
@@ -17,7 +19,11 @@ themes        = config .. "/themes"
 themename     = "/gits"
 themedir      = themes .. themename
 
-wallpaper    = themedir .. "/background2.jpg"
+if utils.process.cmd_output("hostname") == "thor" then
+    wallpaper    = themedir .. "/background_1600x1200.jpg"
+else
+    wallpaper    = themedir .. "/background2.jpg"
+end
 
 theme.wallpaper_cmd = { "awsetbg " .. wallpaper }
 
@@ -160,3 +166,5 @@ theme.widget_mpd_stop  = themedir.."/icons/mpd_stop.png"
 -- }}}
 
 return theme
+
+-- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

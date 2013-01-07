@@ -18,7 +18,9 @@ function run_once(cmd)
     if not cmd then
         do return nil end
     end
-    awful.util.spawn_with_shell("pgrep -u $USER -x " .. cmd .. " || (" .. cmd .. " &)")
+
+    name = cmd_output("basename " .. cmd)
+    awful.util.spawn_with_shell("pgrep -u $USER -x " .. name .. " || (" .. cmd .. " &)")
 end
 --}}}
 
