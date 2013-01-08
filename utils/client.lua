@@ -2,6 +2,7 @@
 
 -- Loads naugthy library
 local naughty = require("naughty")
+local awful = require("awful")
 local client = client
 local math = math
 local print = print
@@ -13,8 +14,7 @@ module("utils.client")
 
 -- A table instance that will save clients opacity
 local clients_opacity = {}
-local opacity_file = "/tmp/" .. os.getenv('USER') .. '.awesome.clients.opacity'
-
+local opacity_file = os.tmpname()
 
 -- {{{ round
 -- Rounds a decimal value
@@ -23,6 +23,7 @@ local function round(num, idp)
     return math.floor(num * mult + 0.5) / mult
 end
 --}}}
+
 
 -- {{{ info
 -- Print window informations
@@ -53,6 +54,92 @@ function info()
 end
 --}}}
 
+
+-- {{{ dict_len
+-- Returns the number of keys contained in a dictionnary
+local function dict_len(dict)
+    local count = 0
+
+    for _, _ in pairs(dict) do
+        count = count + 1
+    end
+    return count
+end
+--}}}
+
+
+-- {{{ isdir
+-- Tests if a directory exists
+local function isdir(path)
+    local code = os.execute('test -d ' .. path)
+
+    if code == 0 then
+        return true
+    else
+        return false
+    end
+end
+--}}}
+
+
+-- {{{ ispid
+-- Tests if a pid exists
+local function ispid(pid)
+        return isdir('/proc/' .. pid)
+end
+--}}}
+
+
+-- {{{ pid_to_file
+-- Saves dictionnary key value into filename
+local function pid_to_file(dict, filename)
+    file = io.open(filename, "w")
+
+    if file ~= nil then
+        for pid, opacity in pairs(dict) do
+            if ispid(pid) then
+                file:write(pid .. ":" .. opacity .. "\n")
+            else
+                dict[pid] = nil
+            end
+        end
+        io.close(file)
+    else
+        print('E: Could not open file for writing: ' .. filename)
+        naughty.notify({
+            text = 'Could not open file for writing: ' .. filename,
+            preset = naughty.config.presets.critical
+        })
+    end
+end
+--}}}
+
+
+-- {{{ file_to_pid
+-- Loads dictionnary key value couples from  filename
+local function file_to_pid(filename, dict)
+    if not awful.util.file_readable(filename) then
+        return nil
+    end
+
+    file = io.open(filename, "r")
+
+    if file ~= nil then
+        for line in file:lines() do
+            print("line: '" .. line .. "'")
+        end
+        io.close(file)
+    else
+        print('E: Could not open file for reading: ' .. filename)
+        naughty.notify({
+            text = 'Could not open file for writing: ' .. filename,
+            preset = naughty.config.presets.critical
+        })
+    end
+end
+--}}}
+
+
 -- {{{ opacity_save
 -- Saves a client's opacity into the module level clients_opacity table
 function opacity_save(c)
@@ -62,20 +149,18 @@ function opacity_save(c)
         opacity = 1
     end
     clients_opacity[c.pid] = opacity
-
-    file = io.open(opacity_file, "w")
-
-    for k, v in pairs(clients_opacity) do
-        file:write(k .. ":" .. v .. "\n")
-    end
-
-    io.close(file)
+    pid_to_file(clients_opacity, opacity_file)
 end
 --}}}
+
 
 -- {{{ opacity_default
 -- Returns saved opacity or 1 if client was not found
 function opacity_default(c)
+    if dict_len(clients_opacity) == 0 then
+        file_to_pid(opacity_file, clients_opacity)
+    end
+
     local opacity = clients_opacity[c.pid]
 
     if not opacity then
@@ -85,6 +170,7 @@ function opacity_default(c)
     return clients_opacity[c.pid]
 end
 --}}}
+
 
 -- {{{ opacity_toggle
 -- Increases or decreases client opacity opacity depending on its focus
@@ -98,6 +184,7 @@ function opacity_toggle(c, step)
     end
 end
 --}}}
+
 
 -- {{{ opacity_incr
 -- Increases or decreases client opacity of 1 step

@@ -30,7 +30,7 @@ themedir      = themes .. themename
 -- end
 
 wallpaper    = themedir .. "/background_default.jpg"
-theme.wallpaper_cmd = "awsetbg -a " .. wallpaper
+theme.wallpaper_cmd = { "awsetbg -a " .. wallpaper }
 
 if awful.util.file_readable(config .. "/vain/init.lua") then
     theme.useless_gap_width  = "3"
