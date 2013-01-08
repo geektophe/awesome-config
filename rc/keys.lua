@@ -136,12 +136,14 @@ clientkeys = awful.util.table.join(
         c.maximized_vertical   = not c.maximized_vertical
     end),
     awful.key({ modkey,           }, "Prior", function(c)
-        utils.client.opacity_incr(c, 0.1)
-        naughty.notify({ text = "Client opacity set to: " .. c.opacity })
+        if utils.client.opacity_incr(c, 0.1) then
+            naughty.notify({ text = "Client opacity set to: " .. c.opacity })
+        end
     end),
     awful.key({ modkey,           }, "Next", function(c)
-        utils.client.opacity_incr(c, -0.1)
-        naughty.notify({ text = "Client opacity set to: " .. c.opacity })
+        if utils.client.opacity_incr(c, -0.1) then
+            naughty.notify({ text = "Client opacity set to: " .. c.opacity })
+        end
     end)
 )
 -- }}}

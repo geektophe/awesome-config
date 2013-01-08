@@ -5,13 +5,26 @@ local naughty = require("naughty")
 local client = client
 local math = math
 local print = print
+local os = os
+local io = io
+local pairs = pairs
 
 module("utils.client")
 
 -- A table instance that will save clients opacity
 local clients_opacity = {}
+local opacity_file = "/tmp/" .. os.getenv('USER') .. '.awesome.clients.opacity'
 
--- {{{ Info
+
+-- {{{ round
+-- Rounds a decimal value
+local function round(num, idp)
+    local mult = 10^(idp or 0)
+    return math.floor(num * mult + 0.5) / mult
+end
+--}}}
+
+-- {{{ info
 -- Print window informations
 function info()
     local c = client.focus
@@ -40,19 +53,27 @@ function info()
 end
 --}}}
 
--- {{{ Saves client opacity
+-- {{{ opacity_save
 -- Saves a client's opacity into the module level clients_opacity table
 function opacity_save(c)
-    local opacity = c.opacity
+    local opacity = round(c.opacity, 1)
 
     if opacity < 0 or opacity > 1 then
         opacity = 1
     end
     clients_opacity[c.pid] = opacity
+
+    file = io.open(opacity_file, "w")
+
+    for k, v in pairs(clients_opacity) do
+        file:write(k .. ":" .. v .. "\n")
+    end
+
+    io.close(file)
 end
 --}}}
 
--- {{{ Returns saved opacity
+-- {{{ opacity_default
 -- Returns saved opacity or 1 if client was not found
 function opacity_default(c)
     local opacity = clients_opacity[c.pid]
@@ -65,7 +86,7 @@ function opacity_default(c)
 end
 --}}}
 
--- {{{ Increases or decreases client opacity on focus change
+-- {{{ opacity_toggle
 -- Increases or decreases client opacity opacity depending on its focus
 function opacity_toggle(c, step)
     local opacity = opacity_default(c)
@@ -78,17 +99,24 @@ function opacity_toggle(c, step)
 end
 --}}}
 
--- {{{ Increases or decreases client opacity of a defined value
+-- {{{ opacity_incr
 -- Increases or decreases client opacity of 1 step
 function opacity_incr(c, incr)
-    local opacity = c.opacity
+    local opacity = round(c.opacity, 1)
 
     if opacity < 0 or opacity > 1 then
         opacity = 1
     end
 
-    c.opacity = math.min(math.max(opacity + incr, 0.1), 1)
-    opacity_save(c)
+    local new_opacity = math.min(math.max(opacity + incr, 0.1), 1)
+
+    if opacity ~= new_opacity then
+        c.opacity = new_opacity
+        opacity_save(c)
+        return true
+    end
+
+    return false
 end
 --}}}
 

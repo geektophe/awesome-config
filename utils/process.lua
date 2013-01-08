@@ -8,6 +8,7 @@ local pairs = pairs
 local io = io
 local os = os
 local awful = require("awful")
+local print = print
 
 module("utils.process")
 
@@ -20,6 +21,7 @@ function run_once(cmd)
     end
 
     name = cmd_output("basename " .. cmd:match('^([^ ]+)'))
+    print ("'pgrep -u $USER -x " .. name .. " || (" .. cmd .. " &)'")
     awful.util.spawn_with_shell("pgrep -u $USER -x " .. name .. " || (" .. cmd .. " &)")
 end
 --}}}
