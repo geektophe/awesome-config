@@ -27,6 +27,6 @@ export GPG_AGENT_INFO
 #/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Starts polkit dependant services
-/usr/bin/nm-applet &
+#/usr/bin/nm-applet &
 
 exec /usr/bin/awesome
