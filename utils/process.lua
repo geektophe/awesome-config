@@ -22,7 +22,8 @@ function run_once(cmd)
 
     name = cmd_output("basename " .. cmd:match('^([^ ]+)'))
     print ("'pgrep -u $USER -x " .. name .. " || (" .. cmd .. " &)'")
-    awful.util.spawn_with_shell("pgrep -u $USER -x " .. name .. " || (" .. cmd .. " &)")
+    -- awful.util.spawn_with_shell("pgrep -u $USER -x " .. name .. " || (" .. CMD .. " &)")
+    return cmd_output("pgrep -u $USER -x " .. name .. " || (" .. cmd .. " &)")
 end
 --}}}
 

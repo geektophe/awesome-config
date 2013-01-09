@@ -82,6 +82,11 @@ shifty.config.apps = {
         tag = "3:term",
     },
     {
+        match = { "Terminator Preferences" },
+        tag = "3:term",
+        float = true,
+    },
+    {
         match = { "Empathy" },
         tag = "7:im",
     },

@@ -4,6 +4,8 @@
 local process = require("utils.process")
 local naughty = naughty
 local os = os
+local string = string
+local print = print
 
 module("utils.system")
 
@@ -15,6 +17,7 @@ function main_intf()
 end
 --}}}
 
+
 --{{{ Get Home mount point
 -- Returns home mount point
 function home_mp()
@@ -24,6 +27,7 @@ function home_mp()
 end
 --}}}
 
+
 --{{{ in_path
 -- Checks whether a program is in PATH
 function is_executable(prg)
@@ -31,10 +35,12 @@ function is_executable(prg)
 end
 --}}}
 
+
 --{{{ hsotname
 -- Returns system hostname
 function hostname()
-    return utils.process.cmd_output("hostname")
+    return process.cmd_output("hostname")
 end
 --}}}
+
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

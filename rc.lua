@@ -41,7 +41,7 @@ beautiful.init(themes .. themename .. "/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 -- terminal = "x-terminal-emulator"
-terminal = "urxvt"
+terminal = "urxvtc"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -100,7 +100,8 @@ utils.rc.loadrc('signal')
 -- }}}
 
 -- {{{ Programs to run at startup
-utils.rc.loadrc('startup')
+-- Disabled, managed by Xsession
+-- utils.rc.loadrc('startup')
 -- }}}
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
