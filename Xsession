@@ -12,6 +12,9 @@ export GPG_AGENT_INFO
 # Starts urxvtd daemon
 /usr/bin/urxvtd -o -f -q
 
+# Starts pulseaudio
+/usr/bin/start-pulseaudio-x11
+
 # Starts other components in the background
 /usr/bin/xcompmgr -cF &
 /usr/bin/gnome-sound-applet &
