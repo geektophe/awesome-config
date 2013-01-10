@@ -15,11 +15,12 @@ require("revelation")
 require('shifty')
 
 -- Loads utils libraries
-require("utils.process")
 require("utils.client")
-require("utils.system")
 require("utils.mpd")
+require("utils.process")
 require("utils.rc")
+require("utils.system")
+require("utils.tag")
 
 -- Loads widgets libraries
 require("widgets.clock")
@@ -41,7 +42,7 @@ beautiful.init(themes .. themename .. "/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 -- terminal = "x-terminal-emulator"
-terminal = "urxvtc"
+terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -51,6 +52,9 @@ editor_cmd = terminal .. " -e " .. editor
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
+
+-- Modules variables
+utils.client.unfocus_opacity_incr = 0.3
 -- }}}
 
 -- {{{ Layouts definition

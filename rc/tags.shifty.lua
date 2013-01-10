@@ -53,6 +53,7 @@ shifty.config.apps = {
         float = true,
         honorsizehints = true,
         floatBars=true,
+        ontop=true,
     },
     {
         match = { "Iceweasel.*", "Firefox.*" },
@@ -103,13 +104,14 @@ shifty.config.apps = {
         tag = "6:fs",
     },
     {
-        match = { "gcolor2" },
-        geometry = { 100,100,nil,nil },
-        tag = "",
-    },
-    {
         match = { "MPlayer" },
         float = true,
+    },
+    {
+        match = { "Gcolor2" },
+        float = true,
+        ontop = true,
+        sticky = true,
     },
     {
         match = { "" },

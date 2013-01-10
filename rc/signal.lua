@@ -29,13 +29,13 @@ end)
 
 client.add_signal("focus", function(c)
     c.border_color = beautiful.border_focus
-    utils.client.opacity_toggle(c, 0.3)
+    utils.client.opacity_toggle(c)
     c:raise()
 end)
 
 client.add_signal("unfocus", function(c)
     c.border_color = beautiful.border_normal
-    utils.client.opacity_toggle(c, 0.3)
+    utils.client.opacity_toggle(c)
 end)
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

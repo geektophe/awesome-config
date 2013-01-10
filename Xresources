@@ -20,7 +20,7 @@ XTerm*multiScroll:        true
 XTerm*toolBar:            true
 !*customization:           -color
 XTerm*tremName:           xterm-256color
-xterm*loginshell:         true
+!xterm*loginshell:         true
 
 !
 ! URxvt settings
@@ -31,7 +31,7 @@ xterm*loginshell:         true
 !
 URxvt.depth: 32
 !URxvt.scrollstyle: xterm
-URxvt*loginShell: true
+!URxvt*loginShell: true
 
 ! Font
 URxvt*font: xft:DejaVu Sans Mono:normal:pixelsize=12:antialias=true:hinting=true
@@ -61,8 +61,8 @@ URxvt.color10 : #55FF55
 URxvt.color3  : #AA5500
 URxvt.color11 : #FFFF55
 ! blue
-URxvt.color4  : #0000AA
-URxvt.color12 : #5555FF
+URxvt.color4  : #305D97
+URxvt.color12 : #46627F
 ! magenta
 URxvt.color5  : #AA00AA
 URxvt.color13 : #FF55FF

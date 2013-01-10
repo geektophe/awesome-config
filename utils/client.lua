@@ -9,12 +9,18 @@ local print = print
 local os = os
 local io = io
 local pairs = pairs
+local screen = screen
 
 module("utils.client")
 
+-- Module configuration variable idicating how much client opacity should be
+-- decreased when unfocused
+opacity_min = 0.1
+opacity_unfocus_incr = 0.3
+
 -- A table instance that will save clients opacity
 local clients_opacity = {}
-local opacity_file = os.tmpname()
+local opacity_file = "/tmp/awmclnt.opacity." .. os.getenv('USER')
 
 -- {{{ round
 -- Rounds a decimal value
@@ -126,13 +132,17 @@ local function file_to_pid(filename, dict)
 
     if file ~= nil then
         for line in file:lines() do
-            print("line: '" .. line .. "'")
+            for pid, opacity in line:gmatch("([%d]+):([%d\.]+)") do
+                if pid and opacity and ispid(pid) then
+                    dict[pid] = opacity
+                end
+            end
         end
         io.close(file)
     else
         print('E: Could not open file for reading: ' .. filename)
         naughty.notify({
-            text = 'Could not open file for writing: ' .. filename,
+            text = 'Could not open file for reading: ' .. filename,
             preset = naughty.config.presets.critical
         })
     end
@@ -154,6 +164,20 @@ end
 --}}}
 
 
+-- {{{ opacity_reload
+-- Reloads clients opacity from clients_opacity dictionnary
+function opacity_reload()
+    for s = 1, screen.count() do
+        for c in client.get() do
+            if clients_opacity[c.pid] then
+                c.opacity = clients_opacity[c.pid]
+                opacity_toggle(c)
+            end
+        end
+    end
+end
+
+
 -- {{{ opacity_default
 -- Returns saved opacity or 1 if client was not found
 function opacity_default(c)
@@ -161,12 +185,10 @@ function opacity_default(c)
         file_to_pid(opacity_file, clients_opacity)
     end
 
-    local opacity = clients_opacity[c.pid]
-
-    if not opacity then
+    if not clients_opacity[c.pid] then
         opacity_save(c)
-        opacity = clients_opacity[c.pid]
     end
+
     return clients_opacity[c.pid]
 end
 --}}}
@@ -174,13 +196,13 @@ end
 
 -- {{{ opacity_toggle
 -- Increases or decreases client opacity opacity depending on its focus
-function opacity_toggle(c, step)
+function opacity_toggle(c)
     local opacity = opacity_default(c)
 
     if client.focus == c then
         c.opacity = opacity
     else
-        c.opacity = math.max(opacity - step, 0.1)
+        c.opacity = math.max(opacity - unfocus_opacity_incr, opacity_min)
     end
 end
 --}}}
@@ -195,7 +217,7 @@ function opacity_incr(c, incr)
         opacity = 1
     end
 
-    local new_opacity = math.min(math.max(opacity + incr, 0.1), 1)
+    local new_opacity = math.min(math.max(opacity + incr, opacity_min), 1)
 
     if opacity ~= new_opacity then
         c.opacity = new_opacity
@@ -206,5 +228,18 @@ function opacity_incr(c, incr)
     return false
 end
 --}}}
+
+
+-- {{{ viewnext
+-- Select next client in tag
+function viewnext(incr)
+    awful.client.focus.byidx(incr)
+
+    if client.focus then
+        client.focus:raise()
+    end
+end
+--}}}
+
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

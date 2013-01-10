@@ -7,78 +7,52 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, }, "Right",  awful.tag.viewnext),
     awful.key({ modkey, }, "Escape", awful.tag.history.restore),
 
+    -- Move tag
+    awful.key({ modkey, "Control" }, "Left",  function () utils.tag.incindex(-1) end),
+    awful.key({ modkey, "Control" }, "Right", function () utils.tag.incindex(1) end),
+
     -- Shifty: keybindings specific to shifty
-    awful.key({modkey}, "d", shifty.del), -- delete a tag
-    awful.key({modkey, "Shift"}, "n", shifty.send_prev), -- client to prev tag
-    awful.key({modkey}, "n", shifty.send_next), -- client to next tag
-    awful.key({modkey, "Control"}, "n",
-        function()
-            local t = awful.tag.selected()
-            local s = awful.util.cycle(screen.count(), t.screen + 1)
-            awful.tag.history.restore()
-            t = shifty.tagtoscr(s, t)
-            awful.tag.viewonly(t)
-        end),
-    awful.key({modkey}, "a", shifty.add), -- creat a new tag
-    awful.key({modkey, "Control"}, "è", shifty.rename), -- rename a tag
-    awful.key({modkey, "shift"}, "a", -- nopopup new tag
+    awful.key({ modkey            }, "d", shifty.del), -- delete a tag
+    awful.key({ modkey            }, "n", shifty.send_next), -- client to next tag
+    awful.key({ modkey, "Shift"   }, "n", shifty.send_prev), -- client to prev tag
+    awful.key({ modkey, "Control" }, "n", utils.tag.toscreen), -- send tag to screen
+    awful.key({ modkey            }, "a", shifty.add), -- creat a new tag
+    awful.key({ modkey, "Control" }, "è", shifty.rename), -- rename a tag
+    awful.key({ modkey, "shift"   }, "a", -- nopopup new tag
         function()
             shifty.add({nopopup = true})
         end),
 
-
     -- Tab
-    awful.key({ modkey, }, "Tab",
-        function ()
-            awful.client.focus.byidx( 1)
-            if client.focus then client.focus:raise() end
-        end),
-    awful.key({ modkey, "Shift" }, "Tab",
-        function ()
-            awful.client.focus.byidx(-1)
-            if client.focus then client.focus:raise() end
-        end),
-
+    awful.key({ modkey,         }, "Tab", function () utils.client.viewnext(1) end),
+    awful.key({ modkey, "Shift" }, "Tab", function () utils.client.viewnext(-1) end),
 
     -- Remapped H
     awful.key({ modkey,           }, "c", function () awful.tag.incmwfact(-0.05) end),
     awful.key({ modkey, "Shift"   }, "c", function () awful.tag.incnmaster(1) end),
     awful.key({ modkey, "Control" }, "c", function () awful.tag.incncol(1) end),
 
-
     -- Remapped J
-    awful.key({ modkey, }, "t",
-        function ()
-            awful.client.focus.byidx(1)
-            if client.focus then client.focus:raise() end
-        end),
+    awful.key({ modkey, },           "t", function () utils.client.viewnext(1) end),
     awful.key({ modkey, "Shift"   }, "t", function () awful.client.swap.byidx(1) end),
     awful.key({ modkey, "Control" }, "t", function () awful.screen.focus_relative(1) end),
 
-
     -- Remapped K
-    awful.key({ modkey, }, "s",
-        function ()
-            awful.client.focus.byidx(-1)
-            if client.focus then client.focus:raise() end
-        end),
+    awful.key({ modkey, }, "s", function () utils.client.viewnext(-1) end),
     awful.key({ modkey, "Shift"   }, "s", function () awful.client.swap.byidx( -1) end),
     awful.key({ modkey, "Control" }, "s", function () awful.screen.focus_relative(-1) end),
-
 
     -- Remapped L
     awful.key({ modkey,           }, "r",     function () awful.tag.incmwfact(0.05) end),
     awful.key({ modkey, "Shift"   }, "r",     function () awful.tag.incnmaster(-1) end),
     awful.key({ modkey, "Control" }, "r",     function () awful.tag.incncol(-1) end),
 
-
     awful.key({ modkey,           }, "g", awful.client.urgent.jumpto),
-
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey, "Control" }, "l", awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+    awful.key({ modkey, "Control" }, "l",      awesome.restart),
+    awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
