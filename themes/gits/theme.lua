@@ -19,16 +19,6 @@ sharedthemes  = shared .. "/themes"
 themes        = config .. "/themes"
 themename     = "/gits"
 themedir      = themes .. themename
-
--- resolution = utils.process.cmd_output("xrandr -q|grep '^Screen 0'|awk -F, '{print $2}'|awk '{print $2$3$4}'")
--- print ("resolution: " .. resolution)
-
--- if awful.util.file_readable(themedir .. "/background_" .. resolution ..  ".jpg") then
---     wallpaper = themedir .. "/background_" .. resolution ..  ".jpg"
--- else
---     wallpaper    = themedir .. "/background_default.jpg"
--- end
-
 wallpaper    = themedir .. "/background_default.jpg"
 theme.wallpaper_cmd = { "awsetbg -a " .. wallpaper }
 
@@ -45,14 +35,14 @@ theme.fg_normal = "#ffffff"
 theme.bg_normal = "#405156aa"
 theme.fg_focus  = "#ffffff"
 theme.bg_focus  = "#137112aa"
-theme.fg_urgent = "#929392"
-theme.bg_urgent = "#34353488"
+theme.fg_urgent = "#ffffff"
+theme.bg_urgent = "#FF6B0175"
 -- }}}
 
 -- {{{ Borders
 theme.border_width  = "1"
 theme.border_normal = "#777777"
-theme.border_focus  = "#ffffff"
+theme.border_focus  = "#FFB30198"
 theme.border_marked = "#ffffff"
 -- }}}
 
@@ -97,7 +87,7 @@ theme.mouse_finder_color = "#CC9393"
 theme.menu_bg_normal = "#00000075"
 theme.menu_bg_focus = "#FF6B0175"
 theme.menu_border_width = "0"
-theme.menu_height = "15"
+theme.menu_height = "18"
 theme.menu_width  = "130"
 -- }}}
 

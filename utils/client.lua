@@ -150,20 +150,6 @@ end
 --}}}
 
 
--- {{{ opacity_save
--- Saves a client's opacity into the module level clients_opacity table
-function opacity_save(c)
-    local opacity = round(c.opacity, 1)
-
-    if opacity < 0 or opacity > 1 then
-        opacity = 1
-    end
-    clients_opacity[c.pid] = opacity
-    pid_to_file(clients_opacity, opacity_file)
-end
---}}}
-
-
 -- {{{ opacity_reload
 -- Reloads clients opacity from clients_opacity dictionnary
 function opacity_reload()
@@ -178,13 +164,23 @@ function opacity_reload()
 end
 
 
+-- {{{ opacity_save
+-- Saves a client's opacity into the module level clients_opacity table
+function opacity_save(c)
+    local opacity = round(c.opacity, 1)
+
+    if opacity < 0 or opacity > 1 then
+        opacity = 1
+    end
+
+    clients_opacity[c.pid] = opacity
+end
+--}}}
+
+
 -- {{{ opacity_default
 -- Returns saved opacity or 1 if client was not found
 function opacity_default(c)
-    if dict_len(clients_opacity) == 0 then
-        file_to_pid(opacity_file, clients_opacity)
-    end
-
     if not clients_opacity[c.pid] then
         opacity_save(c)
     end
@@ -240,6 +236,5 @@ function viewnext(incr)
     end
 end
 --}}}
-
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

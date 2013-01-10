@@ -104,11 +104,11 @@ clientkeys = awful.util.table.join(
     end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "l",      function (c) c:redraw()                       end),
-    awful.key({ modkey,           }, "m",      function (c) c.minimized = not c.minimized    end),
-    awful.key({ modkey,           }, "m",      function (c)
-        c.maximized_horizontal = not c.maximized_horizontal
-        c.maximized_vertical   = not c.maximized_vertical
-    end),
+    -- awful.key({ modkey,           }, "m",      function (c) c.minimized = not c.minimized    end),
+    -- awful.key({ modkey,           }, "m",      function (c)
+    --     c.maximized_horizontal = not c.maximized_horizontal
+    --     c.maximized_vertical   = not c.maximized_vertical
+    -- end),
     awful.key({ modkey,           }, "Prior", function(c)
         if utils.client.opacity_incr(c, 0.1) then
             naughty.notify({ text = "Client opacity set to: " .. c.opacity })

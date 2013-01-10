@@ -79,7 +79,7 @@ shifty.config.apps = {
         opacity = 0.8,
     },
     {
-        match = { "URxvt", "Terminator" },
+        match = { "URxvt", "Terminator", "Gnome-terminal" },
         tag = "3:term",
     },
     {
