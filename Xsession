@@ -27,7 +27,7 @@ export GPG_AGENT_INFO
 /usr/bin/xscreensaver -no-splash &
 
 # Starts polkit server
-#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Starts polkit dependant services
 /usr/bin/nm-applet &
