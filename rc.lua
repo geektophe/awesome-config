@@ -18,11 +18,13 @@ require('shifty')
 require("utils.client")
 require("utils.mpd")
 require("utils.process")
+require("utils.pulseaudio")
 require("utils.rc")
 require("utils.system")
 require("utils.tag")
 
 -- Loads widgets libraries
+require("widgets.bat")
 require("widgets.clock")
 require("widgets.cpu")
 require("widgets.fs")
@@ -30,6 +32,8 @@ require("widgets.mem")
 require("widgets.net")
 require("widgets.mpd")
 require("widgets.spacer")
+require("widgets.task")
+require("widgets.volume")
 -- }}}
 
 -- {{{ Variable definitions
@@ -45,6 +49,9 @@ beautiful.init(themes .. themename .. "/theme.lua")
 terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
+
+-- Lock screen command
+xlock = "xscreensaver-command -lock"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.

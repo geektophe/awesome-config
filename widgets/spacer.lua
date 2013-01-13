@@ -13,7 +13,7 @@ module("widgets.spacer")
 function widget()
     if spacerw == nil then
         spacer = widget_create({ type = "textbox", name = "spacer" })
-        spacer.text    = "  "
+        spacer.text    = "   "
     end
     return spacer
 end

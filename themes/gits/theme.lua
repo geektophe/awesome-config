@@ -28,13 +28,15 @@ end
 --}}}
 
 -- {{{ Styles
-theme.font      = "sans 8"
+theme.font      = "dejavu sans 8"
 
 -- {{{ Colors
 theme.fg_normal = "#ffffff"
-theme.bg_normal = "#405156aa"
-theme.fg_focus  = "#ffffff"
-theme.bg_focus  = "#137112aa"
+theme.bg_normal = "#475F6188"
+-- theme.bg_normal = "#72858Fdd"
+theme.fg_focus  = "#000000"
+theme.bg_focus  = "#50711Fee"
+-- theme.bg_focus  = "#137112aa"
 theme.fg_urgent = "#ffffff"
 theme.bg_urgent = "#FF6B0175"
 -- }}}
@@ -146,6 +148,7 @@ theme.titlebar_maximized_button_normal_inactive = sharedthemes .. "/zenburn/titl
 -- }}}
 
 -- {{{ Widgets icons
+theme.widget_bat       = themedir.."/icons/bat.png"
 theme.widget_cpu       = themedir.."/icons/cpu.png"
 theme.widget_netup     = themedir.."/icons/up.png"
 theme.widget_fs        = themedir.."/icons/disk.png"

@@ -12,8 +12,7 @@ module("utils.system")
 --{{{ Get main interface
 -- Returns main network interface name (the one the default reoute is bound to)
 function main_intf()
-    return process.cmd_output(
-		"route -n|grep ^0.0.0.0|awk '{print $8}'")
+    return process.cmd_output("route -n|grep ^0.0.0.0|awk '{print $8}'")
 end
 --}}}
 
@@ -22,8 +21,7 @@ end
 -- Returns home mount point
 function home_mp()
     local home = os.getenv('HOME')
-    return process.cmd_output(
-		"df " .. home .. "|awk '$1~/^\\// {print $6}'")
+    return process.cmd_output("df " .. home .. "|awk '$1~/^\\// {print $6}'")
 end
 --}}}
 
@@ -40,6 +38,20 @@ end
 -- Returns system hostname
 function hostname()
     return process.cmd_output("hostname")
+end
+--}}}
+
+
+-- {{{ isdir
+-- Tests if a directory exists
+function isdir(path)
+    local code = os.execute('test -d ' .. path)
+
+    if code == 0 then
+        return true
+    else
+        return false
+    end
 end
 --}}}
 

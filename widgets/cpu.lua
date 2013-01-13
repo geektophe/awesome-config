@@ -6,50 +6,61 @@
 --
 -- Note that he theme should have widget_cpu attribute set
 
-local process = require("utils.process")
-local system = require("utils.system")
 local vicious = require("vicious")
 local awful = require("awful")
-local naughty = require("naughty")
+local blingbling = require("blingbling")
 local beautiful = beautiful
 local widget_init = widget
 local image = image
 
 module("widgets.cpu")
 
--- Adapt this program to your environment
-local sysmonitor = "gnome-system-monitor"
-
-local function check()
-    if not system.is_executable(sysmonitor) then
-        naughty.notify({ text = "Missing program " .. sysmonitor })
-    end
-end
 
 function widget()
-    check()
-    -- CPU usage widget
-    -- local cpuwidget = widget_init({ type = "textbox" })
-    -- vicious.register(cpuwidget, vicious.widgets.cpu, "$1%")
-    local cpuwidget = awful.widget.graph()
-    cpuwidget:set_width(40)
-    cpuwidget:set_background_color("#494B4F")
-    cpuwidget:set_color("#FF5656")
-    cpuwidget:set_border_color("#727352")
-    cpuwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
-    vicious.register(cpuwidget, vicious.widgets.cpu, "$1")
-
-    cpuwidget.widget:buttons(awful.util.table.join(
-        awful.button({ }, 1, function () process.run_or_raise(sysmonitor) end)
-    ))
-
-    return cpuwidget.widget
-end
-
--- CPU icon
-function icon()
     local cpuicon = widget_init({ type = "imagebox" })
     cpuicon.image = image(beautiful.widget_cpu)
-    return cpuicon
+    --
+    -- local cpulabel= widget_init({ type = "textbox" })
+    -- cpulabel.text='CPU: '
+    --
+    local loadwidget = blingbling.classical_graph.new()
+    loadwidget:set_height(18)
+    loadwidget:set_width(150)
+    loadwidget:set_tiles_color("#00000022")
+    loadwidget:set_show_text(true)
+    loadwidget:set_label("Load: $percent %")
+    --
+    --bind top popup on the graph
+    -- blingbling.popups.htop(loadwidget.widget,
+    --    { title_color = beautiful.notify_font_color_1,
+    --       user_color = beautiful.notify_font_color_2,
+    --       root_color = beautiful.notify_font_color_3,
+    --       terminal = "urxvt"})
+    vicious.register(loadwidget, vicious.widgets.cpu,'$1',2)
+    --
+    local core1widget=blingbling.progress_graph.new()
+    core1widget:set_height(18)
+    core1widget:set_width(11)
+    core1widget:set_filled(true)
+    core1widget:set_h_margin(2)
+    core1widget:set_filled_color("#00000033")
+    vicious.register(core1widget, vicious.widgets.cpu, "$2")
+    --
+    local core2widget=blingbling.progress_graph.new()
+    core2widget:set_height(18)
+    core2widget:set_width(11)
+    core2widget:set_filled(true)
+    core2widget:set_h_margin(2)
+    core2widget:set_filled_color("#00000033")
+    vicious.register(core2widget, vicious.widgets.cpu, "$2")
+
+    return {
+        loadwidget.widget,
+        core2widget.widget,
+        core1widget.widget,
+        cpuicon,
+        layout = awful.widget.layout.horizontal.rightleft
+        }
 end
+
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

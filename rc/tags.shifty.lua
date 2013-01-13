@@ -37,10 +37,16 @@ shifty.config.tags = {
      ["7:im"] = {
          init = true,
          position = 7,
+         mwfact = 0.2,
      },
     ["8:off"] = {
         init = true,
         position = 8,
+    },
+    ["9:gimp"] = {
+        init = false,
+        position = 9,
+        mwfact = 0.2,
     },
 }
 -- }}}
@@ -79,7 +85,7 @@ shifty.config.apps = {
         opacity = 0.8,
     },
     {
-        match = { "URxvt", "Terminator", "Gnome-terminal" },
+        match = { "URxvt", "Terminator", "Gnome%-terminal" },
         tag = "3:term",
     },
     {
@@ -93,7 +99,7 @@ shifty.config.apps = {
     },
     {
         match = { "contact_list" },
-        geometry = { 100,100,nil,nil },
+        callback = awful.client.setmaster,
     },
     {
         match = {  "LibreOffice.*" },
@@ -114,7 +120,18 @@ shifty.config.apps = {
         sticky = true,
     },
     {
+        match = { "gimp.*" },
+        tag = "9:gimp",
+    },
+    {
+        match = { "gimp%-file%-export", "^.*%-file$" },
+        tag = "9:gimp",
+        float = true,
+    },
+    {
         match = { "" },
+        -- callback = awful.client.setslave,
+        slave = true,
         buttons = awful.util.table.join(
             awful.button({}, 1, function (c) client.focus = c; c:raise() end),
             awful.button({modkey}, 1, function(c)

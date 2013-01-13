@@ -60,7 +60,16 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "i",     utils.client.info),
 
     -- Prompt
-    awful.key({ modkey },            "l",     function () mypromptbox[mouse.screen]:run() end)
+    awful.key({ modkey },            "l",     function () mypromptbox[mouse.screen]:run() end),
+
+    -- Volume management
+    awful.key({}, "XF86AudioMute",        utils.pulseaudio.volume_mute),
+    awful.key({}, "XF86AudioLowerVolume", utils.pulseaudio.volume_down),
+    awful.key({}, "XF86AudioRaiseVolume", utils.pulseaudio.volume_up),
+
+    -- Volume management
+    awful.key({}, "XF86ScreenSaver",      function () awful.util.spawn(xlock) end),
+    awful.key({"Control", "Mod1"},   "l", function () awful.util.spawn(xlock) end)
 )
 
 -- Tags access keys
