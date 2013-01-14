@@ -17,14 +17,18 @@ local image = image
 
 module("widgets.net")
 
+local netwidget = nil
+
 -- Network usage widget
 function widget()
-    local netwidget = blingbling.net.new()
-    netwidget:set_height(18)
-    netwidget:set_ippopup()
-    netwidget:set_show_text(true)
-    netwidget:set_v_margin(3)
-    netwidget:set_interface(utils_system.main_intf())
+    if netwidget == nil then
+        netwidget = blingbling.net.new()
+        netwidget:set_height(18)
+        netwidget:set_ippopup()
+        netwidget:set_show_text(true)
+        netwidget:set_v_margin(3)
+        netwidget:set_interface(utils_system.main_intf())
+    end
 
     return netwidget.widget
 end

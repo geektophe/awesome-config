@@ -6,9 +6,10 @@
 -- Note that he theme should have widget_cpu attribute set
 
 local widget_create = widget
-local spacer = nil
 
 module("widgets.spacer")
+
+local spacer = nil
 
 function widget()
     if spacerw == nil then

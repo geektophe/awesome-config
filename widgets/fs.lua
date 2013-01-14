@@ -15,22 +15,32 @@ local image = image
 
 module("widgets.fs")
 
+local fsicon = nil
+local fslabel = nil
+local fswidget = nil
+
 -- File system usage  widget
 function widget()
-    local fsicon = widget_init({ type = "imagebox" })
-    fsicon.image = image(beautiful.widget_disk)
+    if fsicon == nil then
+        fsicon = widget_init({ type = "imagebox" })
+        fsicon.image = image(beautiful.widget_disk)
+    end
 
-    local fslabel = widget_init({ type = "textbox" })
-    fslabel.text = "/ "
+    if fslabel == nil then
+        fslabel = widget_init({ type = "textbox" })
+        fslabel.text = "/ "
+    end
 
-    local fswidget = blingbling.progress_bar.new()
-    fswidget:set_height(18)
-    fswidget:set_width(50)
-    fswidget:set_show_text(true)
-    fswidget:set_horizontal(true)
-    -- fswidget:set_filled(true)
-    -- fswidget:set_filled_color("#00000033")
-    vicious.register(fswidget, vicious.widgets.fs, "${/ used_p}", 120 )
+    if fswidget == nil then
+        fswidget = blingbling.progress_bar.new()
+        fswidget:set_height(18)
+        fswidget:set_width(50)
+        fswidget:set_show_text(true)
+        fswidget:set_horizontal(true)
+        -- fswidget:set_filled(true)
+        -- fswidget:set_filled_color("#00000033")
+        vicious.register(fswidget, vicious.widgets.fs, "${/ used_p}", 120 )
+    end
 
     return {
         fswidget.widget,

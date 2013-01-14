@@ -55,4 +55,12 @@ function isdir(path)
 end
 --}}}
 
+
+-- {{{ hasbattery
+-- Tells if the computer is equipped of a battery
+function hasbattery()
+    return isdir('/sys/class/power_supply/BAT0')
+end
+--}}}
+
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

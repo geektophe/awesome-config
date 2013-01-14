@@ -9,8 +9,14 @@ local awful = require('awful')
 
 module("widgets.clock")
 
+local clockwidget = nil
+
 function widget()
-    return awful.widget.textclock({ align = "right" }, " %a %d %b  %H:%M ")
+    if clockwidget == nil then
+        clockwidget = awful.widget.textclock({ align = "right" }, " %a %d %b  %H:%M ")
+    end
+
+    return clockwidget
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

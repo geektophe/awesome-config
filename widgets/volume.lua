@@ -15,18 +15,25 @@ local image = image
 
 module("widgets.volume")
 
+local volicon = nil
+local volwidget = nil
+
 -- File system usage  widget
 function widget()
-    local volicon = widget_init({ type = "imagebox" })
-    volicon.image = image(beautiful.widget_vol)
+    if volicon == nil then
+        volicon = widget_init({ type = "imagebox" })
+        volicon.image = image(beautiful.widget_vol)
+    end
 
-    local volwidget = blingbling.volume.new()
-    volwidget:set_height(18)
-    volwidget:set_width(50)
-    --bind the volume widget on the master channel
-    volwidget:update_master()
-    volwidget:set_master_control()
-    volwidget:set_bar(true)
+    if volwidget == nil then
+        volwidget = blingbling.volume.new()
+        volwidget:set_height(18)
+        volwidget:set_width(50)
+        --bind the volume widget on the master channel
+        volwidget:update_master()
+        volwidget:set_master_control()
+        volwidget:set_bar(true)
+    end
 
     return {
         volwidget.widget,

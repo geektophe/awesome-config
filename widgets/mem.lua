@@ -15,16 +15,23 @@ local image = image
 
 module("widgets.mem")
 
-function widget()
-    local memicon = widget_init({ type = "imagebox" })
-    memicon.image = image(beautiful.widget_mem)
+local memicon = nil
+local memwidget = nil
 
-    local memwidget=blingbling.classical_graph.new()
-    memwidget:set_height(18)
-    memwidget:set_width(100)
-    memwidget:set_tiles_color("#00000022")
-    memwidget:set_show_text(true)
-    vicious.register(memwidget, vicious.widgets.mem, '$1')
+function widget()
+    if memicon == nil then
+        memicon = widget_init({ type = "imagebox" })
+        memicon.image = image(beautiful.widget_mem)
+    end
+
+    if memwidget == nil then
+        memwidget = blingbling.classical_graph.new()
+        memwidget:set_height(18)
+        memwidget:set_width(100)
+        memwidget:set_tiles_color("#00000022")
+        memwidget:set_show_text(true)
+        vicious.register(memwidget, vicious.widgets.mem, '$1')
+    end
 
     return {
         memwidget.widget,
