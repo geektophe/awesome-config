@@ -18,7 +18,7 @@ module("widgets.mem")
 local memicon = nil
 local memwidget = nil
 
-function widget()
+function widget(wide)
     if memicon == nil then
         memicon = widget_init({ type = "imagebox" })
         memicon.image = image(beautiful.widget_mem)
@@ -27,7 +27,12 @@ function widget()
     if memwidget == nil then
         memwidget = blingbling.classical_graph.new()
         memwidget:set_height(18)
-        memwidget:set_width(100)
+
+        if wide == nil or wide then
+            memwidget:set_width(100)
+        else
+            memwidget:set_width(75)
+        end
         memwidget:set_tiles_color("#00000022")
         memwidget:set_show_text(true)
         vicious.register(memwidget, vicious.widgets.mem, '$1')

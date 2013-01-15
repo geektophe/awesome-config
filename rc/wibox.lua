@@ -5,6 +5,7 @@ systray = widget({ type = "systray" })
 mywibox = {}
 mypromptbox = {}
 mylayoutbox = {}
+wide = utils.screen.width() > 1280
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
@@ -37,13 +38,13 @@ for s = 1, screen.count() do
         widgets.spacer.widget(),
         widgets.net.widget(),
         utils.system.hasbattery() and widgets.spacer.widget() or nil,
-        utils.system.hasbattery() and widgets.bat.widget() or nil,
+        utils.system.hasbattery() and widgets.bat.widget(wide) or nil,
         widgets.spacer.widget(),
-        widgets.fs.widget(),
+        widgets.fs.widget(wide),
         widgets.spacer.widget(),
-        widgets.mem.widget(),
+        widgets.mem.widget(wide),
         widgets.spacer.widget(),
-        widgets.cpu.widget(),
+        widgets.cpu.widget(wide),
         widgets.spacer.widget(),
         widgets.volume.widget(),
         widgets.spacer.widget(),

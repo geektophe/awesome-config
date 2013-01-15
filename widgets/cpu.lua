@@ -20,7 +20,7 @@ local loadwidget = nil
 local core1widget = nil
 local core2widget = nil
 
-function widget()
+function widget(wide)
     if cpuicon == nil then
         cpuicon = widget_init({ type = "imagebox" })
         cpuicon.image = image(beautiful.widget_cpu)
@@ -32,10 +32,15 @@ function widget()
     if loadwidget == nil then
         loadwidget = blingbling.classical_graph.new()
         loadwidget:set_height(18)
-        loadwidget:set_width(150)
+
+        if wide == nil or wide then
+            loadwidget:set_width(150)
+        else
+            loadwidget:set_width(75)
+        end
         loadwidget:set_tiles_color("#00000022")
         loadwidget:set_show_text(true)
-        loadwidget:set_label("Load: $percent %")
+        loadwidget:set_label("$percent %")
         --
         --bind top popup on the graph
         -- blingbling.popups.htop(loadwidget.widget,

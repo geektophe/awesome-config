@@ -20,6 +20,7 @@ function loaderror(name, err)
             })
     return print("E: error loading RC file '" .. name .. "': " .. err)
 end
+--}}}
 
 
 -- {{{ Loadrc

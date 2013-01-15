@@ -20,7 +20,7 @@ local baticon = nil
 local batwidget = nil
 
 -- File system usage  widget
-function widget()
+function widget(wide)
     if baticon == nil then
         baticon = widget_init({ type = "imagebox" })
         baticon.image = image(beautiful.widget_bat)
@@ -29,7 +29,11 @@ function widget()
     if batwidget == nil then
         batwidget=blingbling.progress_bar.new()
         batwidget:set_height(18)
-        batwidget:set_width(50)
+        if wide == nil or wide then
+            batwidget:set_width(50)
+        else
+            batwidget:set_width(40)
+        end
         batwidget:set_show_text(true)
         batwidget:set_horizontal(true)
         -- batwidget:set_filled(true)

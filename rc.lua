@@ -20,6 +20,7 @@ require("utils.mpd")
 require("utils.process")
 require("utils.pulseaudio")
 require("utils.rc")
+require("utils.screen")
 require("utils.system")
 require("utils.tag")
 

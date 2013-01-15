@@ -20,7 +20,7 @@ local fslabel = nil
 local fswidget = nil
 
 -- File system usage  widget
-function widget()
+function widget(wide)
     if fsicon == nil then
         fsicon = widget_init({ type = "imagebox" })
         fsicon.image = image(beautiful.widget_disk)
@@ -34,7 +34,12 @@ function widget()
     if fswidget == nil then
         fswidget = blingbling.progress_bar.new()
         fswidget:set_height(18)
-        fswidget:set_width(50)
+
+        if wide == nil or wide then
+            fswidget:set_width(50)
+        else
+            fswidget:set_width(40)
+        end
         fswidget:set_show_text(true)
         fswidget:set_horizontal(true)
         -- fswidget:set_filled(true)
