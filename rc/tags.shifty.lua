@@ -26,8 +26,8 @@ shifty.config.tags = {
         init = true,
         position = 4,
     },
-    ["5:notag"] = {
-        init = true,
+    ["5:sys"] = {
+        init = false,
         position = 5,
     },
     ["6:fs"] = {
@@ -40,7 +40,7 @@ shifty.config.tags = {
          mwfact = 0.2,
      },
     ["8:off"] = {
-        init = true,
+        init = false,
         position = 8,
     },
     ["9:gimp"] = {
@@ -127,6 +127,11 @@ shifty.config.apps = {
         match = { "gimp%-file%-export", "^.*%-file$" },
         tag = "9:gimp",
         float = true,
+    },
+    {
+        match = { "Rdesktop" },
+        float = true,
+        tag = "5:sys",
     },
     {
         match = { "" },
