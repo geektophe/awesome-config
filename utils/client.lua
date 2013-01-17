@@ -258,7 +258,10 @@ function markedtotag(t)
         c.border_color = beautiful.border_normal
         last = c
     end
-    client.focus = last
+
+    if latt ~= nil then
+        client.focus = last
+    end
 end
 --}}}
 

@@ -170,7 +170,7 @@ shifty.taglist.buttons = awful.util.table.join(
     awful.button({ modkey          }, 1, awful.client.movetotag),
     awful.button({ "Shift"         }, 1, awful.tag.viewtoggle),
     awful.button({ "Control"       }, 1, awful.client.toggletag),
-    awful.button({ },                 2, utils.client.markedtotag),
+    awful.button({ },                 3, utils.client.markedtotag),
     awful.button({ },                 4, awful.tag.viewnext),
     awful.button({ },                 5, awful.tag.viewprev)
     )
