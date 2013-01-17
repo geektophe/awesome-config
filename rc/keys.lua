@@ -8,6 +8,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, }, "Escape", awful.tag.history.restore),
 
     -- Move tag
+    awful.key({ modkey, "Control" }, "n",     utils.tag.toscreen), -- send tag to screen
     awful.key({ modkey, "Control" }, "Left",  function () utils.tag.incindex(-1) end),
     awful.key({ modkey, "Control" }, "Right", function () utils.tag.incindex(1) end),
 
@@ -15,13 +16,14 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey            }, "d", shifty.del), -- delete a tag
     awful.key({ modkey            }, "n", shifty.send_next), -- client to next tag
     awful.key({ modkey, "Shift"   }, "n", shifty.send_prev), -- client to prev tag
-    awful.key({ modkey, "Control" }, "n", utils.tag.toscreen), -- send tag to screen
     awful.key({ modkey            }, "a", shifty.add), -- creat a new tag
     awful.key({ modkey, "Control" }, "è", shifty.rename), -- rename a tag
     awful.key({ modkey, "shift"   }, "a", -- nopopup new tag
         function()
             shifty.add({nopopup = true})
         end),
+
+    -- Clients managenent
 
     -- Tab
     awful.key({ modkey,         }, "Tab", function () utils.client.viewnext(1) end),
@@ -47,6 +49,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "r",     function () awful.tag.incnmaster(-1) end),
     awful.key({ modkey, "Control" }, "r",     function () awful.tag.incncol(-1) end),
 
+    -- Jump to urgent client
     awful.key({ modkey,           }, "g", awful.client.urgent.jumpto),
 
     -- Standard program
@@ -56,7 +59,7 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
-    awful.key({ modkey,           }, "v",     revelation),
+    awful.key({ modkey,           }, "b",     revelation),
     awful.key({ modkey,           }, "i",     utils.client.info),
 
     -- Prompt
@@ -67,9 +70,12 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86AudioLowerVolume", utils.pulseaudio.volume_down),
     awful.key({}, "XF86AudioRaiseVolume", utils.pulseaudio.volume_up),
 
-    -- Volume management
+    -- lock screen management
     awful.key({}, "XF86ScreenSaver",      function () awful.util.spawn(xlock) end),
-    awful.key({"Control", "Mod1"},   "l", function () awful.util.spawn(xlock) end)
+    awful.key({"Control", "Mod1"},   "l", function () awful.util.spawn(xlock) end),
+
+    -- moves selected clients to current tag
+    awful.key({ modkey },            "v", utils.client.markedtoctag)
 )
 
 -- Tags access keys
@@ -79,25 +85,31 @@ for i=1, (shifty.config.maxtags or 9) do
             function ()
                 local t = awful.tag.viewonly(shifty.getpos(i))
             end),
-        awful.key({ modkey, "Control" }, "#" .. i + 9,
+        awful.key({ modkey, "Shift"   }, "#" .. i + 9,
                 function ()
                     local t = shifty.getpos(i)
                     t.selected = not t.selected
                 end),
-        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+        awful.key({ modkey, "Control" }, "#" .. i + 9,
             function ()
                 if client.focus then
                     awful.client.toggletag(shifty.getpos(i))
                 end
             end),
-        awful.key({ modkey, "Shift" }, "#" .. i + 9,
+        awful.key({ modkey, "Mod1"    }, "#" .. i + 9,
             function ()
                 if client.focus then
                     local t = shifty.getpos(i)
-                   awful.client.movetotag(t)
-                   awful.tag.viewonly(t)
-                    end
-                end))
+                    awful.client.movetotag(t)
+                    awful.tag.viewonly(t)
+                end
+            end),
+        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+            function ()
+                local t = shifty.getpos(i)
+                utils.client.markedtotag(t)
+                awful.tag.viewonly(t)
+            end))
 end
 -- }}}
 
@@ -105,20 +117,17 @@ end
 -- {{{ Client key bindings
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-    awful.key({ modkey,           }, "q",      function (c) c:kill()                         end),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
+    awful.key({ modkey            }, "u",      utils.client.togglemarked), -- marks client
+    awful.key({ modkey,           }, "q",      function (c) c:kill() end),
+    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle),
     awful.key({ modkey, "Control" }, "Return", function (c)
         c:swap(awful.client.getmaster())
-        c.raise()
+        c:raise()
     end),
-    awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
-    awful.key({ modkey, "Shift"   }, "l",      function (c) c:redraw()                       end),
-    -- awful.key({ modkey,           }, "m",      function (c) c.minimized = not c.minimized    end),
-    -- awful.key({ modkey,           }, "m",      function (c)
-    --     c.maximized_horizontal = not c.maximized_horizontal
-    --     c.maximized_vertical   = not c.maximized_vertical
-    -- end),
-    awful.key({ modkey,           }, "Prior", function(c)
+    awful.key({ modkey,           }, "o",      awful.client.movetoscreen),
+    awful.key({ modkey, "Shift"   }, "l",      function (c) c:redraw() end),
+    awful.key({ modkey,           }, "m",      utils.client.togglemaximized),
+    awful.key({ modkey,           }, "Prior",  function(c)
         if utils.client.opacity_incr(c, 0.1) then
             naughty.notify({ text = "Client opacity set to: " .. c.opacity })
         end

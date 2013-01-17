@@ -10,6 +10,8 @@ local os = os
 local io = io
 local pairs = pairs
 local screen = screen
+local beautiful = beautiful
+local mouse = mouse
 
 module("utils.client")
 
@@ -227,13 +229,60 @@ end
 
 
 -- {{{ viewnext
--- Select next client in tag
+-- select next client in tag
 function viewnext(incr)
     awful.client.focus.byidx(incr)
 
     if client.focus then
         client.focus:raise()
     end
+end
+--}}}
+
+
+-- {{{ togglemaximized
+-- select next client in tag
+function togglemaximized(c)
+    c.maximized_horizontal = not c.maximized_horizontal
+    c.maximized_vertical   = not c.maximized_vertical
+end
+--}}}
+
+
+-- {{{ markedtotag
+-- Moves marked clients to argument tag
+function markedtotag(t)
+    local last = nil
+    for _, c in pairs(awful.client.getmarked()) do
+        awful.client.movetotag(t, c)
+        c.border_color = beautiful.border_normal
+        last = c
+    end
+    client.focus = last
+end
+--}}}
+
+
+-- {{{ togglemarked
+-- select next client in tag
+function togglemarked(c)
+    if awful.client.ismarked(c) then
+        awful.client.unmark(c)
+        c.border_color = beautiful.border_focus
+    else
+        awful.client.mark(c)
+        c.border_color = beautiful.border_marked
+    end
+end
+--}}}
+
+
+-- {{{ markedtoctag
+-- Moves marked clients to current tag
+function markedtoctag()
+    local s = mouse.screen
+    local t = awful.tag.selected(s)
+    markedtotag(t)
 end
 --}}}
 

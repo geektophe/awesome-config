@@ -3,6 +3,7 @@
 local awful = require("awful")
 local table = table
 local screen = screen
+local shifty = shifty
 
 module("utils.tag")
 

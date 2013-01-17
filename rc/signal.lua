@@ -28,14 +28,34 @@ client.add_signal("manage", function (c, startup)
 end)
 
 client.add_signal("focus", function(c)
-    c.border_color = beautiful.border_focus
+    if not awful.client.ismarked(c) then
+        c.border_color = beautiful.border_focus
+    end
     utils.client.opacity_toggle(c)
     c:raise()
 end)
 
 client.add_signal("unfocus", function(c)
-    c.border_color = beautiful.border_normal
+    if not awful.client.ismarked(c) then
+        c.border_color = beautiful.border_normal
+    end
     utils.client.opacity_toggle(c)
 end)
+
+-- Handle runtime errors after startup
+do
+    local in_error = false
+    awesome.add_signal("debug::error", function (err)
+        -- Make sure we don't go into an endless error loop
+        if in_error then return end
+        in_error = true
+
+        naughty.notify({ preset = naughty.config.presets.critical,
+                         title = "Oops, an error happened!",
+                         text = err })
+        in_error = false
+    end)
+end
+-- }}}
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

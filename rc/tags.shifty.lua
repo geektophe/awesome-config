@@ -138,14 +138,14 @@ shifty.config.apps = {
         -- callback = awful.client.setslave,
         slave = true,
         buttons = awful.util.table.join(
-            awful.button({}, 1, function (c) client.focus = c; c:raise() end),
-            awful.button({modkey}, 1, function(c)
+            awful.button({},                1, function(c) client.focus = c; c:raise() end),
+            awful.button({modkey},          1, function(c)
                     client.focus = c
                     c:raise()
                     awful.mouse.client.move(c)
                 end),
-            awful.button({modkey}, 3, awful.mouse.client.resize)
-            )
+            awful.button({modkey, "Shift"}, 1, utils.client.togglemarked),
+            awful.button({modkey},          3, awful.mouse.client.resize))
     },
 }
 -- }}}
@@ -166,30 +166,14 @@ shifty.config.defaults = {
 -- {{{ Tag list definition
 shifty.taglist = {}
 shifty.taglist.buttons = awful.util.table.join(
-    awful.button({ },        1, awful.tag.viewonly),
-    awful.button({ modkey }, 1, awful.client.movetotag),
-    awful.button({ },        3, awful.tag.viewtoggle),
-    awful.button({ modkey }, 3, awful.client.toggletag),
-    awful.button({ },        4, awful.tag.viewnext),
-    awful.button({ },        5, awful.tag.viewprev)
+    awful.button({ },                 1, awful.tag.viewonly),
+    awful.button({ modkey          }, 1, awful.client.movetotag),
+    awful.button({ "Shift"         }, 1, awful.tag.viewtoggle),
+    awful.button({ "Control"       }, 1, awful.client.toggletag),
+    awful.button({ },                 2, utils.client.markedtotag),
+    awful.button({ },                 4, awful.tag.viewnext),
+    awful.button({ },                 5, awful.tag.viewprev)
     )
 -- }}}
-
-
---awful.hooks.property.register(function (c, prop)
---    -- Remove the titlebar if fullscreen
---    if c.fullscreen then
---        awful.titlebar.remove(c)
---    elseif not c.fullscreen then
---        -- Add title bar for floating apps
---        if c.titlebar == nil and awful.client.floating.get(c) then
---            awful.titlebar.add(c, { modkey = modkey })
---        -- Remove title bar, if it's not floating
---        elseif c.titlebar and not awful.client.floating.get(c) then
---            awful.titlebar.remove(c)
---        end
---    end
---end)
-
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

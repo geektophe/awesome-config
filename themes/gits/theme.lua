@@ -45,7 +45,7 @@ theme.bg_urgent = "#FF6B0175"
 theme.border_width  = "1"
 theme.border_normal = "#777777"
 theme.border_focus  = "#FFB30198"
-theme.border_marked = "#ffffff"
+theme.border_marked = "#FF000098"
 -- }}}
 
 -- {{{ Titlebars

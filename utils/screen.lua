@@ -1,6 +1,8 @@
 -- Functions for reading or manipulating screen settings
 
 local utils_process = require('utils.process')
+local utils_system = require('utils.system')
+local naughty = require('naughty')
 local string = string
 local tonumber = tonumber
 local print = print
@@ -15,7 +17,20 @@ local res = nil
 -- Returns main screen resolution
 function resolution()
     if res == nil then
-        res = utils_process.cmd_output("xdpyinfo | grep dimensions | awk '{print $2}'")
+        if utils_system.is_executable('xdpyinfo') then
+            res = utils_process.cmd_output("xdpyinfo | grep dimensions | awk '{print $2}'")
+        else
+            local errmsg = "xdpyinfo not found. cannot determine screen resolution. using default 1024x768"
+
+            naughty.notify({ title = "Cannot determine screen resolution",
+                    text = errmsg,
+                    preset = naughty.config.presets.critical
+                    })
+            print("E: cannot determine screen resolution: " .. errmsg)
+
+            -- Returns default resolution
+            res = "1024x768"
+        end
     end
     return res
 end
