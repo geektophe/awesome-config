@@ -62,6 +62,15 @@ shifty.config.apps = {
         ontop=true,
     },
     {
+        match = { "gimp.*", "dia.*" },
+        tag = "9:img",
+    },
+    {
+        match = { "gimp%-file%-export", "^.*%-file$" },
+        tag = "9:img",
+        float = true,
+    },
+    {
         match = { "Iceweasel.*", "Firefox.*" },
         tag = "1:www",
         screen = screen.count(),
@@ -119,15 +128,6 @@ shifty.config.apps = {
         float = true,
         ontop = true,
         sticky = true,
-    },
-    {
-        match = { "gimp.*", "dia.*" },
-        tag = "9:img",
-    },
-    {
-        match = { "gimp%-file%-export", "^.*%-file$" },
-        tag = "9:img",
-        float = true,
     },
     {
         match = { "Rdesktop" },
