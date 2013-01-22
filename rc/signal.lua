@@ -12,6 +12,14 @@ client.add_signal("manage", function (c, startup)
             end
         end)
 
+    -- Makes client floating ontop
+    c.ontop = awful.client.floating.get(c)
+
+    c:add_signal("property::floating",  function (c)
+        c.ontop = awful.client.floating.get(c)
+    end)
+
+
     if not startup then
         -- Set the windows at the slave,
         -- i.e. put it at the end of others instead of setting it master.

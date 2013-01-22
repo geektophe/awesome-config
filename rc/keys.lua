@@ -23,8 +23,6 @@ globalkeys = awful.util.table.join(
             shifty.add({nopopup = true})
         end),
 
-    -- Clients managenent
-
     -- Tab
     awful.key({ modkey,         }, "Tab", function () utils.client.viewnext(1) end),
     awful.key({ modkey, "Shift" }, "Tab", function () utils.client.viewnext(-1) end),

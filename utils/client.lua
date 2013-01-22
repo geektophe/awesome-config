@@ -289,4 +289,12 @@ function markedtoctag()
 end
 --}}}
 
+
+-- {{{ togglefloat
+-- Makes a client float and forces it ontop
+function togglefloat(c)
+    awful.client.floating.toggle(c)
+    c.ontop = awful.client.floating.get(c)
+end
+
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

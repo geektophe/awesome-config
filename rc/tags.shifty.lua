@@ -43,7 +43,7 @@ shifty.config.tags = {
         init = false,
         position = 8,
     },
-    ["9:gimp"] = {
+    ["9:img"] = {
         init = false,
         position = 9,
         mwfact = 0.2,
@@ -67,13 +67,14 @@ shifty.config.apps = {
         screen = screen.count(),
     },
     {
-        match = { "Thunderbird.*" },
-        tag = "2:mail",
-    },
-    {
-        match = { "Npviewer.bin" },
+        match = { "Npviewer.bin", "Plugin-container" },
         tag = "1:www",
         float = true,
+        -- callback = function (c) c.fullscreen end,
+    },
+    {
+        match = { "Thunderbird.*" },
+        tag = "2:mail",
     },
     {
         match = { "Gvim" },
@@ -120,12 +121,12 @@ shifty.config.apps = {
         sticky = true,
     },
     {
-        match = { "gimp.*" },
-        tag = "9:gimp",
+        match = { "gimp.*", "dia.*" },
+        tag = "9:img",
     },
     {
         match = { "gimp%-file%-export", "^.*%-file$" },
-        tag = "9:gimp",
+        tag = "9:img",
         float = true,
     },
     {
