@@ -62,10 +62,6 @@ shifty.config.apps = {
         ontop=true,
     },
     {
-        match = { "gimp.*", "dia.*" },
-        tag = "9:img",
-    },
-    {
         match = { "gimp%-file%-export", "^.*%-file$" },
         tag = "9:img",
         float = true,
@@ -133,6 +129,10 @@ shifty.config.apps = {
         match = { "Rdesktop" },
         float = true,
         tag = "5:sys",
+    },
+    {
+        match = { "gimp.*", "^dia$" },
+        tag = "9:img",
     },
     {
         match = { "" },

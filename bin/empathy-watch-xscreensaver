@@ -1,0 +1,172 @@
+#!/usr/bin/python
+
+###############################################################################
+#
+# IMPORTS
+#
+###############################################################################
+
+import dbus
+import subprocess
+import re
+
+
+###############################################################################
+#
+# PARAMETERS AND CONSTANTS
+#
+###############################################################################
+
+CUSTOM_AWAY = "I'll be back..."
+
+CODE_TO_STATUS = {
+    1: "Offline",
+    2: "Online",
+    3: "Away",
+    4: "Extended_Away",
+    5: "Invisible",
+    6: "Busy"
+}
+
+STATUS_TO_CODE = {
+    "off": 1,
+    "offline": 1,
+    "on": 2,
+    "online": 2,
+    "away": 3,
+    "extended away": 4,
+    "na": 4,
+    "n/a": 4,
+    "invisible": 5,
+    "invis": 5,
+    "busy": 6,
+    "dnd": 6,
+}
+
+BUS = dbus.SessionBus()
+
+
+###############################################################################
+#
+# CLASSES
+#
+###############################################################################
+
+class EmpathyProxy(object):
+    """
+    Empathy account manager proxy class
+    """
+
+    def __init__(self):
+        """
+        Class initialization.
+
+        Stores accoun manager instance.
+        """
+        self.account_manager = BUS.get_object(
+            'org.freedesktop.Telepathy.AccountManager',
+            '/org/freedesktop/Telepathy/AccountManager')
+        self.prev_presence = {}
+
+    def get_accounts(self):
+        """
+        Return an account manager object
+        """
+        return self.account_manager.Get(
+            'org.freedesktop.Telepathy.AccountManager',
+            'ValidAccounts')
+
+    def get_status(self, path):
+        """
+        Sets empathy accounts status.
+        """
+        if str(path) == '/org/freedesktop/Telepathy/Account/ring/tel/ring':
+            return None
+
+        account = BUS.get_object('org.freedesktop.Telepathy.AccountManager', path)
+        enabled = account.Get('org.freedesktop.Telepathy.Account', 'Enabled')
+
+        if not enabled:
+            return None
+
+        code, status, custom =  account.Get(
+            'org.freedesktop.Telepathy.Account',
+            'RequestedPresence')
+
+        return code, status, custom
+
+    def set_status(self, path, code, status, custom):
+        """
+        Sets empathy accounts status.
+        """
+        if str(path) == '/org/freedesktop/Telepathy/Account/ring/tel/ring':
+            return
+
+        account = BUS.get_object('org.freedesktop.Telepathy.AccountManager', path)
+        enabled = account.Get('org.freedesktop.Telepathy.Account', 'Enabled')
+
+        if not enabled:
+            return
+
+        account.Set(
+            'org.freedesktop.Telepathy.Account',
+            'RequestedPresence',
+            dbus.Struct((dbus.UInt32(code), status, custom), signature=None),
+            dbus_interface='org.freedesktop.DBus.Properties')
+
+    def away(self):
+        """
+        Sets status away
+
+        Saves current status to be restored by back method.
+        """
+        code = STATUS_TO_CODE['away']
+
+        for path in self.get_accounts():
+            presence = self.get_status(path)
+
+            if presence is not None:
+                self.prev_presence[path] = presence
+                self.set_status(path, code, CODE_TO_STATUS[code], CUSTOM_AWAY)
+
+    def back(self):
+        """
+        Sets status back to previous status
+        """
+        default_code = STATUS_TO_CODE['online']
+
+        for path in self.get_accounts():
+            if self.prev_presence.has_key(path):
+                code, status, custom = self.prev_presence[path]
+            else:
+                code, status, custom = default_code, CODE_TO_STATUS[default_code], ""
+
+            self.set_status(path, code, status, custom)
+
+
+###############################################################################
+#
+# MAIN
+#
+###############################################################################
+
+if __name__ == '__main__':
+    proxy = EmpathyProxy()
+
+    watcher = subprocess.Popen(
+        ['xscreensaver-command', '-watch'],
+        stdout=subprocess.PIPE)
+
+    try:
+        while True:
+            row = watcher.stdout.readline()
+
+            if re.match('^(BLANK|LOCK)', row):
+                proxy.away()
+            elif re.match('^UNBLANK', row):
+                proxy.back()
+
+        watcher.stdout.flush()
+
+    except KeyboardInterrupt:
+        pass
