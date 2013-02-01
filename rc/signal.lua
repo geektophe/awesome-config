@@ -25,6 +25,8 @@ client.add_signal("manage", function (c, startup)
         -- i.e. put it at the end of others instead of setting it master.
         -- awful.client.setslave(c)
         utils.client.opacity_save(c)
+        awful.placement.no_overlap(c)
+        awful.placement.no_offscreen(c)
 
         -- Put windows in a smart way, only if they do not set an initial position.
         if not c.size_hints.user_position and not c.size_hints.program_position then
