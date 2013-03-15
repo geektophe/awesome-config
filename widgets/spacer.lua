@@ -5,7 +5,7 @@
 --
 -- Note that he theme should have widget_cpu attribute set
 
-local widget_create = widget
+local wibox = wibox
 
 module("widgets.spacer")
 
@@ -13,8 +13,8 @@ local spacer = nil
 
 function widget()
     if spacerw == nil then
-        spacer = widget_create({ type = "textbox", name = "spacer" })
-        spacer.text    = "   "
+        spacer = wibox.widget.textbox()
+        spacer:set_text("   ")
     end
     return spacer
 end

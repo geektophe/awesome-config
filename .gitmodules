@@ -1,0 +1,6 @@
+[submodule "shifty"]
+	path = shifty
+	url = https://github.com/cdump/awesome-shifty.git
+[submodule "blingbling"]
+	path = blingbling
+	url = https://github.com/cedlemo/blingbling.git

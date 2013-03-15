@@ -3,38 +3,43 @@
 os.setlocale("fr_FR.UTF-8")
 
 -- Standard awesome library
-require("awful")
-require("awful.autofocus")
+awful = require("awful")
+awful.autofocus = require("awful.autofocus")
+naughty = require("naughty")
+oocairo = require("oocairo")
+wibox = require("wibox")
 -- require("awful.rules")
 -- Theme handling library
-require("beautiful")
+beautiful = require("beautiful")
 -- Revelation library
-require("revelation")
+revelation = require("revelation")
 
 -- Loads Shifty automatic tags management library
-require('shifty')
+shifty = require("shifty")
 
 -- Loads utils libraries
-require("utils.client")
-require("utils.mpd")
-require("utils.process")
-require("utils.pulseaudio")
-require("utils.rc")
-require("utils.screen")
-require("utils.system")
-require("utils.tag")
+utils = {}
+utils.client = require("utils.client")
+utils.client = require("utils.mpd")
+utils.process = require("utils.process")
+utils.pulseaudio = require("utils.pulseaudio")
+utils.rc = require("utils.rc")
+utils.screen = require("utils.screen")
+utils.system = require("utils.system")
+utils.tag = require("utils.tag")
 
 -- Loads widgets libraries
-require("widgets.bat")
-require("widgets.clock")
-require("widgets.cpu")
-require("widgets.fs")
-require("widgets.mem")
-require("widgets.net")
-require("widgets.mpd")
-require("widgets.spacer")
-require("widgets.task")
-require("widgets.volume")
+widgets = {}
+widgets.bat = require("widgets.bat")
+widgets.clock = require("widgets.clock")
+widgets.cpu = require("widgets.cpu")
+widgets.fs = require("widgets.fs")
+widgets.mem = require("widgets.mem")
+widgets.net = require("widgets.net")
+-- widgets.mpd = require("widgets.mpd")
+widgets.spacer = require("widgets.spacer")
+widgets.task = require("widgets.task")
+widgets.volume = require("widgets.volume")
 -- }}}
 
 -- {{{ Variable definitions
@@ -92,7 +97,7 @@ utils.rc.loadrc('tags.shifty')
 -- }}}
 
 -- {{{ Menu
-utils.rc.loadrc('menu')
+-- utils.rc.loadrc('menu')
 -- }}}
 
 -- {{{ Wibox

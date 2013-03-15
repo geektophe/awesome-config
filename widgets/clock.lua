@@ -13,7 +13,8 @@ local clockwidget = nil
 
 function widget()
     if clockwidget == nil then
-        clockwidget = awful.widget.textclock({ align = "right" }, " %a %d %b  %H:%M ")
+        -- clockwidget = awful.widget.textclock({ align = "right" }, " %a %d %b  %H:%M ")
+        clockwidget = awful.widget.textclock()
     end
 
     return clockwidget

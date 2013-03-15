@@ -1,6 +1,7 @@
 -- Task warrior widget
 
 local blingbling = require("blingbling")
+local oocairo = require("oocairo")
 local beautiful = beautiful
 
 module("widgets.task")

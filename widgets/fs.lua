@@ -9,9 +9,9 @@
 local vicious = require("vicious")
 local awful = require("awful")
 local blingbling = require("blingbling")
+local oocairo = require("oocairo")
 local beautiful = beautiful
-local widget_init = widget
-local image = image
+local wibox = wibox
 
 module("widgets.fs")
 
@@ -22,8 +22,8 @@ local fswidget = nil
 -- File system usage  widget
 function widget(wide)
     if fsicon == nil then
-        fsicon = widget_init({ type = "imagebox" })
-        fsicon.image = image(beautiful.widget_disk)
+        fsicon = wibox.widget.imagebox()
+        fsicon:set_image(oocairo.image_surface_create_from_png(beautiful.widget_disk))
     end
 
     if fslabel == nil then
@@ -47,12 +47,12 @@ function widget(wide)
         vicious.register(fswidget, vicious.widgets.fs, "${/ used_p}", 120 )
     end
 
-    return {
-        fswidget.widget,
-        fslabel,
-        fsicon,
-        layout = awful.widget.layout.horizontal.rightleft
-        }
+    return fswidget.widget
+    -- local layout = wibox.layout.align.horizontal()
+    -- layout:add(fswidget.widget)
+    -- layout:add(fslabel)
+    -- layout:add(fsicon)
+    -- return layout
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

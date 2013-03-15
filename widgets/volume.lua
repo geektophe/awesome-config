@@ -9,9 +9,9 @@
 local vicious = require("vicious")
 local awful = require("awful")
 local blingbling = require("blingbling")
+local oocairo = require("oocairo")
 local beautiful = beautiful
-local widget_init = widget
-local image = image
+local wibox = wibox
 
 module("widgets.volume")
 
@@ -21,8 +21,8 @@ local volwidget = nil
 -- File system usage  widget
 function widget()
     if volicon == nil then
-        volicon = widget_init({ type = "imagebox" })
-        volicon.image = image(beautiful.widget_vol)
+        volicon = wibox.widget.imagebox()
+        volicon:set_image(oocairo.image_surface_create_from_png(beautiful.widget_vol))
     end
 
     if volwidget == nil then
@@ -35,11 +35,11 @@ function widget()
         volwidget:set_bar(true)
     end
 
-    return {
-        volwidget.widget,
-        volicon,
-        layout = awful.widget.layout.horizontal.rightleft
-        }
+    return volwidget.widget
+    -- local layout = wibox.layout.align.horizontal()
+    -- layout:add(volwidget.widget)
+    -- layout:add(volicon)
+    -- return layout
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

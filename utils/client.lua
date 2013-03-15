@@ -134,7 +134,7 @@ local function file_to_pid(filename, dict)
 
     if file ~= nil then
         for line in file:lines() do
-            for pid, opacity in line:gmatch("([%d]+):([%d\.]+)") do
+            for pid, opacity in line:gmatch("([%d]+):([%d\\.]+)") do
                 if pid and opacity and ispid(pid) then
                     dict[pid] = opacity
                 end

@@ -9,9 +9,9 @@
 local vicious = require("vicious")
 local awful = require("awful")
 local blingbling = require("blingbling")
+local oocairo = require("oocairo")
 local beautiful = beautiful
-local widget_init = widget
-local image = image
+local wibox = wibox
 
 module("widgets.cpu")
 
@@ -22,8 +22,8 @@ local core2widget = nil
 
 function widget(wide)
     if cpuicon == nil then
-        cpuicon = widget_init({ type = "imagebox" })
-        cpuicon.image = image(beautiful.widget_cpu)
+        cpuicon = wibox.widget.imagebox()
+        cpuicon:set_image(oocairo.image_surface_create_from_png(beautiful.widget_cpu))
     end
     --
     -- local cpulabel= widget_init({ type = "textbox" })
@@ -71,13 +71,13 @@ function widget(wide)
         vicious.register(core2widget, vicious.widgets.cpu, "$2")
     end
 
-    return {
-        loadwidget.widget,
-        core2widget.widget,
-        core1widget.widget,
-        cpuicon,
-        layout = awful.widget.layout.horizontal.rightleft
-        }
+    return loadwidget.widget
+    -- local layout = wibox.layout.align.horizontal()
+    -- layout:add(loadwidget.widget)
+    -- layout:add(core2widget.widget)
+    -- layout:add(core1widget.widget)
+    -- layout:add(cpuicon)
+    -- return layout
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

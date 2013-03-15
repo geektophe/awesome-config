@@ -9,9 +9,9 @@
 local vicious = require("vicious")
 local awful = require("awful")
 local blingbling = require("blingbling")
+local oocairo = require("oocairo")
 local beautiful = beautiful
-local widget_init = widget
-local image = image
+local wibox = wibox
 
 module("widgets.mem")
 
@@ -20,8 +20,8 @@ local memwidget = nil
 
 function widget(wide)
     if memicon == nil then
-        memicon = widget_init({ type = "imagebox" })
-        memicon.image = image(beautiful.widget_mem)
+        memicon = wibox.widget.imagebox()
+        memicon:set_image(oocairo.image_surface_create_from_png(beautiful.widget_mem))
     end
 
     if memwidget == nil then
@@ -38,11 +38,11 @@ function widget(wide)
         vicious.register(memwidget, vicious.widgets.mem, '$1')
     end
 
-    return {
-        memwidget.widget,
-        memicon,
-        layout = awful.widget.layout.horizontal.rightleft
-        }
+    return memwidget.widget
+    -- local layout = wibox.layout.align.horizontal()
+    -- layout:add(memwidget.widget)
+    -- layout:add(memicon)
+    -- return layout
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

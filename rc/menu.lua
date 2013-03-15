@@ -14,7 +14,7 @@ mymainmenu = awful.menu({ items = {
 
 mylauncher = awful.widget.launcher(
     {
-        image = image(beautiful.awesome_icon),
+        image = oocairo.image_surface_create_from_png(beautiful.awesome_icon),
         menu = mymainmenu
     })
 

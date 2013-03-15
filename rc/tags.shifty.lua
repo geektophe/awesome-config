@@ -27,11 +27,11 @@ shifty.config.tags = {
         position = 4,
     },
     ["5:sys"] = {
-        init = false,
+        init = true,
         position = 5,
     },
     ["6:fs"] = {
-        init = true,
+        init = false,
         position = 6,
     },
      ["7:im"] = {

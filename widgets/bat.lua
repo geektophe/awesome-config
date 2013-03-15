@@ -10,9 +10,9 @@ local vicious = require("vicious")
 local awful = require("awful")
 local blingbling = require("blingbling")
 local naughty = require("naughty")
+local oocairo = require("oocairo")
 local beautiful = beautiful
-local widget_init = widget
-local image = image
+local wibox = wibox
 
 module("widgets.bat")
 
@@ -22,8 +22,8 @@ local batwidget = nil
 -- File system usage  widget
 function widget(wide)
     if baticon == nil then
-        baticon = widget_init({ type = "imagebox" })
-        baticon.image = image(beautiful.widget_bat)
+        baticon = wibox.widget.imagebox()
+        baticon:set_image(oocairo.image_surface_create_from_png(beautiful.widget_bat))
     end
 
     if batwidget == nil then
@@ -53,11 +53,11 @@ function widget(wide)
                 return '<span color="white">(Bat: ' .. args[1] .. args[2] .. '% ' .. string.sub(args[3], 0, 5) .. ')</span>' end , 30, "BAT0")
     end
 
-    return {
-        batwidget.widget,
-        baticon,
-        layout = awful.widget.layout.horizontal.rightleft
-        }
+    return batwidget.widget
+    -- local layout = wibox.layout.align.horizontal()
+    -- layout:add(batwidget.widget)
+    -- layout:add(baticon)
+    -- return layout
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
