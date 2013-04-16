@@ -10,7 +10,7 @@ local vicious = require("vicious")
 local awful = require("awful")
 local blingbling = require("blingbling")
 local naughty = require("naughty")
-local oocairo = require("oocairo")
+local awesome = awesome
 local beautiful = beautiful
 local wibox = wibox
 
@@ -19,13 +19,17 @@ module("widgets.bat")
 local baticon = nil
 local batwidget = nil
 
+function icon()
 -- File system usage  widget
-function widget(wide)
     if baticon == nil then
         baticon = wibox.widget.imagebox()
-        baticon:set_image(oocairo.image_surface_create_from_png(beautiful.widget_bat))
+        img = awesome.load_image(beautiful.widget_bat)
+        baticon:set_image(img)
     end
+    return baticon
+end
 
+function widget(wide)
     if batwidget == nil then
         batwidget=blingbling.progress_bar.new()
         batwidget:set_height(18)

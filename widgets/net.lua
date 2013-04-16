@@ -10,7 +10,7 @@
 local vicious = require("vicious")
 local awful = require("awful")
 local blingbling = require("blingbling")
-local oocairo = require("oocairo")
+local awesome = awesome
 local utils = { system = require("utils.system") }
 local beautiful = beautiful
 

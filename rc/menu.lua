@@ -3,8 +3,7 @@ myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua" },
    { "restart", awesome.restart },
-   { "quit", awesome.quit },
-   { "next", function () utils.client.viewnext(1) end }
+   { "quit", awesome.quit }
 }
 
 mymainmenu = awful.menu({ items = {
@@ -14,7 +13,7 @@ mymainmenu = awful.menu({ items = {
 
 mylauncher = awful.widget.launcher(
     {
-        image = oocairo.image_surface_create_from_png(beautiful.awesome_icon),
+        image = awesome.load_image(beautiful.awesome_icon),
         menu = mymainmenu
     })
 

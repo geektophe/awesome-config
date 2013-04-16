@@ -20,7 +20,6 @@ shifty = require("shifty")
 -- Loads utils libraries
 utils = {}
 utils.client = require("utils.client")
-utils.client = require("utils.mpd")
 utils.process = require("utils.process")
 utils.pulseaudio = require("utils.pulseaudio")
 utils.rc = require("utils.rc")
@@ -97,7 +96,7 @@ utils.rc.loadrc('tags.shifty')
 -- }}}
 
 -- {{{ Menu
--- utils.rc.loadrc('menu')
+utils.rc.loadrc('menu')
 -- }}}
 
 -- {{{ Wibox

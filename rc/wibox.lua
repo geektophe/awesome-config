@@ -23,27 +23,37 @@ for s = 1, screen.count() do
     mywibox[s] = awful.wibox({ position = "top", screen = s })
     -- Add widgets to the wibox - order matters
     local left_layout = wibox.layout.fixed.horizontal()
+    left_layout:add(mylauncher)
     left_layout:add(shifty.taglist[s])
     left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the left
     local right_layout = wibox.layout.fixed.horizontal()
-    right_layout:add(mylayoutbox[s])
-    right_layout:add(widgets.clock.widget())
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(widgets.spacer.widget())
-    -- right_layout:add(widgets.net.widget())
-    if utils.system.hasbattery() then right_layout:add(widgets.spacer.widget()) end
-    if utils.system.hasbattery() then right_layout:add(widgets.bat.widget(wide)) end
-    right_layout:add(widgets.spacer.widget())
-    right_layout:add(widgets.fs.widget(wide))
-    right_layout:add(widgets.spacer.widget())
-    right_layout:add(widgets.mem.widget(wide))
-    right_layout:add(widgets.spacer.widget())
-    right_layout:add(widgets.cpu.widget(wide))
-    right_layout:add(widgets.spacer.widget())
+    right_layout:add(widgets.volume.icon())
     right_layout:add(widgets.volume.widget())
     right_layout:add(widgets.spacer.widget())
+    right_layout:add(widgets.cpu.icon(wide))
+    right_layout:add(widgets.cpu.core1widget(wide))
+    right_layout:add(widgets.cpu.core2widget(wide))
+    right_layout:add(widgets.cpu.loadwidget(wide))
+    right_layout:add(widgets.spacer.widget())
+    right_layout:add(widgets.mem.icon())
+    right_layout:add(widgets.mem.widget(wide))
+    right_layout:add(widgets.spacer.widget())
+    right_layout:add(widgets.fs.icon())
+    right_layout:add(widgets.fs.widget(wide))
+    right_layout:add(widgets.spacer.widget())
+
+    -- right_layout:add(widgets.net.widget())
+    if utils.system.hasbattery() then
+        right_layout:add(widgets.bat.icon())
+        right_layout:add(widgets.bat.widget(wide))
+    end
+    right_layout:add(widgets.spacer.widget())
+    if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(widgets.clock.widget())
+    right_layout:add(mylayoutbox[s])
 
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
