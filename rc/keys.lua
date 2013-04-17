@@ -199,5 +199,4 @@ if tags_type == "shifty" then
 end
 -- }}}
 
-
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

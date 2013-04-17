@@ -102,6 +102,10 @@ utils.rc.loadrc('tags.awful')
 utils.rc.loadrc('menu')
 -- }}}
 
+-- {{{ Buttons
+utils.rc.loadrc('buttons')
+-- }}}
+
 -- {{{ Wibox
 utils.rc.loadrc('wibox')
 -- }}}

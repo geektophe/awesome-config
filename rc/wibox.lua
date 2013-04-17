@@ -4,18 +4,8 @@ mypromptbox = {}
 mylayoutbox = {}
 wide = utils.screen.width() > 1280
 
--- {{{ Tag list definition
 taglist = {}
-taglist.buttons = awful.util.table.join(
-    awful.button({ },                 1, awful.tag.viewonly),
-    awful.button({ modkey          }, 1, awful.client.movetotag),
-    awful.button({ "Shift"         }, 1, awful.tag.viewtoggle),
-    awful.button({ "Control"       }, 1, awful.client.toggletag),
-    awful.button({ },                 3, utils.client.markedtotag),
-    awful.button({ },                 4, awful.tag.viewnext),
-    awful.button({ },                 5, awful.tag.viewprev)
-    )
--- }}}
+taglist.buttons = taglist_buttons
 
 if tags_type == "shifty" then
     shifty.taglist = taglist
@@ -27,12 +17,7 @@ for s = 1, screen.count() do
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)
-    mylayoutbox[s]:buttons(awful.util.table.join(
-        awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-        awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-        awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-        awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end))
-        )
+    mylayoutbox[s]:buttons(layoutbox_buttons)
     -- Create a taglist widget
     taglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist.buttons)
 

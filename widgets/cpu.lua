@@ -54,7 +54,7 @@ function loadwidget(wide)
         --       user_color = beautiful.notify_font_color_2,
         --       root_color = beautiful.notify_font_color_3,
         --       terminal = "urxvt"})
-        vicious.register(_loadwidget, vicious.widgets.cpu,'$1', 5)
+        vicious.register(_loadwidget, vicious.widgets.cpu,'$1', 3)
     end
     return _loadwidget
 end
