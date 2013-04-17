@@ -12,9 +12,9 @@ wibox = require("wibox")
 -- Theme handling library
 beautiful = require("beautiful")
 -- Revelation library
-revelation = require("revelation")
+--revelation = require("revelation")
 -- Eminent library
-eminent = require("eminent")
+--eminent = require("eminent")
 
 -- Loads Shifty automatic tags management library
 -- shifty = require("shifty")

@@ -56,7 +56,7 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
-    awful.key({ modkey,           }, "b",     revelation),
+    --awful.key({ modkey,           }, "b",     revelation),
     awful.key({ modkey,           }, "i",     utils.client.info),
 
     -- Prompt
@@ -168,12 +168,12 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey            }, "u",      utils.client.togglemarked), -- marks client
     awful.key({ modkey,           }, "q",      function (c) c:kill() end),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle),
+    awful.key({ modkey, "Control" }, "Space",  awful.client.floating.toggle),
     awful.key({ modkey, "Control" }, "Return", function (c)
         c:swap(awful.client.getmaster())
         c:raise()
     end),
-    awful.key({ modkey,           }, "o",      awful.client.movetoscreen),
+    awful.key({ modkey,           }, "n",      awful.client.movetoscreen),
     awful.key({ modkey, "Shift"   }, "l",      function (c) c:redraw() end),
     awful.key({ modkey,           }, "m",      utils.client.togglemaximized),
     awful.key({ modkey,           }, "Prior",  function(c)
