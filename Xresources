@@ -6,7 +6,7 @@ XTerm*background:         black
 XTerm*foreground:         white
 XTerm*cursorColor:        white
 XTerm*geometry:           80x25
-XTerm*faceName:           Dejavu Sans Mono:normal:pixelsize=12
+XTerm*faceName:           DejaVu_Sans_Mono_for_Powerline.otf:normal:pixelsize=12
 XTerm*dynamicColors:      true
 XTerm*utf8:               2
 XTerm*eightBitInput:      true
@@ -34,7 +34,7 @@ URxvt.depth: 32
 !URxvt*loginShell: true
 
 ! Font
-URxvt*font: xft:DejaVu Sans Mono:normal:pixelsize=12:antialias=true:hinting=true
+URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:antialias=true:hinting=true
 URxvt*letterSpace: -1
 
 ! Scroll bar

@@ -1,8 +1,10 @@
 #!/bin/bash
+exec >> .xsession-errors
+exec 2>&1
 
 # Configures screen on identified hostname
-case $HOSTNAME in
-	thor) xrandr --output DVI-1 --rihgt-of DVI-0 ;;
+case $(hostname) in
+	thor) xrandr --output DVI-1 --right-of DVI-0 ;;
 esac
 
 # Loads X applications configuration
@@ -22,7 +24,7 @@ export GPG_AGENT_INFO
 /usr/bin/start-pulseaudio-x11
 
 # Starts other components in the background
-/usr/bin/xcompmgr -cF &
+/usr/bin/compton -b
 /usr/bin/parcellite &
 /usr/bin/dropboxd &
 /usr/bin/xscreensaver -no-splash &
