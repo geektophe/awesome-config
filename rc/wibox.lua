@@ -4,6 +4,23 @@ mypromptbox = {}
 mylayoutbox = {}
 wide = utils.screen.width() > 1280
 
+-- {{{ Tag list definition
+taglist = {}
+taglist.buttons = awful.util.table.join(
+    awful.button({ },                 1, awful.tag.viewonly),
+    awful.button({ modkey          }, 1, awful.client.movetotag),
+    awful.button({ "Shift"         }, 1, awful.tag.viewtoggle),
+    awful.button({ "Control"       }, 1, awful.client.toggletag),
+    awful.button({ },                 3, utils.client.markedtotag),
+    awful.button({ },                 4, awful.tag.viewnext),
+    awful.button({ },                 5, awful.tag.viewprev)
+    )
+-- }}}
+
+if tags_type == "shifty" then
+    shifty.taglist = taglist
+end
+
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt()
@@ -17,14 +34,14 @@ for s = 1, screen.count() do
         awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end))
         )
     -- Create a taglist widget
-    shifty.taglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, shifty.taglist.buttons)
+    taglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist.buttons)
 
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s })
     -- Add widgets to the wibox - order matters
     local left_layout = wibox.layout.fixed.horizontal()
     left_layout:add(mylauncher)
-    left_layout:add(shifty.taglist[s])
+    left_layout:add(taglist[s])
     left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the left

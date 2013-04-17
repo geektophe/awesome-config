@@ -4,18 +4,20 @@ os.setlocale("fr_FR.UTF-8")
 
 -- Standard awesome library
 awful = require("awful")
+awful.rules = require("awful.rules")
 awful.autofocus = require("awful.autofocus")
 naughty = require("naughty")
 oocairo = require("oocairo")
 wibox = require("wibox")
--- require("awful.rules")
 -- Theme handling library
 beautiful = require("beautiful")
 -- Revelation library
 revelation = require("revelation")
+-- Eminent library
+eminent = require("eminent")
 
 -- Loads Shifty automatic tags management library
-shifty = require("shifty")
+-- shifty = require("shifty")
 
 -- Loads utils libraries
 utils = {}
@@ -92,7 +94,8 @@ layouts =
 -- }}}
 
 -- {{{ Shifty settings
-utils.rc.loadrc('tags.shifty')
+--utils.rc.loadrc('tags.shifty')
+utils.rc.loadrc('tags.awful')
 -- }}}
 
 -- {{{ Menu
@@ -104,7 +107,7 @@ utils.rc.loadrc('wibox')
 -- }}}
 
 -- {{{ Shifty initialization
-shifty.init()
+--shifty.init()
 -- }}}
 
 -- {{{ Key bindings
@@ -114,6 +117,11 @@ utils.rc.loadrc('keys')
 -- {{{ Signals
 utils.rc.loadrc('signal')
 -- }}}
+
+-- {{{ Awful rulses
+utils.rc.loadrc('rules.awful')
+-- }}}
+
 
 -- {{{ Programs to run at startup
 -- Disabled, managed by Xsession
