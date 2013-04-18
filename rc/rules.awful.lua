@@ -14,9 +14,15 @@ awful.rules.rules = {
                      switchtotag = true,
                      floating = false} },
 
-    -- Gimp
+    -- Web
     { rule       = { class = "Firefox" },
       properties = { tag = tags[1][1]} },
+
+    { rule       = { class = "Chromium" },
+      properties = { tag = tags[1][1]} },
+
+    { rule = { instance = "plugin-container" },
+      properties = { tag = tags[1][1], floating = true, fullscreen = true } },
 
     { rule       = { class = "Transmission" },
       properties = { tag = tags[1][1] } },
