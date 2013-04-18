@@ -14,8 +14,8 @@ tags = {
         "8:off",
         "9:img"},
     layout = {
-        layouts[4],
-        layouts[4],
+        layouts[2],
+        layouts[2],
         layouts[2],
         layouts[2],
         layouts[2],
@@ -35,8 +35,8 @@ tags = {
         "8:off",
         "9:img"},
     layout = {
-        layouts[4],
-        layouts[4],
+        layouts[2],
+        layouts[2],
         layouts[2],
         layouts[2],
         layouts[2],

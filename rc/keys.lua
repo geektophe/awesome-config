@@ -195,7 +195,7 @@ root.keys(global_keys)
 
 if tags_type == "shifty" then
     shifty.config.globalkeys = global_keys
-    shifty.config.clientkeys = clientkeys
+    shifty.config.clientkeys = client_keys
 end
 -- }}}
 

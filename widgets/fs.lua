@@ -9,8 +9,8 @@
 local vicious = require("vicious")
 local awful = require("awful")
 local blingbling = require("blingbling")
-local awesome = awesome
 local beautiful = beautiful
+local awesome = awesome
 local wibox = wibox
 
 module("widgets.fs")
@@ -18,7 +18,6 @@ module("widgets.fs")
 local _fsicon = nil
 local _fswidget = nil
 
--- File system usage  widget
 function icon()
     if _fsicon == nil then
         _fsicon = wibox.widget.imagebox()
