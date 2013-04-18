@@ -10,7 +10,6 @@ awful.rules.rules = {
                      keys = client_keys,
                      buttons = client_buttons,
                      floatBars = true,
-                     tag = tags[1][5],
                      switchtotag = true,
                      floating = false} },
 
@@ -22,7 +21,7 @@ awful.rules.rules = {
       properties = { tag = tags[1][1]} },
 
     { rule = { instance = "plugin-container" },
-      properties = { tag = tags[1][1], floating = true, fullscreen = true } },
+      properties = { floating = true, fullscreen = true } },
 
     { rule       = { class = "Transmission" },
       properties = { tag = tags[1][1] } },
