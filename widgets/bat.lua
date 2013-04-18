@@ -10,39 +10,37 @@ local vicious = require("vicious")
 local awful = require("awful")
 local blingbling = require("blingbling")
 local naughty = require("naughty")
-local awesome = awesome
 local beautiful = beautiful
+local awesome = awesome
 local wibox = wibox
 
 module("widgets.bat")
 
-local baticon = nil
-local batwidget = nil
+local _baticon = nil
+local _batwidget = nil
 
 function icon()
--- File system usage  widget
-    if baticon == nil then
-        baticon = wibox.widget.imagebox()
-        img = awesome.load_image(beautiful.widget_bat)
-        baticon:set_image(img)
+    if _baticon == nil then
+        _baticon = wibox.widget.imagebox()
+        _baticon:set_image(awesome.load_image(beautiful.widget_bat))
     end
-    return baticon
+    return _baticon
 end
 
 function widget(wide)
-    if batwidget == nil then
-        batwidget=blingbling.progress_bar.new()
-        batwidget:set_height(18)
+    if _batwidget == nil then
+        _batwidget=blingbling.progress_graph.new()
+        _batwidget:set_height(18)
         if wide == nil or wide then
-            batwidget:set_width(50)
+            _batwidget:set_width(50)
         else
-            batwidget:set_width(40)
+            _batwidget:set_width(40)
         end
-        batwidget:set_show_text(true)
-        batwidget:set_horizontal(true)
-        -- batwidget:set_filled(true)
-        -- batwidget:set_filled_color("#00000033")
-        vicious.register(batwidget, vicious.widgets.bat, "$2", 61, "BAT0",
+        _batwidget:set_show_text(true)
+        _batwidget:set_horizontal(true)
+        -- _batwidget:set_filled(true)
+        -- _batwidget:set_filled_color("#00000033")
+        vicious.register(_batwidget, vicious.widgets.bat, "$2", 61, "BAT0",
             --Bat % Warning
             function (widget, args)
                 if args[2] < 15 then
@@ -57,11 +55,7 @@ function widget(wide)
                 return '<span color="white">(Bat: ' .. args[1] .. args[2] .. '% ' .. string.sub(args[3], 0, 5) .. ')</span>' end , 30, "BAT0")
     end
 
-    return batwidget.widget
-    -- local layout = wibox.layout.align.horizontal()
-    -- layout:add(batwidget.widget)
-    -- layout:add(baticon)
-    -- return layout
+    return _batwidget
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

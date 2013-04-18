@@ -1,4 +1,5 @@
 -- Shity tags and apps configuration
+tags_type = "shifty"
 
 -- {{{ Enable title bar only for floating windows
 shifty.config.float_bars = true
@@ -27,11 +28,11 @@ shifty.config.tags = {
         position = 4,
     },
     ["5:sys"] = {
-        init = true,
+        init = false,
         position = 5,
     },
     ["6:fs"] = {
-        init = false,
+        init = true,
         position = 6,
     },
      ["7:im"] = {
@@ -138,15 +139,7 @@ shifty.config.apps = {
         match = { "" },
         -- callback = awful.client.setslave,
         slave = true,
-        buttons = awful.util.table.join(
-            awful.button({},                1, function(c) client.focus = c; c:raise() end),
-            awful.button({modkey},          1, function(c)
-                    client.focus = c
-                    c:raise()
-                    awful.mouse.client.move(c)
-                end),
-            awful.button({modkey, "Shift"}, 1, utils.client.togglemarked),
-            awful.button({modkey},          3, awful.mouse.client.resize))
+        buttons = client_buttons
     },
 }
 -- }}}
@@ -162,6 +155,5 @@ shifty.config.defaults = {
     opacity=1,
 }
 -- }}}
-
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

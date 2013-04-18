@@ -9,14 +9,14 @@ local wibox = wibox
 
 module("widgets.spacer")
 
-local spacer = nil
+local _spacer = nil
 
 function widget()
-    if spacerw == nil then
-        spacer = wibox.widget.textbox()
-        spacer:set_text("   ")
+    if _spacer == nil then
+        _spacer = wibox.widget.textbox()
+        _spacer:set_text("   ")
     end
-    return spacer
+    return _spacer
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

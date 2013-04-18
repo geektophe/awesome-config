@@ -9,31 +9,26 @@
 local vicious = require("vicious")
 local awful = require("awful")
 local blingbling = require("blingbling")
-local awesome = awesome
 local beautiful = beautiful
+local awesome = awesome
 local wibox = wibox
 
 module("widgets.cpu")
 
-local cpuicon = nil
+local _cpuicon = nil
 local _loadwidget = nil
 local _core1widget = nil
 local _core2widget = nil
 
 function icon()
-    if cpuicon == nil then
-        cpuicon = wibox.widget.imagebox()
-        img = awesome.load_image(beautiful.widget_cpu)
-        cpuicon:set_image(img)
+    if _cpuicon == nil then
+        _cpuicon = wibox.widget.imagebox()
+        _cpuicon:set_image(awesome.load_image(beautiful.widget_cpu))
     end
-    return cpuicon
+    return _cpuicon
 end
 
 function loadwidget(wide)
-    --
-    -- local cpulabel= widget_init({ type = "textbox" })
-    -- cpulabel.text='CPU: '
-    --
     if _loadwidget == nil then
         _loadwidget = blingbling.line_graph.new()
         _loadwidget:set_height(18)
@@ -45,15 +40,7 @@ function loadwidget(wide)
         end
         _loadwidget:set_graph_background_color("#00000022")
         _loadwidget:set_show_text(true)
-        _loadwidget:set_rounded_size(0.3)
         _loadwidget:set_label("$percent %")
-        --
-        --bind top popup on the graph
-        -- blingbling.popups.htop(_loadwidget.widget,
-        --    { title_color = beautiful.notify_font_color_1,
-        --       user_color = beautiful.notify_font_color_2,
-        --       root_color = beautiful.notify_font_color_3,
-        --       terminal = "urxvt"})
         vicious.register(_loadwidget, vicious.widgets.cpu,'$1', 3)
     end
     return _loadwidget

@@ -37,9 +37,7 @@ widgets.cpu = require("widgets.cpu")
 widgets.fs = require("widgets.fs")
 widgets.mem = require("widgets.mem")
 widgets.net = require("widgets.net")
--- widgets.mpd = require("widgets.mpd")
 widgets.spacer = require("widgets.spacer")
-widgets.task = require("widgets.task")
 widgets.volume = require("widgets.volume")
 -- }}}
 

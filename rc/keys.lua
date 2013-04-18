@@ -1,7 +1,7 @@
 -- Key bindings definition
 
 -- {{{ Global keys bindings
-globalkeys = awful.util.table.join(
+global_keys = awful.util.table.join(
     awful.key({ modkey, }, "Left",   awful.tag.viewprev),
     awful.key({ modkey, }, "Right",  awful.tag.viewnext),
     awful.key({ modkey, }, "Escape", awful.tag.history.restore),
@@ -78,7 +78,7 @@ globalkeys = awful.util.table.join(
 if tags_type == "shifty" then
 -- Tags access keys
     for i=1, (shifty.config.maxtags or 9) do
-        globalkeys = awful.util.table.join(globalkeys,
+        global_keys = awful.util.table.join(global_keys,
             awful.key({ modkey }, "#" .. i + 9,
                 function ()
                     local t = awful.tag.viewonly(shifty.getpos(i))
@@ -120,7 +120,7 @@ else
     -- Be careful: we use keycodes to make it works on any keyboard layout.
     -- This should map on the top row of your keyboard, usually 1 to 9.
     for i = 1, keynumber do
-        globalkeys = awful.util.table.join(globalkeys,
+        global_keys = awful.util.table.join(global_keys,
             awful.key({ modkey }, "#" .. i + 9,
                     function ()
                           local screen = mouse.screen
@@ -164,11 +164,11 @@ end
 
 
 -- {{{ Client key bindings
-clientkeys = awful.util.table.join(
+client_keys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey            }, "u",      utils.client.togglemarked), -- marks client
     awful.key({ modkey,           }, "q",      function (c) c:kill() end),
-    awful.key({ modkey, "Control" }, "Space",  awful.client.floating.toggle),
+    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle),
     awful.key({ modkey, "Control" }, "Return", function (c)
         c:swap(awful.client.getmaster())
         c:raise()
@@ -191,10 +191,10 @@ clientkeys = awful.util.table.join(
 
 
 -- {{{ Key bindings affectation
-root.keys(globalkeys)
+root.keys(global_keys)
 
 if tags_type == "shifty" then
-    shifty.config.globalkeys = globalkeys
+    shifty.config.globalkeys = global_keys
     shifty.config.clientkeys = clientkeys
 end
 -- }}}

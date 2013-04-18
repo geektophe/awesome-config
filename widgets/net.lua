@@ -10,26 +10,25 @@
 local vicious = require("vicious")
 local awful = require("awful")
 local blingbling = require("blingbling")
-local awesome = awesome
 local utils = { system = require("utils.system") }
 local beautiful = beautiful
 
 module("widgets.net")
 
-local netwidget = nil
+local _netwidget = nil
 
 -- Network usage widget
 function widget()
-    if netwidget == nil then
-        netwidget = blingbling.net.new()
-        netwidget:set_height(18)
-        netwidget:set_ippopup()
-        netwidget:set_show_text(true)
-        netwidget:set_v_margin(3)
-        netwidget:set_interface(utils.system.main_intf())
+    if _netwidget == nil then
+        _netwidget = blingbling.net.new()
+        _netwidget:set_height(18)
+        _netwidget:set_ippopup()
+        _netwidget:set_show_text(true)
+        _netwidget:set_v_margin(3)
+        _netwidget:set_interface(utils.system.main_intf())
     end
 
-    return netwidget.widget
+    return _netwidget
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
