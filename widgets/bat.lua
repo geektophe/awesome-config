@@ -11,34 +11,36 @@ local awful = require("awful")
 local blingbling = require("blingbling")
 local naughty = require("naughty")
 local beautiful = beautiful
-local widget_init = widget
+local widget_new = widget
 local image = image
 
 module("widgets.bat")
 
-local baticon = nil
-local batwidget = nil
+local _baticon = nil
+local _batwidget = nil
 
--- File system usage  widget
-function widget(wide)
-    if baticon == nil then
-        baticon = widget_init({ type = "imagebox" })
-        baticon.image = image(beautiful.widget_bat)
+function icon()
+    if _baticon == nil then
+        _baticon = widget_new({ type = "imagebox" })
+        _baticon.image = image(beautiful.widget_bat)
     end
+    return _baticon
+end
 
-    if batwidget == nil then
-        batwidget=blingbling.progress_bar.new()
-        batwidget:set_height(18)
+function widget(wide)
+    if _batwidget == nil then
+        _batwidget=blingbling.progress_bar.new()
+        _batwidget:set_height(18)
         if wide == nil or wide then
-            batwidget:set_width(50)
+            _batwidget:set_width(50)
         else
-            batwidget:set_width(40)
+            _batwidget:set_width(40)
         end
-        batwidget:set_show_text(true)
-        batwidget:set_horizontal(true)
-        -- batwidget:set_filled(true)
-        -- batwidget:set_filled_color("#00000033")
-        vicious.register(batwidget, vicious.widgets.bat, "$2", 61, "BAT0",
+        _batwidget:set_show_text(true)
+        _batwidget:set_horizontal(true)
+        -- _batwidget:set_filled(true)
+        -- _batwidget:set_filled_color("#00000033")
+        vicious.register(_batwidget, vicious.widgets.bat, "$2", 61, "BAT0",
             --Bat % Warning
             function (widget, args)
                 if args[2] < 15 then
@@ -53,11 +55,7 @@ function widget(wide)
                 return '<span color="white">(Bat: ' .. args[1] .. args[2] .. '% ' .. string.sub(args[3], 0, 5) .. ')</span>' end , 30, "BAT0")
     end
 
-    return {
-        batwidget.widget,
-        baticon,
-        layout = awful.widget.layout.horizontal.rightleft
-        }
+    return _batwidget.widget
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

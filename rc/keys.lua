@@ -1,8 +1,7 @@
 -- Key bindings definition
 
-
 -- {{{ Global keys bindings
-globalkeys = awful.util.table.join(
+global_keys = awful.util.table.join(
     awful.key({ modkey, }, "Left",   awful.tag.viewprev),
     awful.key({ modkey, }, "Right",  awful.tag.viewnext),
     awful.key({ modkey, }, "Escape", awful.tag.history.restore),
@@ -13,15 +12,15 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "Right", function () utils.tag.incindex(1) end),
 
     -- Shifty: keybindings specific to shifty
-    awful.key({ modkey            }, "d", shifty.del), -- delete a tag
-    awful.key({ modkey            }, "n", shifty.send_next), -- client to next tag
-    awful.key({ modkey, "Shift"   }, "n", shifty.send_prev), -- client to prev tag
-    awful.key({ modkey            }, "a", shifty.add), -- creat a new tag
-    awful.key({ modkey, "Control" }, "è", shifty.rename), -- rename a tag
-    awful.key({ modkey, "shift"   }, "a", -- nopopup new tag
-        function()
-            shifty.add({nopopup = true})
-        end),
+    --awful.key({ modkey            }, "d", shifty.del), -- delete a tag
+    --awful.key({ modkey            }, "n", shifty.send_next), -- client to next tag
+    --awful.key({ modkey, "Shift"   }, "n", shifty.send_prev), -- client to prev tag
+    --awful.key({ modkey            }, "a", shifty.add), -- creat a new tag
+    --awful.key({ modkey, "Control" }, "è", shifty.rename), -- rename a tag
+    --awful.key({ modkey, "shift"   }, "a", -- nopopup new tag
+    --    function()
+    --        shifty.add({nopopup = true})
+    --    end),
 
     -- Tab
     awful.key({ modkey,         }, "Tab", function () utils.client.viewnext(1) end),
@@ -76,44 +75,96 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey },            "v", utils.client.markedtoctag)
 )
 
+if tags_type == "shifty" then
 -- Tags access keys
-for i=1, (shifty.config.maxtags or 9) do
-    globalkeys = awful.util.table.join(globalkeys,
-        awful.key({ modkey }, "#" .. i + 9,
-            function ()
-                local t = awful.tag.viewonly(shifty.getpos(i))
-            end),
-        awful.key({ modkey, "Shift"   }, "#" .. i + 9,
+    for i=1, (shifty.config.maxtags or 9) do
+        global_keys = awful.util.table.join(global_keys,
+            awful.key({ modkey }, "#" .. i + 9,
+                function ()
+                    local t = awful.tag.viewonly(shifty.getpos(i))
+                end),
+            awful.key({ modkey, "Shift"   }, "#" .. i + 9,
+                    function ()
+                        local t = shifty.getpos(i)
+                        t.selected = not t.selected
+                    end),
+            awful.key({ modkey, "Control" }, "#" .. i + 9,
+                function ()
+                    if client.focus then
+                        awful.client.toggletag(shifty.getpos(i))
+                    end
+                end),
+            awful.key({ modkey, "Mod1"    }, "#" .. i + 9,
+                function ()
+                    if client.focus then
+                        local t = shifty.getpos(i)
+                        awful.client.movetotag(t)
+                        awful.tag.viewonly(t)
+                    end
+                end),
+            awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
                 function ()
                     local t = shifty.getpos(i)
-                    t.selected = not t.selected
-                end),
-        awful.key({ modkey, "Control" }, "#" .. i + 9,
-            function ()
-                if client.focus then
-                    awful.client.toggletag(shifty.getpos(i))
-                end
-            end),
-        awful.key({ modkey, "Mod1"    }, "#" .. i + 9,
-            function ()
-                if client.focus then
-                    local t = shifty.getpos(i)
-                    awful.client.movetotag(t)
+                    utils.client.markedtotag(t)
                     awful.tag.viewonly(t)
-                end
-            end),
-        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
-            function ()
-                local t = shifty.getpos(i)
-                utils.client.markedtotag(t)
-                awful.tag.viewonly(t)
-            end))
+                end))
+    end
+else
+-- Compute the maximum number of digit we need, limited to 9
+    keynumber = 0
+    for s = 1, screen.count() do
+       keynumber = math.min(9, math.max(#tags[s], keynumber));
+    end
+
+    -- Bind all key numbers to tags.
+    -- Be careful: we use keycodes to make it works on any keyboard layout.
+    -- This should map on the top row of your keyboard, usually 1 to 9.
+    for i = 1, keynumber do
+        global_keys = awful.util.table.join(global_keys,
+            awful.key({ modkey }, "#" .. i + 9,
+                    function ()
+                          local screen = mouse.screen
+                          if tags[screen][i] then
+                              awful.tag.viewonly(tags[screen][i])
+                          end
+                    end),
+            awful.key({ modkey, "Shift" }, "#" .. i + 9,
+                    function ()
+                        if client.focus and tags[client.focus.screen][i] then
+                            local t = tags[client.focus.screen][i]
+                            t.selected = not t.selected
+                        end
+                    end),
+            awful.key({ modkey, "Control" }, "#" .. i + 9,
+                    function ()
+                        if client.focus and tags[client.focus.screen][i] then
+                            local t = tags[client.focus.screen][i]
+                            awful.client.toggletag(t)
+                        end
+                    end),
+            awful.key({ modkey, "Mod1" }, "#" .. i + 9,
+                    function ()
+                        if client.focus and tags[client.focus.screen][i] then
+                            local t = tags[client.focus.screen][i]
+                            awful.client.movetotag(t)
+                            awful.tag.viewonly(t)
+                        end
+                    end),
+            awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+                    function ()
+                        if client.focus and tags[client.focus.screen][i] then
+                            local t = tags[client.focus.screen][i]
+                            utils.client.markedtotag(t)
+                            awful.tag.viewonly(t)
+                        end
+                    end))
+    end
 end
 -- }}}
 
 
 -- {{{ Client key bindings
-clientkeys = awful.util.table.join(
+client_keys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey            }, "u",      utils.client.togglemarked), -- marks client
     awful.key({ modkey,           }, "q",      function (c) c:kill() end),
@@ -140,10 +191,12 @@ clientkeys = awful.util.table.join(
 
 
 -- {{{ Key bindings affectation
-root.keys(globalkeys)
-shifty.config.globalkeys = globalkeys
-shifty.config.clientkeys = clientkeys
--- }}}
+root.keys(global_keys)
 
+if tags_type == "shifty" then
+    shifty.config.globalkeys = global_keys
+    shifty.config.clientkeys = client_keys
+end
+-- }}}
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

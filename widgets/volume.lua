@@ -15,31 +15,30 @@ local image = image
 
 module("widgets.volume")
 
-local volicon = nil
-local volwidget = nil
+local _volicon = nil
+local _volwidget = nil
 
--- File system usage  widget
+function icon()
+    if _volicon == nil then
+        _volicon = widget_init({ type = "imagebox" })
+        _volicon.image = image(beautiful.widget_vol)
+    end
+    return _volicon
+end
+
 function widget()
-    if volicon == nil then
-        volicon = widget_init({ type = "imagebox" })
-        volicon.image = image(beautiful.widget_vol)
-    end
 
-    if volwidget == nil then
-        volwidget = blingbling.volume.new()
-        volwidget:set_height(18)
-        volwidget:set_width(50)
+    if _volwidget == nil then
+        _volwidget = blingbling.volume.new()
+        _volwidget:set_height(18)
+        _volwidget:set_width(50)
         --bind the volume widget on the master channel
-        volwidget:update_master()
-        volwidget:set_master_control()
-        volwidget:set_bar(true)
+        _volwidget:update_master()
+        _volwidget:set_master_control()
+        _volwidget:set_bar(true)
     end
 
-    return {
-        volwidget.widget,
-        volicon,
-        layout = awful.widget.layout.horizontal.rightleft
-        }
+    return _volwidget.widget
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

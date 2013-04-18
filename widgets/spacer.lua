@@ -5,18 +5,18 @@
 --
 -- Note that he theme should have widget_cpu attribute set
 
-local widget_create = widget
+local widget_new = widget
 
 module("widgets.spacer")
 
-local spacer = nil
+local _spacer = nil
 
 function widget()
-    if spacerw == nil then
-        spacer = widget_create({ type = "textbox", name = "spacer" })
-        spacer.text    = "   "
+    if _spacerw == nil then
+        _spacer = widget_new({ type = "textbox", name = "spacer" })
+        _spacer.text = "   "
     end
-    return spacer
+    return _spacer
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

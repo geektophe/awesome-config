@@ -15,34 +15,33 @@ local image = image
 
 module("widgets.mem")
 
-local memicon = nil
-local memwidget = nil
+local _memicon = nil
+local _memwidget = nil
+
+function icon()
+    if _memicon == nil then
+        _memicon = widget_init({ type = "imagebox" })
+        _memicon.image = image(beautiful.widget_mem)
+    end
+    return _memicon
+end
 
 function widget(wide)
-    if memicon == nil then
-        memicon = widget_init({ type = "imagebox" })
-        memicon.image = image(beautiful.widget_mem)
-    end
-
-    if memwidget == nil then
-        memwidget = blingbling.classical_graph.new()
-        memwidget:set_height(18)
+    if _memwidget == nil then
+        _memwidget = blingbling.classical_graph.new()
+        _memwidget:set_height(18)
 
         if wide == nil or wide then
-            memwidget:set_width(100)
+            _memwidget:set_width(100)
         else
-            memwidget:set_width(75)
+            _memwidget:set_width(75)
         end
-        memwidget:set_tiles_color("#00000022")
-        memwidget:set_show_text(true)
-        vicious.register(memwidget, vicious.widgets.mem, '$1')
+        _memwidget:set_tiles_color("#00000022")
+        _memwidget:set_show_text(true)
+        vicious.register(_memwidget, vicious.widgets.mem, '$1')
     end
 
-    return {
-        memwidget.widget,
-        memicon,
-        layout = awful.widget.layout.horizontal.rightleft
-        }
+    return _memwidget.widget
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
