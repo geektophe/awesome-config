@@ -17,6 +17,12 @@ client.add_signal("manage", function (c, startup)
 
     c:add_signal("property::floating",  function (c)
         c.ontop = awful.client.floating.get(c)
+
+        if c.ontop then
+            awful.titlebar.add(c, {modkey=modkey})
+        else
+            awful.titlebar.remove(c)
+        end
     end)
 
 

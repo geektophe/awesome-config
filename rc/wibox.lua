@@ -4,13 +4,6 @@ mypromptbox = {}
 mylayoutbox = {}
 wide = utils.screen.width() > 1280
 
-taglist = {}
-taglist.buttons = taglist_buttons
-
-if tags_type == "shifty" then
-    shifty.taglist = taglist
-end
-
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })

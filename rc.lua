@@ -91,39 +91,40 @@ layouts =
 -- {{{ Configuration modules (depend on previous variables)
 -- }}}
 
--- {{{ Shifty settings
---utils.rc.loadrc('tags.shifty')
-utils.rc.loadrc('tags.awful')
--- }}}
-
--- {{{ Menu
-utils.rc.loadrc('menu')
+-- {{{ Signals
+utils.rc.loadrc('signal')
 -- }}}
 
 -- {{{ Buttons
 utils.rc.loadrc('buttons')
 -- }}}
 
--- {{{ Wibox
-utils.rc.loadrc('wibox')
--- }}}
-
--- {{{ Shifty initialization
---shifty.init()
--- }}}
-
 -- {{{ Key bindings
 utils.rc.loadrc('keys')
 -- }}}
 
--- {{{ Signals
-utils.rc.loadrc('signal')
+-- {{{ Shifty settings
+if shifty then
+    utils.rc.loadrc('tags.shifty')
+else
+    utils.rc.loadrc('tags.awful')
+end
 -- }}}
 
--- {{{ Awful rulses
-utils.rc.loadrc('rules.awful')
+-- {{{ Key bindings extension (depends on tags definition)
+if shifty then
+    utils.rc.loadrc('keys.shifty')
+else
+    utils.rc.loadrc('keys.awful')
+end
+-- }}}
+-- {{{ Menu
+utils.rc.loadrc('menu')
 -- }}}
 
+-- {{{ Wibox
+utils.rc.loadrc('wibox')
+-- }}}
 
 -- {{{ Programs to run at startup
 -- Disabled, managed by Xsession

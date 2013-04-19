@@ -24,6 +24,7 @@ opacity_unfocus_incr = 0.3
 local clients_opacity = {}
 local opacity_file = "/tmp/awmclnt.opacity." .. os.getenv('USER')
 
+
 -- {{{ round
 -- Rounds a decimal value
 local function round(num, idp)
