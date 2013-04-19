@@ -86,6 +86,10 @@ awful.rules.rules = {
                      switchtotag = true,
                      floating = false} },
 
+    -- Dialog windows
+    { rule         = { type = "dialog" },
+      properties   = { floating = true, size_hints_honor = true } },
+
     -- Web
     { rule       = { class = "Firefox" },
       properties = { tag = tags[screen.count()][1]} },
@@ -125,16 +129,16 @@ awful.rules.rules = {
     { rule       = { class = "File-roller" },
       properties = { tag = tags[1][6], opacity = 0.8 } },
 
-    -- Dialog windows
-    { rule         = { type = "dialog" },
-      properties   = { floating = true, size_hints_honor = true } },
-
     -- Empathy
     { rule       = { class = "Empathy" },
       properties = { tag = tags[1][7], opacity = 0.8 } },
 
     { rule       = { class = "Empathy", role = "contact_list" },
       callback   = awful.client.setsmaster },
+
+    -- Dia
+    { rule       = { class = "Dia" },
+      properties = { tag = tags[1][9] } },
 }
 -- }}}
 

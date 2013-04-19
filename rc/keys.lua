@@ -87,7 +87,7 @@ client_keys = awful.util.table.join(
         c:swap(awful.client.getmaster())
         c:raise()
     end),
-    awful.key({ modkey,           }, "o",      awful.client.movetoscreen),
+    awful.key({ modkey,           }, "n",      awful.client.movetoscreen),
     awful.key({ modkey, "Shift"   }, "l",      function (c) c:redraw() end),
     awful.key({ modkey,           }, "m",      utils.client.togglemaximized),
     awful.key({ modkey,           }, "Prior",  function(c)
