@@ -100,6 +100,9 @@ awful.rules.rules = {
     { rule = { instance = "plugin-container" },
       properties = { floating = true, fullscreen = true } },
 
+    { rule = { instance = "exe" },
+      properties = { floating = true, fullscreen = true } },
+
     { rule       = { class = "Transmission" },
       properties = { tag = tags[screen.count()][1] } },
 
@@ -110,12 +113,13 @@ awful.rules.rules = {
     -- Terms
     { rule       = { class = "XTerm" },
       properties = { opacity = 0.7, tag = tags[1][3]} },
+
     { rule       = { class = "Gnome-terminal" },
       properties = { tag = tags[1][3] } },
 
     -- Gvim
     { rule       = { class = "Gvim" },
-      properties = { opacity = 0.8, tag = tags[1][4]} },
+      properties = { tag = tags[1][4]} },
 
     -- Baobab
     { rule       = { class = "Baobab" },
@@ -127,11 +131,11 @@ awful.rules.rules = {
 
     -- File Roller
     { rule       = { class = "File-roller" },
-      properties = { tag = tags[1][6], opacity = 0.8 } },
+      properties = { tag = tags[1][6] } },
 
     -- Empathy
     { rule       = { class = "Empathy" },
-      properties = { tag = tags[1][7], opacity = 0.8 } },
+      properties = { tag = tags[1][7] } },
 
     { rule       = { class = "Empathy", role = "contact_list" },
       callback   = awful.client.setsmaster },
