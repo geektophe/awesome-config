@@ -77,7 +77,7 @@ end
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule       = { },
-      callback   = awful.placement.centered,
+      callback   = awful.client.setslave,
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
                      keys = client_keys,
@@ -91,20 +91,11 @@ awful.rules.rules = {
       properties   = { floating = true, size_hints_honor = true } },
 
     -- Web
-    { rule       = { class = "Firefox" },
+    { rule_any   = { class = {"Firefox", "Chromium", "Transmission"} },
       properties = { tag = tags[screen.count()][1]} },
 
-    { rule       = { class = "Chromium" },
-      properties = { tag = tags[screen.count()][1]} },
-
-    { rule = { instance = "plugin-container" },
+    { rule_any   = { instance = {"plugin-container", "exe"} },
       properties = { floating = true, fullscreen = true } },
-
-    { rule = { instance = "exe" },
-      properties = { floating = true, fullscreen = true } },
-
-    { rule       = { class = "Transmission" },
-      properties = { tag = tags[screen.count()][1] } },
 
 	-- Thunderbird
     { rule       = { class = "Thunderbird" },
@@ -140,8 +131,20 @@ awful.rules.rules = {
     { rule       = { class = "Empathy", role = "contact_list" },
       callback   = awful.client.setsmaster },
 
+    -- Libreoffice
+    { rule_any   = { class = { "libreoffice-writer",
+                               "libreoffice-calc",
+                               "libreoffice-impress",
+                               "libreoffice-base",
+                               "libreoffice-math" } },
+      properties = { tag = tags[1][8]} },
+
     -- Dia
     { rule       = { class = "Dia" },
+      properties = { tag = tags[1][9] } },
+
+    -- Gimp
+    { rule       = { class = "Gimp" },
       properties = { tag = tags[1][9] } },
 }
 -- }}}
