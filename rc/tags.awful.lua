@@ -28,11 +28,11 @@ tags_settings = {
         layout = awful.layout.suit.tile,
         position = 6,
     },
-     ["7:im"] = {
+    ["7:im"] = {
         layout = awful.layout.suit.tile,
          position = 7,
          mwfact = 0.2,
-     },
+    },
     ["8:off"] = {
         layout = awful.layout.suit.tile,
         position = 8,
@@ -83,7 +83,7 @@ awful.rules.rules = {
                      keys = client_keys,
                      buttons = client_buttons,
                      focus = true,
-                     switchtotag = true,
+                     switchtotag = false,
                      floating = false} },
 
     -- Dialog windows
@@ -132,7 +132,8 @@ awful.rules.rules = {
       callback   = awful.client.setsmaster },
 
     -- Libreoffice
-    { rule_any   = { class = { "libreoffice-writer",
+    { rule_any   = { class = { "libreoffice-startcenter",
+                               "libreoffice-writer",
                                "libreoffice-calc",
                                "libreoffice-impress",
                                "libreoffice-base",
