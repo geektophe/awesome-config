@@ -1,0 +1,2 @@
+#!/bin/sh
+echo "mcabber_event_hook('$1', '$2', '$3', '$4')" | awesome-client

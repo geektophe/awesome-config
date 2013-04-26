@@ -126,6 +126,10 @@ utils.rc.loadrc('menu')
 utils.rc.loadrc('wibox')
 -- }}}
 
+-- {{{ IM related stuff
+utils.rc.loadrc('im')
+-- }}}
+
 -- {{{ Programs to run at startup
 -- Disabled, managed by Xsession
 -- utils.rc.loadrc('startup')
