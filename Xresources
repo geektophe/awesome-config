@@ -34,7 +34,8 @@ URxvt.depth: 32
 !URxvt*loginShell: true
 
 ! Font
-URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:antialias=true:hinting=true
+!URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:antialias=true:hinting=true
+URxvt.font: xft:DejaVu Sans Mono-9,xft:DejaVu Sans Mono for Powerline-9
 URxvt*letterSpace: -1
 
 ! Scroll bar
@@ -46,7 +47,7 @@ URxvt*scrollstyle: plain
 
 ! to match gnome-terminal "Linux console" scheme
 ! foreground/background
-URxvt*background: [88]#000000
+URxvt*background: [82]#000000
 URxvt*foreground: #ffffff
 !! black
 !URxvt.color0  : #000000

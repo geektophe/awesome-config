@@ -1,7 +1,4 @@
 #!/bin/bash
-exec >> .xsession-errors
-exec 2>&1
-
 # Configures screen on identified hostname
 case $(hostname) in
 	thor) xrandr --output DVI-1 --right-of DVI-0 ;;
@@ -12,10 +9,10 @@ esac
 /usr/bin/setxkbmap fr bepo
 
 # Starts user dbus daemon
-eval $(/usr/bin/dbus-launch --sh-syntax --exit-with-session)
+eval $( /usr/bin/dbus-launch --sh-syntax --exit-with-session )
 
 # Starts gnome-keyring-daemon and exports its variables
-eval $(/usr/bin/gnome-keyring-daemon --start)
+eval $( /usr/bin/gnome-keyring-daemon --start )
 export GNOME_KEYRING_CONTROL
 export SSH_AUTH_SOCK
 export GPG_AGENT_INFO
@@ -35,5 +32,8 @@ export GPG_AGENT_INFO
 
 # Starts polkit dependant services
 /usr/bin/nm-applet &
+
+# Starts urxvtd server
+/usr/bin/urxvtd -q -o -f
 
 exec /usr/bin/awesome

@@ -31,7 +31,7 @@ naughty.config.presets.error = {
     fg = "#ffffff",
 }
 
-naughty.config.icon_dirs = { os.getenv("HOME") .. ".config/awesome/naughtyicons/",  "/usr/share/pixmaps/" }
+naughty.config.icon_dirs = { os.getenv("HOME") .. "/.config/awesome/icons/im/",  "/usr/share/pixmaps/" }
 
 function mcabber_event_hook(kind, direction, jid, msg)
     if kind == "MSG" then

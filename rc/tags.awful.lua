@@ -105,7 +105,7 @@ awful.rules.rules = {
     { rule       = { class = "XTerm" },
       properties = { opacity = 0.7, tag = tags[1][3]} },
 
-    { rule       = { class = "Gnome-terminal" },
+    { rule_any   = { class = {"Gnome-terminal", "URxvt"} },
       properties = { tag = tags[1][3] } },
 
     -- Gvim
