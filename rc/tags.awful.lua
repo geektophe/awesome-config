@@ -117,7 +117,7 @@ awful.rules.rules = {
       properties = { tag = tags[1][5]} },
 
     -- Nautilus
-    { rule       = { class = "Nautilus" },
+    { rule_any   = { class = {"Nautilus", "Thunar"} },
       properties = { tag = tags[1][6] } },
 
     -- File Roller
@@ -150,12 +150,8 @@ awful.rules.rules = {
                                "libreoffice-math" } },
       properties = { tag = tags[1][8]} },
 
-    -- Dia
-    { rule       = { class = "Dia" },
-      properties = { tag = tags[1][9] } },
-
-    -- Gimp
-    { rule       = { class = "Gimp" },
+    -- Image tools
+    { rule_any   = { class = {"Dia", "Gimp", "Pinta"} },
       properties = { tag = tags[1][9] } },
 }
 -- }}}
