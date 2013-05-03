@@ -49,7 +49,8 @@ function mcabber_event_hook(kind, direction, jid, msg)
                 title = jid
             }
         end
-    elseif kind == "STATUS" then
+    -- Disabled connect/disconnect notifications.
+    elseif kind == "STATUS" and false then
         local mapping = {
             [ "O" ] = "online",
             [ "F" ] = "chat",

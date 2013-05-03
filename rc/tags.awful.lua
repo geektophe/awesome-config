@@ -125,11 +125,21 @@ awful.rules.rules = {
       properties = { tag = tags[1][6] } },
 
     -- Empathy
+    { rule       = { class = "Empathy", role = "contact_list" },
+      properties = { tag = tags[1][7] },
+      callback   = awful.client.setsmaster },
+
     { rule       = { class = "Empathy" },
       properties = { tag = tags[1][7] } },
 
-    { rule       = { class = "Empathy", role = "contact_list" },
+    -- Gajim
+    { rule       = { class = "Gajim", role = "roster" },
+      properties = { tag = tags[1][7] },
       callback   = awful.client.setsmaster },
+
+    { rule       = { class = "Gajim" },
+      properties = { tag = tags[1][7] } },
+
 
     -- Libreoffice
     { rule_any   = { class = { "libreoffice-startcenter",

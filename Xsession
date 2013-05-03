@@ -1,11 +1,12 @@
 #!/bin/bash
+
 # Configures screen on identified hostname
 case $(hostname) in
 	thor) xrandr --output DVI-1 --right-of DVI-0 ;;
 esac
 
 # Loads X applications configuration
-/usr/bin/xrdb -merge ~/.Xresources
+/usr/bin/xrdb -load ~/.Xresources
 /usr/bin/setxkbmap fr bepo
 
 # Starts user dbus daemon
