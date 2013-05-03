@@ -1,0 +1,102 @@
+#!/usr/bin/env python
+
+###############################################################################
+#
+# IMPORTS
+#
+###############################################################################
+
+import dbus
+import subprocess
+import re
+
+
+###############################################################################
+#
+# PARAMETERS AND CONSTANTS
+#
+###############################################################################
+
+CUSTOM_AWAY = "I'll be back..."
+
+CODE_TO_STATUS = {
+    1: "Offline",
+    2: "Online",
+    3: "Away",
+    4: "Extended_Away",
+    5: "Invisible",
+    6: "Busy"
+}
+
+STATUS_TO_CODE = {
+    "off": 1,
+    "offline": 1,
+    "on": 2,
+    "online": 2,
+    "away": 3,
+    "extended away": 4,
+    "na": 4,
+    "n/a": 4,
+    "invisible": 5,
+    "invis": 5,
+    "busy": 6,
+    "dnd": 6,
+}
+
+BUS = dbus.SessionBus()
+
+
+###############################################################################
+#
+# CLASSES
+#
+###############################################################################
+
+class GajimProxy(object):
+    """
+    Empathy account manager proxy class
+    """
+
+    def away(self):
+        """
+        Sets status away
+
+        Saves current status to be restored by back method.
+        """
+        client = subprocess.Popen(["gajim-remote", "change_status", "away"])
+        client.wait()
+
+    def back(self):
+        """
+        Sets status back to previous status
+        """
+        client = subprocess.Popen(["gajim-remote", "change_status", "online"])
+        client.wait()
+
+
+###############################################################################
+#
+# MAIN
+#
+###############################################################################
+
+if __name__ == '__main__':
+    proxy = GajimProxy()
+
+    watcher = subprocess.Popen(
+        ['xscreensaver-command', '-watch'],
+        stdout=subprocess.PIPE)
+
+    try:
+        while True:
+            row = watcher.stdout.readline()
+
+            if re.match('^(BLANK|LOCK)', row):
+                proxy.away()
+            elif re.match('^UNBLANK', row):
+                proxy.back()
+
+        watcher.stdout.flush()
+
+    except KeyboardInterrupt:
+        pass

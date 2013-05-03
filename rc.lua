@@ -126,6 +126,10 @@ utils.rc.loadrc('menu')
 utils.rc.loadrc('wibox')
 -- }}}
 
+-- {{{ Naughty
+utils.rc.loadrc('naughty')
+-- }}}
+
 -- {{{ IM related stuff
 utils.rc.loadrc('im')
 -- }}}

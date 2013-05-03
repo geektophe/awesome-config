@@ -185,6 +185,7 @@ end
 -- Returns saved opacity or 1 if client was not found
 function opacity_default(c)
     if not clients_opacity[c.pid] then
+        c.opacity = 1
         opacity_save(c)
     end
 
