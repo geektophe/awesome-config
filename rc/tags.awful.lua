@@ -91,6 +91,9 @@ awful.rules.rules = {
       properties   = { floating = true, size_hints_honor = true } },
 
     -- Web
+    { rule   = { class = "Firefox", role = "Preferences" },
+      properties = { tag = tags[screen.count()][1], floating = true } },
+
     { rule_any   = { class = {"Firefox", "Chromium", "Transmission"} },
       properties = { tag = tags[screen.count()][1]} },
 
@@ -115,6 +118,10 @@ awful.rules.rules = {
     -- Baobab
     { rule       = { class = "Baobab" },
       properties = { tag = tags[1][5]} },
+
+    -- Rdesktop
+    { rule       = { class = "rdesktop" },
+      properties = { tag = tags[screen.count()][5]} },
 
     -- Nautilus
     { rule_any   = { class = {"Nautilus", "Thunar"} },

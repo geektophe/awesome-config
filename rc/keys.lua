@@ -49,6 +49,9 @@ global_keys = awful.util.table.join(
     -- Jump to urgent client
     awful.key({ modkey,           }, "g", awful.client.urgent.jumpto),
 
+    -- Jump to next screen
+    awful.key({ modkey,           }, "h", function () utils.screen.focusnext() end),
+
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "l",      awesome.restart),

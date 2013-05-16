@@ -34,6 +34,11 @@ client.add_signal("manage", function (c, startup)
         awful.placement.no_overlap(c)
         awful.placement.no_offscreen(c)
     end
+
+    if awful.client.floating.get(c) then
+        c.ontop = true
+        awful.titlebar.add(c, {modkey=modkey})
+    end
 end)
 
 client.add_signal("focus", function(c)
