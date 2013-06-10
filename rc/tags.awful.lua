@@ -121,7 +121,7 @@ awful.rules.rules = {
 
     -- Rdesktop
     { rule       = { class = "rdesktop" },
-      properties = { tag = tags[screen.count()][5]} },
+      properties = { tag = tags[screen.count()][5], floating=true } },
 
     -- Nautilus
     { rule_any   = { class = {"Nautilus", "Thunar"} },
