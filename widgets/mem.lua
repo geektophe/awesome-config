@@ -28,16 +28,18 @@ end
 
 function widget(wide)
     if _memwidget == nil then
-        _memwidget = blingbling.classical_graph.new()
+        _memwidget = blingbling.progress_bar.new()
         _memwidget:set_height(18)
 
         if wide == nil or wide then
-            _memwidget:set_width(100)
+            _memwidget:set_width(60)
         else
-            _memwidget:set_width(75)
+            _memwidget:set_width(50)
         end
-        _memwidget:set_tiles_color("#00000022")
         _memwidget:set_show_text(true)
+        _memwidget:set_horizontal(true)
+        -- _memwidget:set_tiles_color("#00000022")
+        -- _memwidget:set_show_text(true)
         vicious.register(_memwidget, vicious.widgets.mem, '$1')
     end
 

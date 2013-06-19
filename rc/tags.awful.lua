@@ -123,6 +123,10 @@ awful.rules.rules = {
     { rule       = { class = "rdesktop" },
       properties = { tag = tags[screen.count()][5], floating=true } },
 
+    -- Wireshark
+    { rule       = { class = "Wireshark" },
+      properties = { tag = tags[1][5] } },
+
     -- Nautilus
     { rule_any   = { class = {"Nautilus", "Thunar"} },
       properties = { tag = tags[1][6] } },
