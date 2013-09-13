@@ -22,7 +22,7 @@ function widget()
     if _netwidget == nil then
         _netwidget = blingbling.net.new()
         _netwidget:set_height(18)
-        _netwidget:set_ippopup()
+        -- _netwidget:set_ippopup()
         _netwidget:set_show_text(true)
         _netwidget:set_v_margin(3)
         _netwidget:set_interface(utils.system.main_intf())

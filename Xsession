@@ -33,6 +33,7 @@ export GPG_AGENT_INFO
 
 # Starts polkit dependant services
 /usr/bin/nm-applet &
+/usr/bin/blueman-applet &
 
 # Starts urxvtd server
 /usr/bin/urxvtd -q -o -f

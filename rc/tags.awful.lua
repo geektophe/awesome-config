@@ -158,7 +158,8 @@ awful.rules.rules = {
                                "libreoffice-calc",
                                "libreoffice-impress",
                                "libreoffice-base",
-                               "libreoffice-math" } },
+                               "libreoffice-math",
+                               "VCLSalFrame.DocumentWindow" } },
       properties = { tag = tags[1][8]} },
 
     -- Image tools
