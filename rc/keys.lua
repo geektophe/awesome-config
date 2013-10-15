@@ -32,14 +32,14 @@ global_keys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "c", function () awful.tag.incncol(1) end),
 
     -- Remapped J
-    awful.key({ modkey, },           "t", function () utils.client.viewnext(1) end),
-    awful.key({ modkey, "Shift"   }, "t", function () awful.client.swap.byidx(1) end),
-    awful.key({ modkey, "Control" }, "t", function () awful.screen.focus_relative(1) end),
+    awful.key({ modkey, },           "t", function () utils.client.viewnext(-1) end),
+    awful.key({ modkey, "Shift"   }, "t", function () awful.client.swap.byidx(-1) end),
+    awful.key({ modkey, "Control" }, "t", function () awful.screen.focus_relative(-1) end),
 
     -- Remapped K
-    awful.key({ modkey, }, "s", function () utils.client.viewnext(-1) end),
-    awful.key({ modkey, "Shift"   }, "s", function () awful.client.swap.byidx( -1) end),
-    awful.key({ modkey, "Control" }, "s", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey, }, "s", function () utils.client.viewnext(1) end),
+    awful.key({ modkey, "Shift"   }, "s", function () awful.client.swap.byidx(1) end),
+    awful.key({ modkey, "Control" }, "s", function () awful.screen.focus_relative(1) end),
 
     -- Remapped L
     awful.key({ modkey,           }, "r",     function () awful.tag.incmwfact(0.05) end),
