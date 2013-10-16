@@ -44,7 +44,7 @@ function mcabber_event_hook(kind, direction, jid, msg)
                 return
             end
 
-            if jid == "nagios@dailymotion.com" and string.match(mesg, "^PROBLEM:") then
+            if jid == "nagios@dailymotion.com" and string.match(msg, "^PROBLEM:") then
                 preset = naughty.config.presets.critical
             else
                 preset = naughty.config.presets.normal
