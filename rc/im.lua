@@ -1,5 +1,6 @@
 muc_nick = "chriss"
 
+-- IM settings
 naughty.config.presets.online = {
     bg = "#1f880e80",
     fg = "#ffffff",
@@ -42,11 +43,19 @@ function mcabber_event_hook(kind, direction, jid, msg)
             if direction == "MUC" and txt:match("^<" .. muc_nick .. ">") then
                 return
             end
+
+            if jid == "nagios@dailymotion.com" and string.match(mesg, "^PROBLEM:") then
+                preset = naughty.config.presets.critical
+            else
+                preset = naughty.config.presets.normal
+            end
+
             naughty.notify{
                 icon = "chat_msg_recv",
                 text = awful.util.escape(txt),
                 title = jid,
-                timeout = 30
+                timeout = 30,
+                preset = preset
             }
         end
     -- Disabled connect/disconnect notifications.
