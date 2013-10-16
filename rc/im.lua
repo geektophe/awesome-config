@@ -45,7 +45,8 @@ function mcabber_event_hook(kind, direction, jid, msg)
             naughty.notify{
                 icon = "chat_msg_recv",
                 text = awful.util.escape(txt),
-                title = jid
+                title = jid,
+                timeout = 30
             }
         end
     -- Disabled connect/disconnect notifications.

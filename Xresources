@@ -118,7 +118,8 @@ URxvt.iso14755_52: false
 
 ! Plugins
 URxvt.perl-ext-common: default,matcher
-URxvt.matcher.button: 2
+URxvt.matcher.button: 3
+URxvt.url-launcher: /usr/bin/firefox
 
 
 !
