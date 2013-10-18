@@ -33,58 +33,56 @@ naughty.config.presets.error = {
 }
 
 
-function mcabber_event_hook(kind, direction, jid, msg)
+function mcabber_event_hook(kind, arg, jid, msg)
     if kind == "MSG" then
-        if direction == "IN" or direction == "MUC" then
+        if arg == "IN" or arg == "MUC" then
             local filehandle = io.open(msg)
             local txt = filehandle:read("*all")
             filehandle:close()
-            awful.util.spawn("rm "..msg)
-            if direction == "MUC" and txt:match("^<" .. muc_nick .. ">") then
+            os.remove(msg)
+            if arg == "MUC" and txt:match("^<" .. muc_nick .. ">") then
                 return
             end
 
-            if jid == "nagios@dailymotion.com" and string.match(msg, "^PROBLEM:") then
-                preset = naughty.config.presets.critical
-            else
-                preset = naughty.config.presets.normal
+            preset = naughty.config.presets.normal
+            icon = "person"
+
+            if string.match(jid, "nagios@dailymotion.com") then
+                if string.match(txt, "^PROBLEM:") then
+                    icon = "problem"
+                    txt = string.gsub(txt, "^PROBLEM: ", "")
+                elseif string.match(txt, "^RECOVERY:") then
+                    icon = "recovery"
+                    txt = string.gsub(txt, "^RECOVERY: ", "")
+                elseif string.match(txt, "^ACKNOWLEDGEMENT: ") then
+                    icon = "notification"
+                    txt = string.gsub(txt, "^ACKNOWLEDGEMENT: ", "")
+                end
+            elseif string.match(jid, "conference.dailymotion.com") then
+                icon = "chat"
             end
 
             naughty.notify{
-                icon = "chat_msg_recv",
+                icon = icon,
                 text = awful.util.escape(txt),
                 title = jid,
                 timeout = 30,
                 preset = preset
             }
         end
-    -- Disabled connect/disconnect notifications.
-    elseif kind == "STATUS" and false then
-        local mapping = {
-            [ "O" ] = "online",
-            [ "F" ] = "chat",
-            [ "A" ] = "away",
-            [ "N" ] = "xa",
-            [ "D" ] = "dnd",
-            [ "I" ] = "invisible",
-            [ "_" ] = "offline",
-            [ "?" ] = "error",
-            [ "X" ] = "requested"
-        }
-        local status = mapping[direction]
-        local iconstatus = status
-        if not status then
-            status = "error"
-        end
-        if jid:match("icq") then
-            iconstatus = "icq/" .. status
-        end
-        naughty.notify{
-            preset = naughty.config.presets[status],
-            text = jid,
-            icon = iconstatus
-        }
     end
+end
+
+
+function mcabber_get_unread_buffers()
+    local state_file = os.getenv("HOME") .. "/.mcabber/mcabber.state"
+    local f = io.open(state_file, "r")
+    local rows = 0
+    for _ in f:lines() do
+        rows = rows + 1
+    end
+    f:close()
+    return rows
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

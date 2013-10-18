@@ -1,7 +1,7 @@
 -- Naughty configuration
 
 naughty.config.default_preset = {
-    timeout = 45,
+    timeout = 30,
     margin  = 4,
     gap     = 1,
 }
