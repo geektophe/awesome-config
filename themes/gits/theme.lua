@@ -161,6 +161,7 @@ theme.widget_disk      = themedir.."/icons/disk.png"
 theme.widget_mpd_play  = themedir.."/icons/mpd_play.png"
 theme.widget_mpd_pause = themedir.."/icons/mpd_pause.png"
 theme.widget_mpd_stop  = themedir.."/icons/mpd_stop.png"
+theme.widget_im        = themedir.."/icons/im.png"
 -- }}}
 
 return theme

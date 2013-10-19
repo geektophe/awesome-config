@@ -39,6 +39,7 @@ widgets.mem = require("widgets.mem")
 widgets.net = require("widgets.net")
 widgets.spacer = require("widgets.spacer")
 widgets.volume = require("widgets.volume")
+widgets.im = require("widgets.im")
 -- }}}
 
 -- {{{ Variable definitions
@@ -122,16 +123,16 @@ end
 utils.rc.loadrc('menu')
 -- }}}
 
--- {{{ Wibox
-utils.rc.loadrc('wibox')
--- }}}
-
 -- {{{ Naughty
 utils.rc.loadrc('naughty')
 -- }}}
 
 -- {{{ IM related stuff
 utils.rc.loadrc('im')
+-- }}}
+
+-- {{{ Wibox
+utils.rc.loadrc('wibox')
 -- }}}
 
 -- {{{ Programs to run at startup

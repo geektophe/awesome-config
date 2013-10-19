@@ -73,16 +73,4 @@ function mcabber_event_hook(kind, arg, jid, msg)
     end
 end
 
-
-function mcabber_get_unread_buffers()
-    local state_file = os.getenv("HOME") .. "/.mcabber/mcabber.state"
-    local f = io.open(state_file, "r")
-    local rows = 0
-    for _ in f:lines() do
-        rows = rows + 1
-    end
-    f:close()
-    return rows
-end
-
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
