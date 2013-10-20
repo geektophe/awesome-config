@@ -18,15 +18,13 @@ local count = {}
 
 -- {{{ Checks if mcabber is running
 local function gmail_get_unread_messages()
-    local unread = 0
-
     if not awful.util.file_readable(os.getenv("HOME") .. "/.netrc") then
         return -1
     end
 
+    local unread = 0
     -- Get info from the Gmail atom feed
     local f = io.popen("curl --connect-timeout 1 -m 3 -fsn " .. rss)
-
     -- Could be huge don't read it all at once, info we are after is at the top
     for line in f:lines() do
        count = string.match(line, "<fullcount>([%d]+)</fullcount>")
