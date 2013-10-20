@@ -5,6 +5,7 @@
 ---------------------------------------------------
 
 -- {{{ Grab environment
+local awful = require("awful")
 local os = { getenv=os.getenv }
 local io = { open=io.open, popen=io.popen }
 local print = print
@@ -18,6 +19,10 @@ local count = {}
 -- {{{ Checks if mcabber is running
 local function gmail_get_unread_messages()
     local unread = 0
+
+    if not awful.util.file_readable(os.getenv("HOME") .. "/.netrc") then
+        return -1
+    end
 
     -- Get info from the Gmail atom feed
     local f = io.popen("curl --connect-timeout 1 -m 3 -fsn " .. rss)
@@ -38,13 +43,11 @@ end
 
 -- {{{ Date widget type
 local function worker(format, warg)
---    if not mcabber_running() then
---        return '<span color="white" bgcolor="grey" weight="bold"> n/a </span>'
---    end
-
     local unread = gmail_get_unread_messages()
     if unread > 0 then
         return '<span color="white" bgcolor="red" weight="bold"> ' .. unread ..  ' </span>'
+    elseif unread < 0 then
+        return '<span color="white" bgcolor="grey" weight="bold"> n/a </span>'
     else
         return '<span color="white" bgcolor="green" weight="bold"> 0 </span>'
     end
