@@ -19,6 +19,19 @@ module("widgets.im")
 
 local _imicon = nil
 local _imwidget = nil
+local _imenabled = true
+
+
+local function im_toggle()
+    if _imenabled then
+        vicious.unregister(_imwidget, true)
+        _imwidget.text = '<span color="white" bgcolor="grey" weight="bold"> dis </span>'
+    else
+        vicious.activate(_imwidget)
+    end
+    _imenabled = not _imenabled
+end
+
 
 function icon()
     if _imicon == nil then
@@ -28,9 +41,14 @@ function icon()
     return _imicon
 end
 
+
 function widget()
     if _imwidget == nil then
         _imwidget = widget_init({ type = "textbox" })
+        _imwidget:buttons(awful.util.table.join(
+                awful.button({ }, 1, function ()
+                        im_toggle()
+                end)))
         vicious.register(_imwidget, mcabber,'$1', 5)
     end
     return _imwidget

@@ -28,9 +28,6 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         widgets.clock.widget(),
         s == 1 and widget({ type = "systray" }) or nil,
-        widgets.spacer.widget(),
-        widgets.im.widget(),
-        widgets.im.icon(),
         -- widgets.net.widget(),
         utils.system.hasbattery() and widgets.spacer.widget() or nil,
         utils.system.hasbattery() and widgets.bat.widget(wide) or nil,
@@ -49,6 +46,12 @@ for s = 1, screen.count() do
         widgets.spacer.widget(),
         widgets.volume.widget(),
         widgets.volume.icon(),
+        widgets.spacer.widget(),
+        widgets.gmail.widget(),
+        widgets.gmail.icon(),
+        widgets.spacer.widget(),
+        widgets.im.widget(),
+        widgets.im.icon(),
         layout = awful.widget.layout.horizontal.rightleft
     }
 end

@@ -40,6 +40,7 @@ widgets.net = require("widgets.net")
 widgets.spacer = require("widgets.spacer")
 widgets.volume = require("widgets.volume")
 widgets.im = require("widgets.im")
+widgets.gmail = require("widgets.gmail")
 -- }}}
 
 -- {{{ Variable definitions
