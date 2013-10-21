@@ -46,11 +46,15 @@ end
 
 -- {{{ Date widget type
 local function worker(format, warg)
-    if not mcabber_running() or not awful.util.file_readable(statefile) then
+    if not mcabber_running() then
         return '<span color="white" bgcolor="grey" weight="bold"> n/a </span>'
     end
 
-    local unread = mcabber_get_unread_buffers()
+    local unread = 0
+    if awful.util.file_readable(statefile) then
+        unread = mcabber_get_unread_buffers()
+    end
+
     if unread > 0 then
         return '<span color="white" bgcolor="red" weight="bold"> ' .. unread ..  ' </span>'
     else
