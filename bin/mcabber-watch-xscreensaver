@@ -37,7 +37,7 @@ class GajimProxy(object):
 
         Saves current status to be restored by back method.
         """
-        if not os.path.isfile(FIFO):
+        if not os.path.exists(FIFO):
             return
         f = open(FIFO, "w")
         f.write("/%s\n" % command)
