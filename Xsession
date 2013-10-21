@@ -26,7 +26,7 @@ export GPG_AGENT_INFO
 /usr/bin/parcellite &
 /usr/bin/dropboxd &
 /usr/bin/xscreensaver -no-splash &
-~/.config/awesome/bin/gajim-watch-xscreensaver &
+~/.config/awesome/bin/mcabber-watch-xscreensaver &
 
 # Starts polkit server
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
