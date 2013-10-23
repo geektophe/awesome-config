@@ -47,7 +47,7 @@ class GajimProxy(object):
         """
         Sets status online
         """
-        self.fifo_write("back")
+        self.fifo_write("online")
 
     def away(self):
         """

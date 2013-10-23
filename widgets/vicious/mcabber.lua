@@ -20,8 +20,10 @@ local statefile = os.getenv("HOME") .. "/.mcabber/mcabber.state"
 local function mcabber_get_unread_buffers()
     local f = io.open(statefile, "r")
     local rows = 0
-    for _ in f:lines() do
-        rows = rows + 1
+    for line in f:lines() do
+        if not line:match("^nagios@") then
+            rows = rows + 1
+        end
     end
     f:close()
     return rows
