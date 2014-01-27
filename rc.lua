@@ -7,7 +7,6 @@ awful = require("awful")
 awful.rules = require("awful.rules")
 awful.autofocus = require("awful.autofocus")
 naughty = require("naughty")
-oocairo = require("oocairo")
 wibox = require("wibox")
 -- Theme handling library
 beautiful = require("beautiful")
