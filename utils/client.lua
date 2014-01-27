@@ -24,6 +24,7 @@ opacity_unfocus_incr = 0.3
 local clients_opacity = {}
 local opacity_file = "/tmp/awmclnt.opacity." .. os.getenv('USER')
 
+
 -- {{{ round
 -- Rounds a decimal value
 local function round(num, idp)
@@ -184,6 +185,7 @@ end
 -- Returns saved opacity or 1 if client was not found
 function opacity_default(c)
     if not clients_opacity[c.pid] then
+        c.opacity = 1
         opacity_save(c)
     end
 

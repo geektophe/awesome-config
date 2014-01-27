@@ -17,23 +17,27 @@ client.connect_signal("manage", function (c, startup)
 
     c:connect_signal("property::floating",  function (c)
         c.ontop = awful.client.floating.get(c)
+
+        if c.ontop then
+            awful.titlebar.add(c, {modkey=modkey})
+        else
+            awful.titlebar.remove(c)
+        end
     end)
 
 
     if not startup then
         -- Set the windows at the slave,
         -- i.e. put it at the end of others instead of setting it master.
-        awful.client.setslave(c)
+        -- awful.client.setslave(c)
         utils.client.opacity_save(c)
         awful.placement.no_overlap(c)
         awful.placement.no_offscreen(c)
+    end
 
-        -- Put windows in a smart way, only if they do not set an initial position.
-        if not c.size_hints.user_position and not c.size_hints.program_position then
-            awful.placement.no_overlap(c)
-            awful.placement.no_offscreen(c)
-        end
-
+    if awful.client.floating.get(c) then
+        c.ontop = true
+        awful.titlebar.add(c, {modkey=modkey})
     end
 end)
 

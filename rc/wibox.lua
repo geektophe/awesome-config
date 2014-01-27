@@ -32,6 +32,11 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local right_layout = wibox.layout.fixed.horizontal()
+    right_layout:add(widgets.gmail.icon())
+    right_layout:add(widgets.gmail.widget())
+    right_layout:add(widgets.spacer.widget())
+    right_layout:add(widgets.im.icon())
+    right_layout:add(widgets.im.widget())
     right_layout:add(widgets.spacer.widget())
     right_layout:add(widgets.volume.icon())
     right_layout:add(widgets.volume.widget())
@@ -48,12 +53,11 @@ for s = 1, screen.count() do
     right_layout:add(widgets.fs.widget(wide))
     right_layout:add(widgets.spacer.widget())
 
-    -- right_layout:add(widgets.net.widget())
     if utils.system.hasbattery() then
         right_layout:add(widgets.bat.icon())
         right_layout:add(widgets.bat.widget(wide))
+        right_layout:add(widgets.spacer.widget())
     end
-    right_layout:add(widgets.spacer.widget())
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(widgets.clock.widget())
     right_layout:add(mylayoutbox[s])

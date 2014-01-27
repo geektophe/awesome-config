@@ -32,9 +32,9 @@ function widget(wide)
         _memwidget:set_height(18)
 
         if wide == nil or wide then
-            _memwidget:set_width(100)
+            _memwidget:set_width(60)
         else
-            _memwidget:set_width(75)
+            _memwidget:set_width(50)
         end
         _memwidget:set_graph_background_color("#00000022")
         _memwidget:set_show_text(true)

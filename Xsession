@@ -1,6 +1,4 @@
 #!/bin/bash
-exec >> .xsession-errors
-exec 2>&1
 
 # Configures screen on identified hostname
 case $(hostname) in
@@ -8,14 +6,14 @@ case $(hostname) in
 esac
 
 # Loads X applications configuration
-/usr/bin/xrdb -merge ~/.Xresources
+/usr/bin/xrdb -load ~/.Xresources
 /usr/bin/setxkbmap fr bepo
 
 # Starts user dbus daemon
-eval $(/usr/bin/dbus-launch --sh-syntax --exit-with-session)
+eval $( /usr/bin/dbus-launch --sh-syntax --exit-with-session )
 
 # Starts gnome-keyring-daemon and exports its variables
-eval $(/usr/bin/gnome-keyring-daemon --start)
+eval $( /usr/bin/gnome-keyring-daemon --start )
 export GNOME_KEYRING_CONTROL
 export SSH_AUTH_SOCK
 export GPG_AGENT_INFO
@@ -28,12 +26,16 @@ export GPG_AGENT_INFO
 /usr/bin/parcellite &
 /usr/bin/dropboxd &
 /usr/bin/xscreensaver -no-splash &
-/usr/local/bin/empathy-watch-xscreensaver &
+~/.config/awesome/bin/mcabber-watch-xscreensaver &
 
 # Starts polkit server
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Starts polkit dependant services
 /usr/bin/nm-applet &
+#/usr/bin/blueman-applet &
+
+# Starts urxvtd server
+/usr/bin/urxvtd -q -o -f
 
 exec /usr/bin/awesome

@@ -28,7 +28,7 @@ end
 
 function widget()
     if _volwidget == nil then
-        _volwidget = blingbling.volume.new({})
+        _volwidget = blingbling.volume.new()
         _volwidget:set_height(18)
         _volwidget:set_width(50)
         --bind the volume widget on the master channel

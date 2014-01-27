@@ -1,6 +1,3 @@
--- Shity tags and apps configuration
-tags_type = "shifty"
-
 -- {{{ Enable title bar only for floating windows
 shifty.config.float_bars = true
 -- }}}
@@ -154,6 +151,18 @@ shifty.config.defaults = {
     guess_position=true,
     opacity=1,
 }
+-- }}}
+
+
+-- {{{ Tag list definition
+taglist = {}
+taglist.buttons = taglist_buttons
+shifty.taglist = taglist
+-- }}}
+
+
+-- {{{ Shifty initialization
+shifty.init()
 -- }}}
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

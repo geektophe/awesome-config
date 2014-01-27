@@ -6,6 +6,9 @@ local naughty = require('naughty')
 local string = string
 local tonumber = tonumber
 local print = print
+local screen = screen
+local awful = awful
+local mouse = mouse
 
 
 module('utils.screen')
@@ -56,5 +59,14 @@ function height()
 end
 --}}}
 
+
+-- {{{ focusnext
+-- Focus next screen
+function focusnext()
+    if screen.count() > 1 then
+        awful.screen.focus(awful.util.cycle(screen.count(), mouse.screen + 1))
+    end
+end
+--}}}
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

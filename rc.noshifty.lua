@@ -508,21 +508,23 @@ awful.rules.rules = {
     { rule       = { class = "Thunderbird" },
       properties = { tag = tags[1][2]} },
 
-    -- Xterm
+    -- Terms
     { rule       = { class = "XTerm" },
+      properties = { opacity = 0.7, tag = tags[1][3]} },
+    { rule       = { class = "Gnome-terminal" },
       properties = { opacity = 0.7, tag = tags[1][3]} },
 
     -- Gvim
     { rule       = { class = "Gvim" },
       properties = { opacity = 0.8, tag = tags[1][4]} },
 
+    -- Baobab
+    { rule       = { class = "Baobab" },
+      properties = { tag = tags[1][5]} },
+
     -- Nautilus
     { rule       = { class = "Nautilus" },
       properties = { tag = tags[1][6], opacity = 0.8 } },
-
-    -- Baobab
-    { rule       = { class = "Baobab" },
-      properties = { tag = tags[1][6]} },
 
     -- File Roller
     { rule       = { class = "File-roller" },
@@ -534,10 +536,10 @@ awful.rules.rules = {
 
     -- Empathy
     { rule       = { class = "Empathy" },
-      properties = { tag = tags[1][7], opacity = 0.8 } },
+      properties = { tag = tags[screen.count()][1], opacity = 0.8 } },
 
     { rule       = { class = "Empathy", role = "contact_list" },
-	  callback   = awful.client.setslave },
+	  callback   = awful.client.setsmaster },
 }
 --}}}
 

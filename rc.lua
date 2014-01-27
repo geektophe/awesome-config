@@ -39,6 +39,8 @@ widgets.mem = require("widgets.mem")
 widgets.net = require("widgets.net")
 widgets.spacer = require("widgets.spacer")
 widgets.volume = require("widgets.volume")
+widgets.im = require("widgets.im")
+widgets.gmail = require("widgets.gmail")
 -- }}}
 
 -- {{{ Variable definitions
@@ -51,7 +53,7 @@ beautiful.init(themes .. themename .. "/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 -- terminal = "x-terminal-emulator"
-terminal = "gnome-terminal"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -91,39 +93,48 @@ layouts =
 -- {{{ Configuration modules (depend on previous variables)
 -- }}}
 
--- {{{ Shifty settings
---utils.rc.loadrc('tags.shifty')
-utils.rc.loadrc('tags.awful')
--- }}}
-
--- {{{ Menu
-utils.rc.loadrc('menu')
+-- {{{ Signals
+utils.rc.loadrc('signal')
 -- }}}
 
 -- {{{ Buttons
 utils.rc.loadrc('buttons')
 -- }}}
 
--- {{{ Wibox
-utils.rc.loadrc('wibox')
--- }}}
-
--- {{{ Shifty initialization
---shifty.init()
--- }}}
-
 -- {{{ Key bindings
 utils.rc.loadrc('keys')
 -- }}}
 
--- {{{ Signals
-utils.rc.loadrc('signal')
+-- {{{ Shifty settings
+if shifty then
+    utils.rc.loadrc('tags.shifty')
+else
+    utils.rc.loadrc('tags.awful')
+end
 -- }}}
 
--- {{{ Awful rulses
-utils.rc.loadrc('rules.awful')
+-- {{{ Key bindings extension (depends on tags definition)
+if shifty then
+    utils.rc.loadrc('keys.shifty')
+else
+    utils.rc.loadrc('keys.awful')
+end
+-- }}}
+-- {{{ Menu
+utils.rc.loadrc('menu')
 -- }}}
 
+-- {{{ Naughty
+utils.rc.loadrc('naughty')
+-- }}}
+
+-- {{{ IM related stuff
+utils.rc.loadrc('im')
+-- }}}
+
+-- {{{ Wibox
+utils.rc.loadrc('wibox')
+-- }}}
 
 -- {{{ Programs to run at startup
 -- Disabled, managed by Xsession
