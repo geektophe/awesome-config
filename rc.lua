@@ -10,6 +10,7 @@ naughty = require("naughty")
 wibox = require("wibox")
 -- Theme handling library
 beautiful = require("beautiful")
+gears = require("gears")
 -- Revelation library
 --revelation = require("revelation")
 -- Eminent library
@@ -48,7 +49,6 @@ widgets.gmail = require("widgets.gmail")
 confdir = awful.util.getdir("config")
 themes = confdir .. "/themes/"
 themename = "gits"
-beautiful.init(themes .. themename .. "/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 -- terminal = "x-terminal-emulator"
@@ -90,6 +90,10 @@ layouts =
 -- }}}
 
 -- {{{ Configuration modules (depend on previous variables)
+-- }}}
+
+-- {{{ Theme
+utils.rc.loadrc('theme')
 -- }}}
 
 -- {{{ Signals
