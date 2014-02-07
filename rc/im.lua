@@ -48,9 +48,9 @@ function mcabber_event_hook(kind, arg, jid, msg)
             icon = "person"
 
             if string.match(jid, "nagios@dailymotion.com") then
-                if string.match(txt, "^PROBLEM:") then
+                if string.match(txt, "^PROBLEM:?") then
                     icon = "problem"
-                    txt = string.gsub(txt, "^PROBLEM: ", "")
+                    txt = string.gsub(txt, "^PROBLEM:? ", "")
                 elseif string.match(txt, "^RECOVERY:") then
                     icon = "recovery"
                     txt = string.gsub(txt, "^RECOVERY: ", "")
