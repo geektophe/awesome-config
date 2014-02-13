@@ -15,16 +15,7 @@ client.connect_signal("manage", function (c, startup)
     -- Makes client floating ontop
     c.ontop = awful.client.floating.get(c)
 
-    c:connect_signal("property::floating",  function (c)
-        c.ontop = awful.client.floating.get(c)
-
-        if c.ontop then
-            awful.titlebar.add(c, {modkey=modkey})
-        else
-            awful.titlebar.remove(c)
-        end
-    end)
-
+    c:connect_signal("property::floating", utils.client.titlebar_toggle)
 
     if not startup then
         -- Set the windows at the slave,
@@ -35,10 +26,8 @@ client.connect_signal("manage", function (c, startup)
         awful.placement.no_offscreen(c)
     end
 
-    if awful.client.floating.get(c) then
-        c.ontop = true
-        awful.titlebar.add(c, {modkey=modkey})
-    end
+    utils.client.titlebar_configure(c)
+    utils.client.titlebar_toggle(c)
 end)
 
 client.connect_signal("focus", function(c)
