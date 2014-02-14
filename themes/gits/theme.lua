@@ -19,8 +19,8 @@ sharedthemes  = shared .. "/themes"
 themes        = config .. "/themes"
 themename     = "/gits"
 themedir      = themes .. themename
-wallpaper    = themedir .. "/background_default.jpg"
-theme.wallpaper_cmd = { "awsetbg -a " .. wallpaper }
+theme.wallpaper     = themedir .. "/background_default.jpg"
+theme.wallpaper_cmd = { "awsetbg -a " .. theme.wallpaper }
 
 if awful.util.file_readable(config .. "/vain/init.lua") then
     theme.useless_gap_width  = "3"
