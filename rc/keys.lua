@@ -2,8 +2,8 @@
 
 -- {{{ Global keys bindings
 global_keys = awful.util.table.join(
-    awful.key({ modkey, }, "Left",   awful.tag.viewprev),
-    awful.key({ modkey, }, "Right",  awful.tag.viewnext),
+    awful.key({ modkey, }, "Left",   function() utils.client.viewnext(-1) end),
+    awful.key({ modkey, }, "Right",  function() utils.client.viewnext(1) end),
     awful.key({ modkey, }, "Escape", awful.tag.history.restore),
 
     -- Move tag
