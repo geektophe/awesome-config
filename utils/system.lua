@@ -45,13 +45,7 @@ end
 -- {{{ isdir
 -- Tests if a directory exists
 function isdir(path)
-    local code = os.execute('test -d ' .. path)
-
-    if code == 0 then
-        return true
-    else
-        return false
-    end
+    return os.execute('test -d ' .. path)
 end
 --}}}
 
