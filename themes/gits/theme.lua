@@ -148,21 +148,22 @@ theme.titlebar_maximized_button_normal_inactive = sharedthemes .. "/zenburn/titl
 -- }}}
 
 -- {{{ Widgets icons
-theme.widget_bat       = themedir.."/icons/bat.png"
-theme.widget_cpu       = themedir.."/icons/cpu.png"
-theme.widget_netup     = themedir.."/icons/up.png"
-theme.widget_fs        = themedir.."/icons/disk.png"
-theme.widget_vol       = themedir.."/icons/vol.png"
-theme.widget_date      = themedir.."/icons/time.png"
-theme.widget_music     = themedir.."/icons/music.png"
-theme.widget_mem       = themedir.."/icons/mem.png"
-theme.widget_net       = themedir.."/icons/down.png"
-theme.widget_disk      = themedir.."/icons/disk.png"
-theme.widget_mpd_play  = themedir.."/icons/mpd_play.png"
-theme.widget_mpd_pause = themedir.."/icons/mpd_pause.png"
-theme.widget_mpd_stop  = themedir.."/icons/mpd_stop.png"
-theme.widget_im        = themedir.."/icons/im.png"
-theme.widget_gmail     = themedir.."/icons/gmail.png"
+theme.widget_bat        = themedir.."/icons/bat.png"
+theme.widget_cpu        = themedir.."/icons/cpu.png"
+theme.widget_netup      = themedir.."/icons/up.png"
+theme.widget_fs         = themedir.."/icons/disk.png"
+theme.widget_vol        = themedir.."/icons/vol.png"
+theme.widget_date       = themedir.."/icons/time.png"
+theme.widget_music      = themedir.."/icons/music.png"
+theme.widget_mem        = themedir.."/icons/mem.png"
+theme.widget_net        = themedir.."/icons/down.png"
+theme.widget_disk       = themedir.."/icons/disk.png"
+theme.widget_mpd_play   = themedir.."/icons/mpd_play.png"
+theme.widget_mpd_pause  = themedir.."/icons/mpd_pause.png"
+theme.widget_mpd_stop   = themedir.."/icons/mpd_stop.png"
+theme.widget_im         = themedir.."/icons/im.png"
+theme.widget_gmail      = themedir.."/icons/gmail.png"
+theme.widget_livestatus = themedir.."/icons/livestatus.png"
 -- }}}
 
 return theme
