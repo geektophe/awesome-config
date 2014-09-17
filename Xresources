@@ -10,7 +10,7 @@ XTerm*faceName:           DejaVu_Sans_Mono_for_Powerline.otf:normal:pixelsize=12
 XTerm*dynamicColors:      true
 XTerm*utf8:               2
 XTerm*eightBitInput:      true
-XTerm*saveLines:          5120
+XTerm*saveLines:          10000
 XTerm*scrollTtyKeypress:  true
 XTerm*scrollTtyOutput:    false
 XTerm*scrollBar:          true

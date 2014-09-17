@@ -13,10 +13,10 @@ esac
 eval $( /usr/bin/dbus-launch --sh-syntax --exit-with-session )
 
 # Starts gnome-keyring-daemon and exports its variables
-eval $( /usr/bin/gnome-keyring-daemon --start )
+eval $( /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export GNOME_KEYRING_CONTROL
 export SSH_AUTH_SOCK
-export GPG_AGENT_INFO
+#export GPG_AGENT_INFO
 
 # Starts pulseaudio
 /usr/bin/start-pulseaudio-x11
