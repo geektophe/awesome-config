@@ -8,7 +8,6 @@ import sys
 import os
 
 
-HIPCHAT_TOKEN = "EpAE2LqpWG3HhLtiqGdbOhqz4H9eE5c2dOBSKJli"
 HIPCHAT_CONFIG = "~/.hipchatrc"
 HIPCHAT_CACHE = os.path.expanduser("~/.mcabber/hipchat.cache")
 NOTIF_SCRIPT = "/usr/bin/awesome-client"
