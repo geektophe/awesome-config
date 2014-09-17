@@ -27,24 +27,29 @@ global_keys = awful.util.table.join(
     awful.key({ modkey, "Shift" }, "Tab", function () utils.client.viewnext(-1) end),
 
     -- Remapped H
-    awful.key({ modkey,           }, "c", function () awful.tag.incmwfact(-0.05) end),
+    -- awful.key({ modkey,           }, "c", function () awful.tag.incmwfact(-0.05) end),
+    awful.key({ modkey,           }, "c", function () awful.client.swap.byidx(-1) end),
     awful.key({ modkey, "Shift"   }, "c", function () awful.tag.incnmaster(1) end),
     awful.key({ modkey, "Control" }, "c", function () awful.tag.incncol(1) end),
+    awful.key({ modkey, "Mod1"    }, "c", function () awful.tag.incmwfact(-0.05) end),
 
     -- Remapped J
-    awful.key({ modkey, },           "t", function () utils.client.viewnext(-1) end),
-    awful.key({ modkey, "Shift"   }, "t", function () awful.client.swap.byidx(-1) end),
+    awful.key({ modkey,           }, "t", function () utils.client.viewnext(-1) end),
+    awful.key({ modkey, "Shift"   }, "t", function () awful.tag.incncol(1) end),
     awful.key({ modkey, "Control" }, "t", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey, "Mod1"    }, "t", function () awful.client.incwfact(-0.05) end),
 
     -- Remapped K
-    awful.key({ modkey, }, "s", function () utils.client.viewnext(1) end),
-    awful.key({ modkey, "Shift"   }, "s", function () awful.client.swap.byidx(1) end),
+    awful.key({ modkey,           }, "s", function () utils.client.viewnext(1) end),
+    awful.key({ modkey, "Shift"   }, "s", function () awful.tag.incncol(-1) end),
     awful.key({ modkey, "Control" }, "s", function () awful.screen.focus_relative(1) end),
+    awful.key({ modkey, "Mod1"    }, "s", function () awful.client.incwfact(0.05) end),
 
     -- Remapped L
-    awful.key({ modkey,           }, "r",     function () awful.tag.incmwfact(0.05) end),
-    awful.key({ modkey, "Shift"   }, "r",     function () awful.tag.incnmaster(-1) end),
-    awful.key({ modkey, "Control" }, "r",     function () awful.tag.incncol(-1) end),
+    awful.key({ modkey,           }, "r", function () awful.client.swap.byidx(1) end),
+    awful.key({ modkey, "Shift"   }, "r", function () awful.tag.incnmaster(-1) end),
+    awful.key({ modkey, "Control" }, "r", function () awful.tag.incncol(-1) end),
+    awful.key({ modkey, "Mod1"    }, "r", function () awful.tag.incmwfact(0.05) end),
 
     -- Jump to urgent client
     awful.key({ modkey,           }, "g", awful.client.urgent.jumpto),

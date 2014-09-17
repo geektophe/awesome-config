@@ -104,12 +104,12 @@ awful.rules.rules = {
     { rule       = { class = "Thunderbird" },
       properties = { tag = tags[1][2]} },
 
-    -- Terms
-    { rule       = { class = "XTerm" },
-      properties = { opacity = 0.7, tag = tags[1][3]} },
+    -- Terms (no more bound)
+    -- { rule       = { class = "XTerm" },
+    --   properties = { opacity = 0.7, tag = tags[1][3]} },
 
-    { rule_any   = { class = {"Gnome-terminal", "URxvt"} },
-      properties = { tag = tags[1][3] } },
+    -- { rule_any   = { class = {"Gnome-terminal", "URxvt"} },
+    --   properties = { tag = tags[1][3] } },
 
     -- Gvim
     { rule       = { class = "Gvim" },
