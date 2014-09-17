@@ -47,10 +47,10 @@ function mcabber_event_hook(kind, arg, jid, msg)
             preset = naughty.config.presets.normal
             icon = "person"
 
-            if string.match(jid, "nagios@dailymotion.com") then
-                if string.match(txt, "^PROBLEM:") then
+            if string.match(jid, "nagios@dailymotion.com") or string.match(jid, "Mon") then
+                if string.match(txt, "^PROBLEM:?") then
                     icon = "problem"
-                    txt = string.gsub(txt, "^PROBLEM: ", "")
+                    txt = string.gsub(txt, "^PROBLEM:? ", "")
                 elseif string.match(txt, "^RECOVERY:") then
                     icon = "recovery"
                     txt = string.gsub(txt, "^RECOVERY: ", "")
@@ -58,7 +58,8 @@ function mcabber_event_hook(kind, arg, jid, msg)
                     icon = "notification"
                     txt = string.gsub(txt, "^ACKNOWLEDGEMENT: ", "")
                 end
-            elseif string.match(jid, "conference.dailymotion.com") then
+            elseif arg == "MUC" then
+                string.gsub(txt, "^<([^>])>", "<strong>%1</strong>")
                 icon = "chat"
             end
 

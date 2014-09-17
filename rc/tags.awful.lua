@@ -98,18 +98,18 @@ awful.rules.rules = {
       properties = { tag = tags[screen.count()][1]} },
 
     { rule_any   = { instance = {"plugin-container", "exe"} },
-      properties = { floating = true, fullscreen = true } },
+      properties = { floating = true, fullscreen = true, focus = true } },
 
 	-- Thunderbird
     { rule       = { class = "Thunderbird" },
       properties = { tag = tags[1][2]} },
 
-    -- Terms
-    { rule       = { class = "XTerm" },
-      properties = { opacity = 0.7, tag = tags[1][3]} },
+    -- Terms (no more bound)
+    -- { rule       = { class = "XTerm" },
+    --   properties = { opacity = 0.7, tag = tags[1][3]} },
 
-    { rule_any   = { class = {"Gnome-terminal", "URxvt"} },
-      properties = { tag = tags[1][3] } },
+    -- { rule_any   = { class = {"Gnome-terminal", "URxvt"} },
+    --   properties = { tag = tags[1][3] } },
 
     -- Gvim
     { rule       = { class = "Gvim" },
