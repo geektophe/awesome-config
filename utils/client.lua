@@ -13,6 +13,7 @@ local screen = screen
 local beautiful = beautiful
 local mouse = mouse
 local wibox = wibox
+local string = string
 
 module("utils.client")
 
@@ -361,5 +362,16 @@ function togglefloat(c)
     awful.client.floating.toggle(c)
     c.ontop = awful.client.floating.get(c)
 end
+--}}}
+
+-- {{{ movetoscreen
+-- Moves the focused client to the next screen by direction
+function movetoscreen(c, direction)
+    s = awful.util.cycle(
+        screen.count(),
+        c.screen + direction)
+    awful.client.movetoscreen(c, s)
+end
+--}}}
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

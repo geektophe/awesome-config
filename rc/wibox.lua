@@ -32,6 +32,8 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local right_layout = wibox.layout.fixed.horizontal()
+    right_layout:add(widgets.mode.widget())
+    right_layout:add(widgets.spacer.widget())
     right_layout:add(widgets.gmail.icon())
     right_layout:add(widgets.gmail.widget())
     right_layout:add(widgets.spacer.widget())
