@@ -27,6 +27,7 @@ export SSH_AUTH_SOCK
 /usr/bin/dropboxd &
 #/usr/bin/xscreensaver -no-splash &
 #~/.config/awesome/bin/mcabber-watch-xscreensaver &
+/usr/bin/xautolock -detectsleep -time 10 -locker "i3lock -i ~/.lockscreen.png" &
 
 # Starts polkit server
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
