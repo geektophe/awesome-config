@@ -374,6 +374,8 @@ function movetoscreen(c, direction)
             screen.count(),
             c.screen + direction)
         awful.client.movetoscreen(c, s)
+        awful.screen.focus(mouse.screen)
+        c:raise()
     end
 end
 --}}}
