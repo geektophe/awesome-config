@@ -16,15 +16,15 @@ resize_mode_keys = {
 
 -- {{{ Move mode keys
 move_mode_keys = {
-    c =     function (c) utils.client.movetoscreen(-1) end,
+    c =     function (c) utils.client.movetoscreen(c, -1) end,
     t =     function (c) awful.client.swap.byidx(-1) end,
     s =     function (c) awful.client.swap.byidx(1) end,
-    s =     function (c) utils.client.movetoscreen(1) end,
-    Left =  function (c) utils.client.movetoscreen(-1) end,
+    r =     function (c) utils.client.movetoscreen(c, 1) end,
+    Left =  function (c) utils.client.movetoscreen(c, -1) end,
     Down =  function (c) awful.client.swap.byidx(-1) end,
     Up =    function (c) awful.client.swap.byidx(1) end,
-    Right = function (c) utils.client.movetoscreen(1) end,
-    space = utils.client.togglemarked
+    Right = function (c) utils.client.movetoscreen(c, 1) end,
+    space = function (c) utils.client.togglemarked(c) end
 }
 
 tag_keys = {
@@ -40,7 +40,6 @@ tag_keys = {
 }
 
 for code, key in  pairs(tag_keys)  do
-    print(string.format("code: %d -> %s", code, key))
     move_mode_keys[key] = function (c)
         if tags[c.screen][code] then
             local t = tags[c.screen][code]
