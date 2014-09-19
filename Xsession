@@ -25,8 +25,8 @@ export SSH_AUTH_SOCK
 /usr/bin/compton -b
 /usr/bin/parcellite &
 /usr/bin/dropboxd &
-/usr/bin/xscreensaver -no-splash &
-~/.config/awesome/bin/mcabber-watch-xscreensaver &
+#/usr/bin/xscreensaver -no-splash &
+#~/.config/awesome/bin/mcabber-watch-xscreensaver &
 
 # Starts polkit server
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

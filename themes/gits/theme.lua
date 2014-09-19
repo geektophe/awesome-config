@@ -20,6 +20,9 @@ themes        = config .. "/themes"
 themename     = "/gits"
 themedir      = themes .. themename
 wallpaper    = themedir .. "/background_default.jpg"
+lockscreen   = home .. "/.lockscreen.png"
+theme.wallpaper = wallpaper
+theme.lockscreen = lockscreen
 theme.wallpaper_cmd = { "awsetbg -a " .. wallpaper }
 
 if awful.util.file_readable(config .. "/vain/init.lua") then
