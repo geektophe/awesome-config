@@ -55,6 +55,8 @@ for s = 1, screen.count() do
         widgets.spacer.widget(),
         widgets.livestatus.widget(),
         widgets.livestatus.icon(),
+        widgets.spacer.widget(),
+        widgets.mode.widget(),
         layout = awful.widget.layout.horizontal.rightleft
     }
 end

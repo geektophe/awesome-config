@@ -295,8 +295,25 @@ end
 -- {{{ togglefloat
 -- Makes a client float and forces it ontop
 function togglefloat(c)
-    awful.client.floating.toggle(c)
-    c.ontop = awful.client.floating.get(c)
+    if c then
+        awful.client.floating.toggle(c)
+        c.ontop = awful.client.floating.get(c)
+    end
 end
+--}}}
+
+-- {{{ movetoscreen
+-- Moves the focused client to the next screen by direction
+function movetoscreen(c, direction)
+    if c then
+        s = awful.util.cycle(
+            screen.count(),
+            c.screen + direction)
+        awful.client.movetoscreen(c, s)
+        awful.screen.focus(mouse.screen)
+        c:raise()
+    end
+end
+--}}}
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

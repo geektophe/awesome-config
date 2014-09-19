@@ -29,6 +29,7 @@ utils.screen = require("utils.screen")
 utils.system = require("utils.system")
 utils.tag = require("utils.tag")
 utils.livestatus = require("utils.livestatus")
+utils.mode = require("utils.mode")
 
 -- Loads widgets libraries
 widgets = {}
@@ -43,6 +44,7 @@ widgets.volume = require("widgets.volume")
 widgets.im = require("widgets.im")
 widgets.gmail = require("widgets.gmail")
 widgets.livestatus = require("widgets.livestatus")
+widgets.mode = require("widgets.mode")
 -- }}}
 
 -- {{{ Variable definitions

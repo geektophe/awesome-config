@@ -8,7 +8,6 @@
 
 local vicious = require("vicious")
 local awful = require("awful")
-local blingbling = require("blingbling")
 local gmail = require("widgets.vicious.gmail")
 local beautiful = beautiful
 local widget_init = widget
