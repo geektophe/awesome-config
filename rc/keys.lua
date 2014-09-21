@@ -135,9 +135,18 @@ global_keys = awful.util.table.join(
     awful.key({"Control", "Mod1"},   "l", function () awful.util.spawn(xlock) end),
 
     -- moves selected clients to current tag
-    awful.key({ modkey },           "v", utils.client.markedtoctag),
+    awful.key({ modkey },            "v", utils.client.markedtoctag),
 
-    awful.key({ modkey },            "b", utils.mode.get_mode_callback("RESIZE", resize_mode_keys, widgets.mode))
+    awful.key({ modkey },            "b", utils.mode.get_mode_callback("RESIZE", resize_mode_keys, widgets.mode)),
+    awful.key({ modkey },            "d",     function ()
+        local cmd = "dmenu_run -i" ..
+            "  -nb '" .. string.sub(beautiful.bg_normal, 0, 7) ..
+            "' -nf '" .. string.sub(beautiful.fg_normal, 0, 7) ..
+            "' -sb '" .. string.sub(beautiful.bg_focus, 0, 7) ..
+            "' -sf '" .. string.sub(beautiful.fg_focus, 0, 7) ..
+            "' -fn 'dejavu sans-8'"
+        awful.util.spawn(cmd)
+    end)
 )
 -- }}}
 
