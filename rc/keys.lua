@@ -14,6 +14,21 @@ resize_mode_keys = {
 -- }}}
 
 
+-- {{{ Tag keys
+tag_keys = {
+    [1] = '"',
+    [2] = '«',
+    [3] = '»',
+    [4] = '(',
+    [5] = ')',
+    [6] = '@',
+    [7] = '+',
+    [8] = '-',
+    [9] = '/'
+}
+-- }}}
+--
+
 -- {{{ Move mode keys
 move_mode_keys = {
     c =     function (c) utils.client.movetoscreen(c, -1) end,
@@ -27,24 +42,25 @@ move_mode_keys = {
     space = function (c) utils.client.togglemarked(c) end
 }
 
-tag_keys = {
-    [1] = '"',
-    [2] = '«',
-    [3] = '»',
-    [4] = '(',
-    [5] = ')',
-    [6] = '@',
-    [7] = '+',
-    [8] = '-',
-    [9] = '/'
-}
-
 for code, key in  pairs(tag_keys)  do
     move_mode_keys[key] = function (c)
         if tags[c.screen][code] then
             local t = tags[c.screen][code]
             awful.client.movetotag(t)
             awful.tag.viewonly(t)
+        end
+    end
+end
+-- }}}
+--
+-- {{{ Move mode keys
+display_mode_keys = {}
+
+for code, key in  pairs(tag_keys)  do
+    display_mode_keys[key] = function (c)
+        if tags[c.screen][code] then
+            local t = tags[c.screen][code]
+            awful.client.toggletag(t)
         end
     end
 end
@@ -193,7 +209,8 @@ client_keys = awful.util.table.join(
             naughty.notify({ text = "Client opacity set to: " .. c.opacity })
         end
     end),
-    awful.key({ modkey },            "m", utils.mode.get_mode_callback("MOVE", move_mode_keys, widgets.mode))
+    awful.key({ modkey },            "m", utils.mode.get_mode_callback("MOVE", move_mode_keys, widgets.mode)),
+    awful.key({ modkey },            "j", utils.mode.get_mode_callback("DISPLAY", display_mode_keys, widgets.mode))
 )
 -- }}}
 

@@ -29,6 +29,10 @@ local _modes = {
     MOVE = {
         label = " MOVE ",
         color = "orange"
+    },
+    DISPLAY = {
+        label = " DISPLAY ",
+        color = "orange"
     }
 }
 
