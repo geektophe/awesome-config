@@ -39,4 +39,15 @@ export SSH_AUTH_SOCK
 # Starts urxvtd server
 /usr/bin/urxvtd -q -o -f
 
+# Starts autossh tunnel to honir
+if [ -f ~/.ssh/config ]; then
+	if grep -q 'Host honir-tunnel$' ~/.ssh/config; then
+		/usr/bin/autossh -xaNf -M 20000 honir-tunnel
+	fi
+	if [ -d ~/.config/lsync ] && grep -q 'Host honir$' ~/.ssh/config; then
+		/usr/bin/lsyncd ~/.config/lsync/etc/lsyncd-client.conf
+		~/.config/lsync/bin/lsync &
+	fi
+fi
+
 exec /usr/bin/awesome

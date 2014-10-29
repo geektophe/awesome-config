@@ -44,6 +44,7 @@ URxvt*scrollBar_right: true
 !URxvt*scrollColor: #c2dd5a
 URxvt*scrollBar_floating: true
 URxvt*scrollstyle: plain
+URxvt*saveLines: 10000
 
 ! to match gnome-terminal "Linux console" scheme
 ! foreground/background
