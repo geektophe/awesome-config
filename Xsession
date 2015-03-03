@@ -27,7 +27,7 @@ export SSH_AUTH_SOCK
 # Starts other components in the background
 /usr/bin/compton -b
 /usr/bin/parcellite &
-/usr/bin/dropboxd &
+/usr/bin/dropbox &
 #/usr/bin/xscreensaver -no-splash &
 #~/.config/awesome/bin/mcabber-watch-xscreensaver &
 /usr/bin/xautolock -detectsleep -time 10 -locker "i3lock -i ~/.lockscreen.png" &
@@ -38,9 +38,6 @@ export SSH_AUTH_SOCK
 # Starts polkit dependant services
 /usr/bin/nm-applet &
 #/usr/bin/blueman-applet &
-
-# Starts urxvtd server
-/usr/bin/urxvtd -q -o -f
 
 # Starts autossh tunnel to honir
 if [ -f ~/.ssh/config ]; then
