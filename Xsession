@@ -5,6 +5,9 @@ case $(hostname) in
 	thor) xrandr --output DVI-1 --right-of DVI-0 ;;
 esac
 
+# Disables speaker
+xset -b
+
 # Loads X applications configuration
 /usr/bin/xrdb -load ~/.Xresources
 /usr/bin/setxkbmap fr bepo
