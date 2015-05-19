@@ -88,7 +88,8 @@ awful.rules.rules = {
 
     -- Dialog windows
     { rule         = { type = "dialog" },
-      properties   = { floating = true, size_hints_honor = true } },
+      properties   = { floating = true, size_hints_honor = true },
+      callback     = awful.placement.centered },
 
     -- Web
     { rule   = { class = "Firefox", role = "Preferences" },
