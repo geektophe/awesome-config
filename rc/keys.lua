@@ -73,8 +73,8 @@ global_keys = awful.util.table.join(
 
     -- Move tag
     awful.key({ modkey, "Control" }, "n",     utils.tag.toscreen), -- send tag to screen
-    awful.key({ modkey, "Control" }, "Left",  function () utils.tag.incindex(-1) end),
-    awful.key({ modkey, "Control" }, "Right", function () utils.tag.incindex(1) end),
+    -- awful.key({ modkey, "Control" }, "Left",  function () utils.tag.incindex(-1) end),
+    -- awful.key({ modkey, "Control" }, "Right", function () utils.tag.incindex(1) end),
 
     -- Shifty: keybindings specific to shifty
     --awful.key({ modkey            }, "d", shifty.del), -- delete a tag
@@ -100,7 +100,7 @@ global_keys = awful.util.table.join(
     -- Remapped J
     awful.key({ modkey,           }, "t",     function () utils.client.viewnext(-1) end),
     awful.key({ modkey, "Shift"   }, "t",     function () awful.tag.incncol(1) end),
-    awful.key({ modkey, "Control" }, "t",     function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey, "Control" }, "t",     function () awful.screen.focus_relative(1) end),
     awful.key({ modkey, "Mod1"    }, "t",     function () awful.client.swap.byidx(-1) end),
     awful.key({ modkey,           }, "Down",  function () utils.client.viewnext(-1) end),
     awful.key({ modkey, "Shift"   }, "Down",  function () awful.tag.incncol(1) end),
@@ -110,7 +110,7 @@ global_keys = awful.util.table.join(
     -- Remapped K
     awful.key({ modkey,           }, "s",     function () utils.client.viewnext(1) end),
     awful.key({ modkey, "Shift"   }, "s",     function () awful.tag.incncol(-1) end),
-    awful.key({ modkey, "Control" }, "s",     function () awful.screen.focus_relative(1) end),
+    awful.key({ modkey, "Control" }, "s",     function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey, "Mod1"    }, "s",     function () awful.client.swap.byidx(1) end),
     awful.key({ modkey,           }, "Up",    function () utils.client.viewnext(1) end),
     awful.key({ modkey, "Shift"   }, "Up",    function () awful.tag.incncol(-1) end),
@@ -171,18 +171,18 @@ global_keys = awful.util.table.join(
 client_keys = awful.util.table.join(
     -- Remapped H
     awful.key({ modkey, "Mod1"    }, "c",      function (c)
-        utils.client.movetoscreen(c, -1)
+        utils.client.movetoscreen(c, 1)
     end),
     awful.key({ modkey, "Mod1"    }, "Left",   function (c)
-        utils.client.movetoscreen(c, -1)
+        utils.client.movetoscreen(c, 1)
     end),
 
     -- Remapped L
     awful.key({ modkey, "Mod1"    }, "r",      function (c)
-        utils.client.movetoscreen(c, 1)
+        utils.client.movetoscreen(c, -1)
     end),
     awful.key({ modkey, "Mod1"    }, "Right",  function (c)
-        utils.client.movetoscreen(c, 1)
+        utils.client.movetoscreen(c, -1)
     end),
 
     awful.key({ modkey,           }, "f",      function (c)
