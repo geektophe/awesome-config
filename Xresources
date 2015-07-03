@@ -34,9 +34,19 @@ URxvt.depth: 32
 !URxvt*loginShell: true
 
 ! Font
+!-- Xft settings -- !
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
 !URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:antialias=true:hinting=true
-URxvt.font: xft:DejaVu Sans Mono-9,xft:DejaVu Sans Mono for Powerline-9
+!URxvt.font: xft:DejaVu Sans Mono-11,xft:PowerLineSymbols-11
+URxvt.font: xft:DejaVu Sans Mono:style=Book:pixelsize=12,xft:DejaVu Sans Mono for Powerline
+!URxvt.font: xft:DejaVu Sans Mono-10,xft:DejaVu Sans Mono for Powerline
 URxvt*letterSpace: -1
+
+! Cut chars
 
 ! Scroll bar
 URxvt*scrollBar: true
@@ -118,10 +128,14 @@ URxvt.iso14755: false
 URxvt.iso14755_52: false
 
 ! Plugins
-URxvt.perl-ext-common: default,matcher
+URxvt.perl-ext-common: default,matcher,font-size
 URxvt.matcher.button: 3
 URxvt.url-launcher: /usr/bin/firefox
-
+URxvt.keysym.C-plus:    perl:font-size:increase
+URxvt.keysym.C-minus:   perl:font-size:decrease
+URxvt.keysym.C-S-plus:  perl:font-size:incglobal
+URxvt.keysym.C-S-minus: perl:font-size:decglobal
+URxvt.keysym.C-equal:   perl:font-size:reset
 
 !
 ! XScreensave settings
