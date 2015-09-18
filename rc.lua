@@ -43,6 +43,7 @@ widgets.volume = require("widgets.volume")
 widgets.im = require("widgets.im")
 widgets.gmail = require("widgets.gmail")
 widgets.mode = require("widgets.mode")
+widgets.mode = require("widgets.calendar")
 -- }}}
 
 -- {{{ Variable definitions

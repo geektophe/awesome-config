@@ -38,7 +38,7 @@ function loadwidget(wide)
         else
             _loadwidget:set_width(75)
         end
-        _loadwidget:set_graph_background_color("#00000022")
+        -- _loadwidget:set_graph_background_color("#00000022")
         _loadwidget:set_show_text(true)
         _loadwidget:set_label("$percent %")
         vicious.register(_loadwidget, vicious.widgets.cpu,'$1', 3)
@@ -53,7 +53,7 @@ function core1widget(wide)
         _core1widget:set_width(11)
         -- _core1widget:set_filled(true)
         _core1widget:set_h_margin(2)
-        _core1widget:set_graph_background_color("#00000033")
+        -- _core1widget:set_graph_background_color("#00000033")
         vicious.register(_core1widget, vicious.widgets.cpu, "$2")
     end
     return _core1widget
@@ -66,7 +66,7 @@ function core2widget(wide)
         _core2widget:set_width(11)
         -- _core2widget:set_filled(true)
         _core2widget:set_h_margin(2)
-        _core2widget:set_graph_background_color("#00000033")
+        -- _core2widget:set_graph_background_color("#00000033")
         vicious.register(_core2widget, vicious.widgets.cpu, "$2")
     end
     return _core2widget

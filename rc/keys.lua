@@ -14,6 +14,21 @@ resize_mode_keys = {
 -- }}}
 
 
+-- {{{ Tag keys
+tag_keys = {
+    [1] = '"',
+    [2] = '«',
+    [3] = '»',
+    [4] = '(',
+    [5] = ')',
+    [6] = '@',
+    [7] = '+',
+    [8] = '-',
+    [9] = '/'
+}
+-- }}}
+--
+
 -- {{{ Move mode keys
 move_mode_keys = {
     c =     function (c) utils.client.movetoscreen(c, -1) end,
@@ -27,24 +42,25 @@ move_mode_keys = {
     space = function (c) utils.client.togglemarked(c) end
 }
 
-tag_keys = {
-    [1] = '"',
-    [2] = '«',
-    [3] = '»',
-    [4] = '(',
-    [5] = ')',
-    [6] = '@',
-    [7] = '+',
-    [8] = '-',
-    [9] = '/'
-}
-
 for code, key in  pairs(tag_keys)  do
     move_mode_keys[key] = function (c)
         if tags[c.screen][code] then
             local t = tags[c.screen][code]
             awful.client.movetotag(t)
             awful.tag.viewonly(t)
+        end
+    end
+end
+-- }}}
+--
+-- {{{ Move mode keys
+display_mode_keys = {}
+
+for code, key in  pairs(tag_keys)  do
+    display_mode_keys[key] = function (c)
+        if tags[c.screen][code] then
+            local t = tags[c.screen][code]
+            awful.client.toggletag(t)
         end
     end
 end
@@ -57,8 +73,8 @@ global_keys = awful.util.table.join(
 
     -- Move tag
     awful.key({ modkey, "Control" }, "n",     utils.tag.toscreen), -- send tag to screen
-    awful.key({ modkey, "Control" }, "Left",  function () utils.tag.incindex(-1) end),
-    awful.key({ modkey, "Control" }, "Right", function () utils.tag.incindex(1) end),
+    -- awful.key({ modkey, "Control" }, "Left",  function () utils.tag.incindex(-1) end),
+    -- awful.key({ modkey, "Control" }, "Right", function () utils.tag.incindex(1) end),
 
     -- Shifty: keybindings specific to shifty
     --awful.key({ modkey            }, "d", shifty.del), -- delete a tag
@@ -84,7 +100,7 @@ global_keys = awful.util.table.join(
     -- Remapped J
     awful.key({ modkey,           }, "t",     function () utils.client.viewnext(-1) end),
     awful.key({ modkey, "Shift"   }, "t",     function () awful.tag.incncol(1) end),
-    awful.key({ modkey, "Control" }, "t",     function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey, "Control" }, "t",     function () awful.screen.focus_relative(1) end),
     awful.key({ modkey, "Mod1"    }, "t",     function () awful.client.swap.byidx(-1) end),
     awful.key({ modkey,           }, "Down",  function () utils.client.viewnext(-1) end),
     awful.key({ modkey, "Shift"   }, "Down",  function () awful.tag.incncol(1) end),
@@ -94,7 +110,7 @@ global_keys = awful.util.table.join(
     -- Remapped K
     awful.key({ modkey,           }, "s",     function () utils.client.viewnext(1) end),
     awful.key({ modkey, "Shift"   }, "s",     function () awful.tag.incncol(-1) end),
-    awful.key({ modkey, "Control" }, "s",     function () awful.screen.focus_relative(1) end),
+    awful.key({ modkey, "Control" }, "s",     function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey, "Mod1"    }, "s",     function () awful.client.swap.byidx(1) end),
     awful.key({ modkey,           }, "Up",    function () utils.client.viewnext(1) end),
     awful.key({ modkey, "Shift"   }, "Up",    function () awful.tag.incncol(-1) end),
@@ -135,9 +151,18 @@ global_keys = awful.util.table.join(
     awful.key({"Control", "Mod1"},   "l", function () awful.util.spawn(xlock) end),
 
     -- moves selected clients to current tag
-    awful.key({ modkey },           "v", utils.client.markedtoctag),
+    awful.key({ modkey },            "v", utils.client.markedtoctag),
 
-    awful.key({ modkey },            "b", utils.mode.get_mode_callback("RESIZE", resize_mode_keys, widgets.mode))
+    awful.key({ modkey },            "b", utils.mode.get_mode_callback("RESIZE", resize_mode_keys, widgets.mode)),
+    awful.key({ modkey },            "d",     function ()
+        local cmd = "dmenu_run -i" ..
+            "  -nb '" .. string.sub(beautiful.bg_normal, 0, 7) ..
+            "' -nf '" .. string.sub(beautiful.fg_normal, 0, 7) ..
+            "' -sb '" .. string.sub(beautiful.bg_focus, 0, 7) ..
+            "' -sf '" .. string.sub(beautiful.fg_focus, 0, 7) ..
+            "' -fn 'dejavu sans-8'"
+        awful.util.spawn(cmd)
+    end)
 )
 -- }}}
 
@@ -146,18 +171,18 @@ global_keys = awful.util.table.join(
 client_keys = awful.util.table.join(
     -- Remapped H
     awful.key({ modkey, "Mod1"    }, "c",      function (c)
-        utils.client.movetoscreen(c, -1)
+        utils.client.movetoscreen(c, 1)
     end),
     awful.key({ modkey, "Mod1"    }, "Left",   function (c)
-        utils.client.movetoscreen(c, -1)
+        utils.client.movetoscreen(c, 1)
     end),
 
     -- Remapped L
     awful.key({ modkey, "Mod1"    }, "r",      function (c)
-        utils.client.movetoscreen(c, 1)
+        utils.client.movetoscreen(c, -1)
     end),
     awful.key({ modkey, "Mod1"    }, "Right",  function (c)
-        utils.client.movetoscreen(c, 1)
+        utils.client.movetoscreen(c, -1)
     end),
 
     awful.key({ modkey,           }, "f",      function (c)
@@ -184,7 +209,8 @@ client_keys = awful.util.table.join(
             naughty.notify({ text = "Client opacity set to: " .. c.opacity })
         end
     end),
-    awful.key({ modkey },            "m", utils.mode.get_mode_callback("MOVE", move_mode_keys, widgets.mode))
+    awful.key({ modkey },            "m", utils.mode.get_mode_callback("MOVE", move_mode_keys, widgets.mode)),
+    awful.key({ modkey },            "j", utils.mode.get_mode_callback("DISPLAY", display_mode_keys, widgets.mode))
 )
 -- }}}
 

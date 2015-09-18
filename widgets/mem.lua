@@ -36,7 +36,7 @@ function widget(wide)
         else
             _memwidget:set_width(50)
         end
-        _memwidget:set_graph_background_color("#00000022")
+        -- _memwidget:set_graph_background_color("#00000022")
         _memwidget:set_show_text(true)
         vicious.register(_memwidget, vicious.widgets.mem, '$1', 10)
     end
