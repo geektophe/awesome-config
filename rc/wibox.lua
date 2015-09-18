@@ -61,8 +61,8 @@ for s = 1, screen.count() do
         right_layout:add(widgets.spacer.widget())
     end
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    -- right_layout:add(widgets.calendar.widget())
-    right_layout:add(widgets.clock.widget())
+    right_layout:add(widgets.calendar.widget())
+    -- right_layout:add(widgets.clock.widget())
     right_layout:add(widgets.spacer.widget())
     right_layout:add(mylayoutbox[s])
 
