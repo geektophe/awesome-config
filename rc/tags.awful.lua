@@ -1,19 +1,19 @@
 -- {{{ Tags definition
 tags_settings = {
     ["1:www"] = {
-        layout = awful.layout.suit.tile,
+        layout = awful.layout.suit.max,
         position = 1,
         exclusive = true,
         mwfact = 0.70,
     },
     ["2:mail"] = {
-        layout = awful.layout.suit.tile,
+        layout = awful.layout.suit.max,
         position = 2,
         exclusive = true,
         mwfact = 0.70,
     },
     ["3:term"] = {
-        layout = awful.layout.suit.tile,
+        layout = awful.layout.suit.fair,
         position = 3,
     },
     ["4:dev"] = {
@@ -25,7 +25,7 @@ tags_settings = {
         position = 5,
     },
     ["6:fs"] = {
-        layout = awful.layout.suit.tile,
+        layout = awful.layout.suit.fair,
         position = 6,
     },
     ["7:im"] = {
@@ -88,6 +88,10 @@ awful.rules.rules = {
 
     -- Dialog windows
     { rule         = { type = "dialog" },
+      properties   = { floating = true, size_hints_honor = true },
+      callback     = awful.placement.centered },
+
+    { rule         = { class = "Xephyr" },
       properties   = { floating = true, size_hints_honor = true },
       callback     = awful.placement.centered },
 
