@@ -36,8 +36,8 @@ function widget(wide)
         else
             _fswidget:set_width(40)
         end
-        _fswidget:set_show_text(true)
         _fswidget:set_horizontal(true)
+        _fswidget:set_show_text(true)
         -- _fswidget:set_filled(true)
         -- _fswidget:set_filled_color("#00000033")
         vicious.register(_fswidget, vicious.widgets.fs, "${/ used_p}", 120 )

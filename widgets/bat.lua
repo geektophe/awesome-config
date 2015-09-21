@@ -36,8 +36,9 @@ function widget(wide)
         else
             _batwidget:set_width(40)
         end
-        _batwidget:set_show_text(true)
         _batwidget:set_horizontal(true)
+        _batwidget:set_show_text(true)
+        _batwidget:set_label("$percent %")
         -- _batwidget:set_filled(true)
         --  _batwidget:set_graph_background_color("#00000033")
         vicious.register(_batwidget, vicious.widgets.bat, "$2", 61, "BAT0",
@@ -52,7 +53,7 @@ function widget(wide)
                         fg = beautiful.fg_focus,
                         bg = beautiful.bg_focus, })
                 end
-                return '<span color="white">(Bat: ' .. args[1] .. args[2] .. '% ' .. string.sub(args[3], 0, 5) .. ')</span>' end , 30, "BAT0")
+            end , 30, "BAT0")
     end
 
     return _batwidget
