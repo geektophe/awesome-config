@@ -39,6 +39,7 @@ theme.bg_focus  = "#50711Fee"
 -- theme.bg_focus  = "#137112aa"
 theme.fg_urgent = "#ffffff"
 theme.bg_urgent = "#FF6B0175"
+theme.bg_naughty = "#475F61bb"
 -- }}}
 
 -- {{{ Borders

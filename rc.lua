@@ -60,7 +60,7 @@ editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Lock screen command
-xlock = string.format("i3lock -t -i %s", beautiful.lockscreen)
+xlock = string.format("%s/.config/awesome/bin/xlock", os.getenv("HOME"))
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
