@@ -1,0 +1,157 @@
+#!/usr/bin/env python2
+
+import hypchat
+import cPickle
+import subprocess
+import traceback
+import sys
+import os
+
+
+HIPCHAT_CONFIG = "~/.hipchatrc"
+HIPCHAT_CACHE = os.path.expanduser("~/.mcabber/hipchat.cache")
+NOTIF_SCRIPT = "/usr/bin/awesome-client"
+
+
+
+
+class NaughtyNotification(object):
+    """
+    Nautification class used to send notification using the Naughty
+    notification system.
+    """
+    kind = "MSG"
+
+    def __init__(self, jid):
+        self.jid = jid
+
+    def send(self, direction, message):
+        if self.direction is not None:
+            direction = self.direction
+
+        cmnd = "mcabber_event_hook('%s', '%s', '%s', '%s')" % (
+                self.kind, direction, self.jid, message)
+        print cmnd
+
+        p = subprocess.Popen([NOTIF_SCRIPT], stdin=subprocess.PIPE)
+        p.communicate(cmnd)
+
+
+class UserNotification(NaughtyNotification):
+    direction = None
+
+
+class RoomNotification(NaughtyNotification):
+    direction = "MUC"
+
+
+class HipchatContactResolver(object):
+    """
+    Resolves an hipchat identifier into a friendly name, and return a
+    Notification object corresponding to the message type.
+    """
+
+    def __init__(self):
+        self.config = self.get_config()
+        if os.path.isfile(HIPCHAT_CACHE):
+            f = open(HIPCHAT_CACHE, "r")
+            self._cache = cPickle.load(f)
+            f.close()
+        else:
+            self._cache = {}
+
+    def get_config(self):
+        config = {}
+        filename = os.path.expanduser(HIPCHAT_CONFIG)
+        f = open(filename, "r")
+        for row in f.readlines():
+            row.strip()
+            key, value = row.split("=", 1)
+            config[key] = value.strip()
+        f.close()
+        return config
+
+    def cache(self, hid, name):
+        """
+        Adds new data to cache, and dump it on disk.
+
+        @param hid:     The hipchat identifier to map in cache.
+        @param name:    The name to associate with it.
+        """
+        self._cache[hid] = name
+        f = open("%s.tmp" % HIPCHAT_CACHE, "w")
+        cPickle.dump(self._cache, f)
+        f.close()
+        os.rename("%s.tmp" % HIPCHAT_CACHE, HIPCHAT_CACHE)
+
+    def resolve(self, hid):
+        """
+        Tries to resolve an hipchat identifier into a friendly name.
+
+        If found, it updates its cache, and dumps it.
+
+        @param hid: The hipchat identifier to map.
+        @return a Notificion object
+        """
+        nid, server = hid.split('@')
+        kind = server.split('.')[0]
+
+        if kind == "chat":
+            cls = UserNotification
+            name = self.resolve_user(nid)
+        else:
+            cls = RoomNotification
+            name = self.resolve_room(nid)
+
+        if name is None:
+            return cls(hid)
+        else:
+            return cls(name)
+
+    def resolve_user(self, nid):
+        """
+        Tries to resolve an user identifier.
+
+        @param nid: The numeric id to look for.
+        @return The mapped name, or None if not found.
+        """
+        if nid in self._cache:
+            return self._cache[nid]
+
+        gid, cid = nid.split('_')
+        hipchat = hypchat.HypChat(self.config.get("TOKEN", ""))
+        try:
+            user = hipchat.get_user(int(cid))
+            name = user["mention_name"]
+            self.cache(nid, name)
+            return name
+        except:
+            return None
+
+    def resolve_room(self, nid):
+        """
+        Maps a room name into a friendly name.
+
+        @param nid: The numeric id to look for.
+        @return The mapped name, or None if not found.
+        """
+        room = " ".join(nid.split("_")[1:])
+        return room.title()
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 5:
+        print "usage: %s kind direction jid message" % os.path.basename(sys.argv[0])
+        sys.exit(1)
+
+    try:
+        f = open("/tmp/notif.txt", "a")
+        kind, direction, jid, message = sys.argv[1:]
+        f.write("%s %s %s %s\n" % (kind, direction, jid, message))
+        resolver = HipchatContactResolver()
+        notification = resolver.resolve(jid)
+        notification.send(direction, message)
+    except:
+        f.write(traceback.format_exc())
+    finally:
+        f.close()

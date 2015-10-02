@@ -1,2 +1,13 @@
 #!/bin/bash
-i3lock -t -i $HOME/.lockscreen.png
+CMD=$HOME/.mcabber/mcabber.fifo
+BGI=$HOME/.lockscreen.png
+
+if [ -p $CMD ]; then
+    echo "/away" > $CMD
+fi
+
+i3lock -n -e -t -f -i $BGI
+
+if [ -p $CMD ]; then
+    echo "/online" > $CMD
+fi
