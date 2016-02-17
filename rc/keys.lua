@@ -150,6 +150,9 @@ global_keys = awful.util.table.join(
     awful.key({}, "XF86ScreenSaver",      function () awful.util.spawn(xlock) end),
     awful.key({"Control", "Mod1"},   "l", function () awful.util.spawn(xlock) end),
 
+    -- screen config management
+    awful.key({}, "XF86Display",     function () awful.util.spawn("screen-config") end),
+
     -- moves selected clients to current tag
     awful.key({ modkey },            "v", utils.client.markedtoctag),
 

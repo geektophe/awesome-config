@@ -16,8 +16,9 @@ xset -b
 /usr/bin/setxkbmap fr bepo
 
 # Starts gnome-keyring-daemon and exports its variables
-eval $( /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-export GNOME_KEYRING_CONTROL
+#eval $( /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh )
+eval $( /usr/bin/ssh-agent )
+#export GNOME_KEYRING_CONTROL
 export SSH_AUTH_SOCK
 #export GPG_AGENT_INFO
 
@@ -28,7 +29,7 @@ export SSH_AUTH_SOCK
 /usr/bin/compton -b
 /usr/bin/parcellite &
 /usr/bin/dropbox &
-/usr/bin/xautolock -detectsleep -time 10 -locker "i3lock -i -t $HOME/.lockscreen.png" &
+/usr/bin/xautolock -detectsleep -time 10 -locker "$HOME/.config/awesome/bin/xlock" &
 
 # Starts polkit server
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

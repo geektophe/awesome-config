@@ -97,10 +97,7 @@ awful.rules.rules = {
 
     -- Web
     { rule   = { class = "Firefox", role = "Preferences" },
-      properties = { tag = tags[screen.count()][1], floating = true } },
-
-    { rule_any   = { class = {"Firefox", "Chromium", "Transmission"} },
-      properties = { tag = tags[screen.count()][1]} },
+      properties = { floating = true } },
 
     { rule_any   = { instance = {"plugin-container", "exe"} },
       properties = { floating = true, fullscreen = true, focus = true } },

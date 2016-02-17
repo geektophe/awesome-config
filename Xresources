@@ -128,7 +128,7 @@ URxvt.iso14755: false
 URxvt.iso14755_52: false
 
 ! Plugins
-URxvt.perl-ext-common: default,matcher,font-size
+URxvt.perl-ext-common: default,matcher,font-size,keyboard-select
 URxvt.matcher.button: 3
 URxvt.url-launcher: /usr/bin/firefox
 URxvt.keysym.C-plus:    perl:font-size:increase
@@ -136,6 +136,7 @@ URxvt.keysym.C-minus:   perl:font-size:decrease
 URxvt.keysym.C-S-plus:  perl:font-size:incglobal
 URxvt.keysym.C-S-minus: perl:font-size:decglobal
 URxvt.keysym.C-equal:   perl:font-size:reset
+URxvt.keysym.C-s:       perl:keyboard-select:activate
 
 !
 ! XScreensave settings
