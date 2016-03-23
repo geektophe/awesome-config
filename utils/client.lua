@@ -23,8 +23,8 @@ opacity_min = 0.1
 opacity_unfocus_incr = 0.3
 
 -- A table instance that will save clients opacity
-local clients_opacity = {}
 local opacity_file = "/tmp/awmclnt.opacity." .. os.getenv('USER')
+local clients_opacity_locks = {}
 
 
 -- {{{ round
@@ -217,56 +217,33 @@ end
 --}}}
 
 
--- {{{ opacity_reload
--- Reloads clients opacity from clients_opacity dictionnary
-function opacity_reload()
-    for s = 1, screen.count() do
-        for c in client.get() do
-            if clients_opacity[c.pid] then
-                c.opacity = clients_opacity[c.pid]
-                opacity_toggle(c)
-            end
-        end
-    end
-end
-
-
--- {{{ opacity_save
--- Saves a client's opacity into the module level clients_opacity table
-function opacity_save(c)
-    local opacity = round(c.opacity, 1)
-
-    if opacity < 0 or opacity > 1 then
-        opacity = 1
-    end
-
-    clients_opacity[c.pid] = opacity
-end
---}}}
-
-
--- {{{ opacity_default
--- Returns saved opacity or 1 if client was not found
-function opacity_default(c)
-    if not clients_opacity[c.pid] then
+-- {{{ opacity_lock_toggle
+-- Disbles or enables opacity switch on focus change
+function opacity_lock_toggle(c)
+    if clients_opacity_locks[c] == nil or
+       clients_opacity_locks[c] == false then
+        clients_opacity_locks[c] = true
         c.opacity = 1
-        opacity_save(c)
+        print("locking opacity")
+    else
+        clients_opacity_locks[c] = false
+        opacity_toggle(c)
+        print("unlocking opacity")
     end
 
-    return clients_opacity[c.pid]
 end
 --}}}
-
 
 -- {{{ opacity_toggle
 -- Increases or decreases client opacity opacity depending on its focus
 function opacity_toggle(c)
-    local opacity = opacity_default(c)
-
+    if clients_opacity_locks[c] == true then
+        return
+    end
     if client.focus == c then
-        c.opacity = opacity
+        c.opacity = 1
     else
-        c.opacity = math.max(opacity - unfocus_opacity_incr, opacity_min)
+        c.opacity = math.max(1 - opacity_unfocus_incr, opacity_min)
     end
 end
 --}}}
@@ -285,7 +262,6 @@ function opacity_incr(c, incr)
 
     if opacity ~= new_opacity then
         c.opacity = new_opacity
-        opacity_save(c)
         return true
     end
 
@@ -306,18 +282,9 @@ end
 --}}}
 
 
--- {{{ togglemaximized
--- select next client in tag
-function togglemaximized(c)
-    c.maximized_horizontal = not c.maximized_horizontal
-    c.maximized_vertical   = not c.maximized_vertical
-end
---}}}
-
-
 -- {{{ markedtotag
 -- Moves marked clients to argument tag
-function markedtotag(t)
+function marked_to_tag(t)
     local last = nil
     for _, c in pairs(awful.client.getmarked()) do
         awful.client.movetotag(t, c)
@@ -334,7 +301,7 @@ end
 
 -- {{{ togglemarked
 -- select next client in tag
-function togglemarked(c)
+function marked_toggle(c)
     if awful.client.ismarked(c) then
         awful.client.unmark(c)
         c.border_color = beautiful.border_focus
@@ -348,7 +315,7 @@ end
 
 -- {{{ markedtoctag
 -- Moves marked clients to current tag
-function markedtoctag()
+function marked_to_client_tag()
     local s = mouse.screen
     local t = awful.tag.selected(s)
     markedtotag(t)
@@ -356,19 +323,9 @@ end
 --}}}
 
 
--- {{{ togglefloat
--- Makes a client float and forces it ontop
-function togglefloat(c)
-    if c then
-        awful.client.floating.toggle(c)
-        c.ontop = awful.client.floating.get(c)
-    end
-end
---}}}
-
 -- {{{ movetoscreen
 -- Moves the focused client to the next screen by direction
-function movetoscreen(c, direction)
+function move_to_screen(c, direction)
     if c then
         s = awful.util.cycle(
             screen.count(),

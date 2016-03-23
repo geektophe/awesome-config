@@ -23,6 +23,7 @@ client_buttons = awful.util.table.join(
             awful.mouse.client.move(c)
         end),
     awful.button({modkey, "Shift"}, 1, utils.client.togglemarked),
+    awful.button({modkey, "Mod1"},  1, utils.client.opacity_lock_toggle),
     awful.button({modkey},          3, awful.mouse.client.resize))
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

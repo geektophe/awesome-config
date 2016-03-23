@@ -31,15 +31,15 @@ tag_keys = {
 
 -- {{{ Move mode keys
 move_mode_keys = {
-    c =     function (c) utils.client.movetoscreen(c, -1) end,
+    c =     function (c) utils.client.move_to_screen(c, -1) end,
     t =     function (c) awful.client.swap.byidx(-1) end,
     s =     function (c) awful.client.swap.byidx(1) end,
-    r =     function (c) utils.client.movetoscreen(c, 1) end,
-    Left =  function (c) utils.client.movetoscreen(c, -1) end,
+    r =     function (c) utils.client.move_to_screen(c, 1) end,
+    Left =  function (c) utils.client.move_to_screen(c, -1) end,
     Down =  function (c) awful.client.swap.byidx(-1) end,
     Up =    function (c) awful.client.swap.byidx(1) end,
-    Right = function (c) utils.client.movetoscreen(c, 1) end,
-    space = function (c) utils.client.togglemarked(c) end
+    Right = function (c) utils.client.move_to_screen(c, 1) end,
+    space = function (c) utils.client.marked_toggle(c) end
 }
 
 for code, key in  pairs(tag_keys)  do
@@ -154,7 +154,7 @@ global_keys = awful.util.table.join(
     awful.key({}, "XF86Display",     function () awful.util.spawn("screen-config") end),
 
     -- moves selected clients to current tag
-    awful.key({ modkey },            "v", utils.client.markedtoctag),
+    awful.key({ modkey },            "v", utils.client.marked_to_client_tag),
 
     awful.key({ modkey },            "b", utils.mode.get_mode_callback("RESIZE", resize_mode_keys, widgets.mode)),
     awful.key({ modkey },            "d",     function ()
@@ -174,18 +174,18 @@ global_keys = awful.util.table.join(
 client_keys = awful.util.table.join(
     -- Remapped H
     awful.key({ modkey, "Mod1"    }, "c",      function (c)
-        utils.client.movetoscreen(c, 1)
+        utils.client.move_to_screen(c, 1)
     end),
     awful.key({ modkey, "Mod1"    }, "Left",   function (c)
-        utils.client.movetoscreen(c, 1)
+        utils.client.move_to_screen(c, 1)
     end),
 
     -- Remapped L
     awful.key({ modkey, "Mod1"    }, "r",      function (c)
-        utils.client.movetoscreen(c, -1)
+        utils.client.move_to_screen(c, -1)
     end),
     awful.key({ modkey, "Mod1"    }, "Right",  function (c)
-        utils.client.movetoscreen(c, -1)
+        utils.client.move_to_screen(c, -1)
     end),
 
     awful.key({ modkey,           }, "f",      function (c)
@@ -195,7 +195,7 @@ client_keys = awful.util.table.join(
 
     awful.key({ modkey,           }, "q",      function (c) c:kill() end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle),
-    awful.key({ modkey, "Mod1"    }, "space",  utils.client.togglemarked), -- marks client
+    awful.key({ modkey, "Mod1"    }, "space",  utils.client.marked_toggle),
     awful.key({ modkey, "Control" }, "Return", function (c)
         c:swap(awful.client.getmaster())
         c:raise()
