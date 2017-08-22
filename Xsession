@@ -1,12 +1,10 @@
 #!/bin/bash
 
-# Starts user dbus daemon
-eval $( /usr/bin/dbus-launch --sh-syntax --exit-with-session )
-
 # Configures screen on identified hostname
 case $(hostname) in
 	thor) /usr/local/bin/screen-config;;
 esac
+
 
 # Disables speaker
 xset -b
@@ -15,37 +13,39 @@ xset -b
 /usr/bin/xrdb -load ~/.Xresources
 /usr/bin/setxkbmap fr bepo
 
-# Starts gnome-keyring-daemon and exports its variables
-#eval $( /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh )
-eval $( /usr/bin/ssh-agent )
-#export GNOME_KEYRING_CONTROL
-export SSH_AUTH_SOCK
-#export GPG_AGENT_INFO
+if [ "$SESSION" == "gnome" ]; then
+	exec /usr/bin/gnome-session
+else
+	# Starts gnome-keyring-daemon and exports its variables
+	eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets )
+	# Starts ssh agent and exports its variables
+	eval $(/usr/bin/ssh-agent)
 
-# Starts pulseaudio
-/usr/bin/start-pulseaudio-x11
+	# Starts pulseaudio
+	/usr/bin/start-pulseaudio-x11
 
-# Starts other components in the background
-/usr/bin/compton -b
-/usr/bin/parcellite &
-/usr/bin/dropbox &
-/usr/bin/xautolock -detectsleep -time 10 -locker "$HOME/.config/awesome/bin/xlock" &
+	# Starts other components in the background
+	/usr/bin/compton -b
+	/usr/bin/parcellite &
+	/usr/bin/dropbox &
+	/usr/bin/xautolock -detectsleep -time 10 -locker "$HOME/.config/awesome/bin/xlock" &
 
-# Starts polkit server
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+	# Starts polkit server
+	/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-# Starts polkit dependant services
-/usr/bin/nm-applet &
+	# Starts polkit dependant services
+	/usr/bin/nm-applet &
 
-# Starts autossh tunnel to honir
-#if [ -f ~/.ssh/config ]; then
-#	if grep -q 'Host honir-tunnel$' ~/.ssh/config; then
-#		/usr/bin/autossh -xaNf -M 20000 honir-tunnel
-#	fi
-#	if [ -d ~/.config/lsync ] && grep -q 'Host honir$' ~/.ssh/config; then
-#		/usr/bin/lsyncd ~/.config/lsync/etc/lsyncd-client.conf
-#		~/.config/lsync/bin/lsync &
-#	fi
-#fi
+	# Starts autossh tunnel to honir
+	#if [ -f ~/.ssh/config ]; then
+	#	if grep -q 'Host honir-tunnel$' ~/.ssh/config; then
+	#		/usr/bin/autossh -xaNf -M 20000 honir-tunnel
+	#	fi
+	#	if [ -d ~/.config/lsync ] && grep -q 'Host honir$' ~/.ssh/config; then
+	#		/usr/bin/lsyncd ~/.config/lsync/etc/lsyncd-client.conf
+	#		~/.config/lsync/bin/lsync &
+	#	fi
+	#fi
 
-exec /usr/bin/awesome
+	exec /usr/bin/awesome
+fi

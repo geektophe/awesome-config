@@ -130,7 +130,7 @@ URxvt.iso14755_52: false
 ! Plugins
 URxvt.perl-ext-common: default,matcher,font-size,keyboard-select
 URxvt.matcher.button: 3
-URxvt.url-launcher: /usr/bin/firefox
+URxvt.url-launcher: xdg-open
 URxvt.keysym.C-plus:    perl:font-size:increase
 URxvt.keysym.C-minus:   perl:font-size:decrease
 URxvt.keysym.C-S-plus:  perl:font-size:incglobal
