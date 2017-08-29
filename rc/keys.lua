@@ -46,8 +46,8 @@ for code, key in  pairs(tag_keys)  do
     move_mode_keys[key] = function (c)
         if tags[c.screen][code] then
             local t = tags[c.screen][code]
-            awful.client.movetotag(t)
-            awful.tag.viewonly(t)
+            client.focus:move_to_tag(t)
+            t:view_only()
         end
     end
 end
@@ -60,7 +60,7 @@ for code, key in  pairs(tag_keys)  do
     display_mode_keys[key] = function (c)
         if tags[c.screen][code] then
             local t = tags[c.screen][code]
-            awful.client.toggletag(t)
+            client.focus:toggle_tag(t)
         end
     end
 end

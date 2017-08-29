@@ -1,75 +1,48 @@
 -- {{{ Tags definition
 tags_settings = {
-    ["1:www"] = {
+    {
+        name = "1:www",
         layout = awful.layout.suit.max,
-        position = 1,
         exclusive = true,
         mwfact = 0.70,
     },
-    ["2:mail"] = {
+    {
+        name = "2:mail",
         layout = awful.layout.suit.max,
-        position = 2,
         exclusive = true,
         mwfact = 0.70,
     },
-    ["3:term"] = {
+    {
+        name = "3:term",
         layout = awful.layout.suit.fair,
-        position = 3,
     },
-    ["4:dev"] = {
+    {
+        name = "4:dev",
         layout = awful.layout.suit.tile,
-        position = 4,
     },
-    ["5:sys"] = {
+    {
+        name = "5:sys",
         layout = awful.layout.suit.tile,
-        position = 5,
     },
-    ["6:fs"] = {
+    {
+        name = "6:fs",
         layout = awful.layout.suit.fair,
-        position = 6,
     },
-    ["7:im"] = {
+    {
+        name = "7:im",
         layout = awful.layout.suit.tile,
-         position = 7,
-         mwfact = 0.2,
+        mwfact = 0.2,
     },
-    ["8:off"] = {
+    {
+        name = "8:off",
         layout = awful.layout.suit.tile,
-        position = 8,
     },
-    ["9:img"] = {
+    {
+        name = "9:img",
         layout = awful.layout.suit.tile,
-        position = 9,
         mwfact = 0.2,
     },
 }
-
-
-tags = {}
-
-for s = 1, screen.count() do
-    -- Creates tags
-    tag_names = {}
-    tag_layouts = {}
-
-    for name, settings in pairs(tags_settings) do
-        if not settings.screen or (settings.screen and settings.screen == s) then
-            tag_names[settings.position] = name
-            tag_layouts[settings.position] = settings.layout
-        end
-    end
-
-    tags[s] = awful.tag(tag_names, s, tag_layouts)
-
-    -- Applies tags settings
-    for name, settings in pairs(tags_settings) do
-        tag = tags[s][settings.position]
-
-        if tag and settings.mwfact then
-            awful.tag.setmwfact(settings.mwfact, tag)
-        end
-    end
-end
 -- }}}
 
 
@@ -78,33 +51,43 @@ awful.rules.rules = {
     -- All clients will match this rule.
     { rule       = { },
       callback   = awful.client.setslave,
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     keys = client_keys,
-                     buttons = client_buttons,
-                     focus = true,
-                     switchtotag = false,
-                     floating = false} },
+      properties = {
+          border_width = beautiful.border_width,
+          border_color = beautiful.border_normal,
+          keys = client_keys,
+          buttons = client_buttons,
+          focus = true,
+          switchtotag = false,
+          floating = false,
+          screen = awful.screen.preferred,
+          placement = awful.placement.no_overlap + awful.placement.no_offscreen
+      }
+    },
 
     -- Dialog windows
     { rule         = { type = "dialog" },
       properties   = { floating = true, size_hints_honor = true },
-      callback     = awful.placement.centered },
+      callback     = awful.placement.centered
+    },
 
     { rule         = { class = "Xephyr" },
       properties   = { floating = true, size_hints_honor = true },
-      callback     = awful.placement.centered },
+      callback     = awful.placement.centered
+    },
 
     -- Web
     { rule   = { class = "Firefox", role = "Preferences" },
-      properties = { floating = true } },
+      properties = { floating = true }
+    },
 
     { rule_any   = { instance = {"plugin-container", "exe"} },
-      properties = { floating = true, fullscreen = true, focus = true } },
+      properties = { floating = true, fullscreen = true, focus = true }
+    },
 
 	-- Thunderbird
     { rule       = { class = "Thunderbird" },
-      properties = { tag = tags[1][2]} },
+      properties = { tag = "2:mail"}
+    },
 
     -- Terms (no more bound)
     -- { rule       = { class = "XTerm" },
@@ -115,43 +98,53 @@ awful.rules.rules = {
 
     -- Gvim
     { rule       = { class = "Gvim" },
-      properties = { tag = tags[1][4]} },
+      properties = { tag = "4:dev" }
+    },
 
     -- Baobab
     { rule       = { class = "Baobab" },
-      properties = { tag = tags[1][5]} },
+      properties = { tag = "5:sys"}
+    },
 
     -- Rdesktop
     { rule       = { class = "rdesktop" },
-      properties = { tag = tags[screen.count()][5], floating=true } },
+      properties = { tag = "5:sys", floating=true }
+    },
 
     -- Wireshark
     { rule       = { class = "Wireshark" },
-      properties = { tag = tags[1][5] } },
+      properties = { tag = "5:sys" }
+    },
 
     -- Nautilus
     { rule_any   = { class = {"Nautilus", "Thunar"} },
-      properties = { tag = tags[1][6] } },
+      properties = { tag = "6:fs" }
+    },
 
     -- File Roller
     { rule       = { class = "File-roller" },
-      properties = { tag = tags[1][6] } },
+      properties = { tag = "6:fs" }
+    },
 
     -- Empathy
     { rule       = { class = "Empathy", role = "contact_list" },
-      properties = { tag = tags[1][7] },
-      callback   = awful.client.setsmaster },
+      properties = { tag = "7:im" },
+      callback   = awful.client.setsmaster
+    },
 
     { rule       = { class = "Empathy" },
-      properties = { tag = tags[1][7] } },
+      properties = { tag = "7:im" }
+    },
 
     -- Gajim
     { rule       = { class = "Gajim", role = "roster" },
-      properties = { tag = tags[1][7] },
-      callback   = awful.client.setsmaster },
+      properties = { tag = "7:im" },
+      callback   = awful.client.setsmaster
+    },
 
     { rule       = { class = "Gajim" },
-      properties = { tag = tags[1][7] } },
+      properties = { tag = "7:im" }
+    },
 
 
     -- Libreoffice
@@ -162,11 +155,13 @@ awful.rules.rules = {
                                "libreoffice-base",
                                "libreoffice-math",
                                "VCLSalFrame.DocumentWindow" } },
-      properties = { tag = tags[1][8]} },
+      properties = { tag = "8:off"}
+    },
 
     -- Image tools
     { rule_any   = { class = {"Dia", "Gimp", "Pinta"} },
-      properties = { tag = tags[1][9] } },
+      properties = { tag = "9:img" }
+    },
 }
 -- }}}
 

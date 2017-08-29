@@ -8,7 +8,6 @@
 
 local vicious = require("vicious")
 local awful = require("awful")
-local blingbling = require("blingbling")
 local mcabber = require("widgets.vicious.mcabber")
 local beautiful = beautiful
 local awesome = awesome

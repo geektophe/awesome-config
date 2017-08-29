@@ -1,48 +1,26 @@
 -- Widget that monitors battery life
--- Module variables are :
---
--- widget : the wiget itself
--- icon : the associated widget icon
---
--- Note that he theme should have widget_disk attribute set
 
 local vicious = require("vicious")
-local awful = require("awful")
-local blingbling = require("blingbling")
+local progress = require("widgets.progress")
 local naughty = require("naughty")
 local beautiful = beautiful
-local awesome = awesome
-local wibox = wibox
+local string = string
 
 module("widgets.bat")
 
-local _baticon = nil
-local _batwidget = nil
-
-function icon()
-    if _baticon == nil then
-        _baticon = wibox.widget.imagebox()
-        _baticon:set_image(awesome.load_image(beautiful.widget_bat))
-    end
-    return _baticon
-end
+local _widget = nil
 
 function widget(wide)
-    if _batwidget == nil then
-        _batwidget=blingbling.progress_graph.new()
-        _batwidget:set_height(18)
-        if wide == nil or wide then
-            _batwidget:set_width(50)
-        else
-            _batwidget:set_width(40)
-        end
-        _batwidget:set_horizontal(true)
-        _batwidget:set_show_text(true)
-        _batwidget:set_label("$percent %")
-        -- _batwidget:set_filled(true)
-        --  _batwidget:set_graph_background_color("#00000033")
-        vicious.register(_batwidget, vicious.widgets.bat, "$2", 61, "BAT0",
-            --Bat % Warning
+    if _widget == nil then
+        local _width = wide and 60 or 50
+        _widget = progress.widget(beautiful.widget_bat, 102, _width, 18)
+
+        vicious.register(
+            _widget.widget,
+            vicious.widgets.bat,
+            function (widget, args) _widget.update(args[2]) end,
+            61,
+            "BAT0",
             function (widget, args)
                 if args[2] < 15 then
                     naughty.notify({
@@ -53,10 +31,13 @@ function widget(wide)
                         fg = beautiful.fg_focus,
                         bg = beautiful.bg_focus, })
                 end
-            end , 30, "BAT0")
+            end,
+            30,
+            "BAT0"
+        )
     end
 
-    return _batwidget
+    return _widget.widget
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

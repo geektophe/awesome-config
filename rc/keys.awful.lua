@@ -2,7 +2,7 @@
 -- Compute the maximum number of digit we need, limited to 9
 keynumber = 0
 for s = 1, screen.count() do
-   keynumber = math.min(9, math.max(#tags[s], keynumber));
+   keynumber = math.min(9, math.max(#tags_settings, keynumber));
 end
 
 -- Bind all key numbers to tags.
@@ -12,39 +12,44 @@ for i = 1, keynumber do
     global_keys = awful.util.table.join(global_keys,
         awful.key({ modkey }, "#" .. i + 9,
                 function ()
-                      local screen = mouse.screen
-                      if tags[screen][i] then
-                          awful.tag.viewonly(tags[screen][i])
-                      end
+                    local screen = awful.screen.focused()
+                    local tag = screen.tags[i]
+                    if tag then
+                        awful.tag.viewonly(tag)
+                    end
                 end),
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
                 function ()
-                    if client.focus and tags[client.focus.screen][i] then
-                        local t = tags[client.focus.screen][i]
-                        t.selected = not t.selected
+                    local screen = awful.screen.focused()
+                    local tag = screen.tags[i]
+                    if client.focus and tag then
+                        tag.selected = not tag.selected
                     end
                 end),
         awful.key({ modkey, "Control" }, "#" .. i + 9,
                 function ()
-                    if client.focus and tags[client.focus.screen][i] then
-                        local t = tags[client.focus.screen][i]
-                        awful.client.toggletag(t)
+                    local screen = awful.screen.focused()
+                    local tag = screen.tags[i]
+                    if client.focus and tag then
+                        awful.client.toggletag(tag)
                     end
                 end),
         awful.key({ modkey, "Mod1" }, "#" .. i + 9,
                 function ()
-                    if client.focus and tags[client.focus.screen][i] then
-                        local t = tags[client.focus.screen][i]
-                        awful.client.movetotag(t)
-                        awful.tag.viewonly(t)
+                    local screen = awful.screen.focused()
+                    local tag = screen.tags[i]
+                    if client.focus and tag then
+                        awful.client.movetotag(tag)
+                        awful.tag.viewonly(tag)
                     end
                 end),
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
                 function ()
-                    if client.focus and tags[client.focus.screen][i] then
-                        local t = tags[client.focus.screen][i]
-                        utils.client.markedtotag(t)
-                        awful.tag.viewonly(t)
+                    local screen = awful.screen.focused()
+                    local tag = screen.tags[i]
+                    if client.focus and tag then
+                        utils.client.markedtotag(tag)
+                        awful.tag.viewonly(tag)
                     end
                 end))
 end

@@ -16,9 +16,6 @@ gears = require("gears")
 -- Eminent library
 --eminent = require("eminent")
 
--- Loads Shifty automatic tags management library
--- shifty = require("shifty")
-
 -- Loads utils libraries
 utils = {}
 utils.client = require("utils.client")
@@ -37,13 +34,13 @@ widgets.clock = require("widgets.clock")
 widgets.cpu = require("widgets.cpu")
 widgets.fs = require("widgets.fs")
 widgets.mem = require("widgets.mem")
-widgets.net = require("widgets.net")
+-- widgets.net = require("widgets.net")
 widgets.spacer = require("widgets.spacer")
-widgets.volume = require("widgets.volume")
+-- widgets.volume = require("widgets.volume")
 widgets.im = require("widgets.im")
 widgets.gmail = require("widgets.gmail")
 widgets.mode = require("widgets.mode")
-widgets.calendar = require("widgets.calendar")
+-- widgets.calendar = require("widgets.calendar")
 -- }}}
 
 -- {{{ Variable definitions
@@ -112,20 +109,13 @@ utils.rc.loadrc('keys')
 -- }}}
 
 -- {{{ Shifty settings
-if shifty then
-    utils.rc.loadrc('tags.shifty')
-else
-    utils.rc.loadrc('tags.awful')
-end
+utils.rc.loadrc('tags')
 -- }}}
 
 -- {{{ Key bindings extension (depends on tags definition)
-if shifty then
-    utils.rc.loadrc('keys.shifty')
-else
-    utils.rc.loadrc('keys.awful')
-end
+utils.rc.loadrc('keys.awful')
 -- }}}
+--
 -- {{{ Menu
 utils.rc.loadrc('menu')
 -- }}}
