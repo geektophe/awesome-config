@@ -10,44 +10,20 @@ local math = math
 local tonumber = tonumber
 local tostring = tostring
 local string = string
+local awful = awful
 
 module("utils.pulseaudio")
 
 function volume_up()
-    local step = 655 * 5
-    local f = io.popen("pacmd dump |grep set-sink-volume")
-    local v = f:read()
-    local volume = tonumber(string.sub(v, string.find(v, 'x') - 1))
-    local newVolume = volume + step
-    if newVolume > 65536 then
-        newVolume = 65536
-    end
-    io.popen("pacmd set-sink-volume 0 "..newVolume)
-    f:close()
+    awful.util.spawn("amixer -D pulse sset Master 5%+")
 end
 
 function volume_down()
-    local step = 655 * 5
-    local f = io.popen("pacmd dump |grep set-sink-volume")
-    local v = f:read()
-    local volume = tonumber(string.sub(v, string.find(v, 'x') - 1))
-    local newVolume = volume - step
-    if newVolume < 0 then
-        newVolume = 0
-    end
-    io.popen("pacmd set-sink-volume 0 "..newVolume)
-    f:close()
+    awful.util.spawn("amixer -D pulse sset Master 5%-")
 end
 
 function volume_mute()
-    local g = io.popen("pacmd dump |grep set-sink-mute")
-    local mute = g:read()
-    if string.find(mute, "no") then
-        io.popen("pacmd set-sink-mute 0 yes")
-    else
-        io.popen("pacmd set-sink-mute 0 no")
-    end
-    g:close()
+    awful.util.spawn("amixer -D pulse sset Master toggle")
 end
 
 function volume_info()
