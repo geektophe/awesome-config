@@ -1,43 +1,22 @@
--- Volume widget definition
--- Module variables are :
---
--- widget : the wiget itself
--- icon : the associated widget icon
---
--- Note that he theme should have widget_disk attribute set
+-- Widget that monitors battery life
 
 local vicious = require("vicious")
-local awful = require("awful")
-local blingbling = require("blingbling")
+local triangle = require("widgets.triangle")
+local naughty = require("naughty")
 local beautiful = beautiful
-local awesome = awesome
-local wibox = wibox
+local string = string
 
 module("widgets.volume")
 
-local _volicon = nil
-local _volwidget = nil
-
-function icon()
-    if _volicon == nil then
-        _volicon = wibox.widget.imagebox()
-        _volicon:set_image(awesome.load_image(beautiful.widget_vol))
-    end
-    return _volicon
-end
+local _widget = nil
 
 function widget()
-    if _volwidget == nil then
-        _volwidget = blingbling.volume.new()
-        _volwidget:set_height(18)
-        _volwidget:set_width(50)
-        --bind the volume widget on the master channel
-        _volwidget:update_master()
-        _volwidget:set_master_control()
-        _volwidget:set_bar(true)
+    if _widget == nil then
+        _widget = triangle.widget(beautiful.widget_vol, 100, 5, 7, 18)
+        _widget.update(50)
     end
 
-    return _volwidget
+    return _widget
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

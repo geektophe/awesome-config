@@ -26,7 +26,8 @@ end
 -- {{{ Loadrc
 -- Loads an additional rc file from rc directory
 function loadrc(name)
-    local confdir = awful.util.getdir("config")
+    -- local confdir = awful.util.getdir("config")
+    local confdir = "/home/christophe/.config/awesome42"
     local path = confdir .. "/rc/" .. name .. ".lua"
 
     -- Loads file

@@ -5,7 +5,7 @@
 --
 -- Note that he theme should have widget_cpu attribute set
 
-local awful = require('awful')
+local wibox = require('wibox')
 
 module("widgets.clock")
 
@@ -13,7 +13,7 @@ local _clockwidget = nil
 
 function widget()
     if _clockwidget == nil then
-        _clockwidget = awful.widget.textclock()
+        _clockwidget = wibox.widget.textclock()
     end
 
     return _clockwidget

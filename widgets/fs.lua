@@ -23,7 +23,7 @@ function widget(wide)
         )
     end
 
-    return _widget.widget
+    return _widget
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

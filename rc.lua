@@ -1,5 +1,7 @@
 -- {{{ Includes
 -- Sets locale
+package.path = string.gsub(package.path, ".config/awesome", ".config/awesome42")
+print(package.path)
 os.setlocale("fr_FR.UTF-8")
 
 -- Standard awesome library
@@ -36,7 +38,7 @@ widgets.fs = require("widgets.fs")
 widgets.mem = require("widgets.mem")
 -- widgets.net = require("widgets.net")
 widgets.spacer = require("widgets.spacer")
--- widgets.volume = require("widgets.volume")
+widgets.volume = require("widgets.volume")
 widgets.im = require("widgets.im")
 widgets.gmail = require("widgets.gmail")
 widgets.mode = require("widgets.mode")
