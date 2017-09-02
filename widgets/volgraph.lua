@@ -13,7 +13,7 @@ local awesome = awesome
 local string = string
 local wibox = wibox
 
-module("widgets.triangle")
+module("widgets.volgraph")
 
 
 function widget(icon, max_value, bars_count, bar_width, height)
@@ -53,22 +53,38 @@ function widget(icon, max_value, bars_count, bar_width, height)
 
     local _widget = wibox.widget {
         _icon,
-        _bar_widgets,
+        {
+            _bar_widgets,
+            _text,
+            layout = wibox.layout.stack
+        },
         layout = wibox.layout.fixed.horizontal
     }
 
     local _container = wibox.container.margin(_widget, 0, 0, 2, 1, "#00000000")
+    local _current_values = {}
 
     _container.update = function (value)
-         for i=1, bars_count, 1 do
-             local _base = (i - 1) * _step
-             local _val = math.max(0, value - _base)
-             _val = math.min(_val, _step)
-             _bars[i]:set_value(_val)
-         end
-     end
+        if _current_values.volume ~= value.volume then
+            for i=1, bars_count, 1 do
+                local _base = (i - 1) * _step
+               local _val = math.max(0, value.volume - _base)
+                _val = math.min(_val, _step)
+                 _bars[i]:set_value(_val)
+            end
+            _current_values.volume = value.volume
+        end
+        if _current_values.mute ~= value.mute then
+            if value.mute then
+                _text:set_markup('<span color="red">Mute</span>')
+            else
+                _text:set_markup('')
+            end
+            _current_values.mute = value.mute
+        end
+    end
 
-     return _container
+    return _container
 end
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

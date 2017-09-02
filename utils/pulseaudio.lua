@@ -22,6 +22,26 @@ local _vol_change_listeners = {}
 local _vol_change_timer = nil
 local _vol_change_enabled = true
 
+local function volume_update_widgets()
+    awful.spawn.easy_async("amixer -D pulse sget Master",
+        function(stdout, stderr, reason, exit_code)
+            if exit_code ~= 0 then
+                naughty.notify({
+                    text = string.format("Failed to get volume level: %s", stderr)
+                })
+                return
+            end
+            local _pct, _mute = stdout:match("Playback [%d]+ %[([%d]+)%%%] %[([[%l]+)%]")
+            if _pct ~= nil then
+                _mute = _mute == "on" and true or false
+                for _, _listener in ipairs(_vol_change_listeners) do
+                    _listener.update({ volume=_pct, mute=_mute })
+                end
+            end
+        end
+    )
+end
+
 local function get_spawn_cb(errmsg)
     return function(stdout, stderr, reason, exit_code)
         if exit_code ~= 0 then
@@ -34,29 +54,9 @@ local function get_spawn_cb(errmsg)
     end
 end
 
-local function volume_update_widgets()
-    awful.spawn.easy_async("amixer -D pulse sget Master",
-        function(stdout, stderr, reason, exit_code)
-            if exit_code ~= 0 then
-                naughty.notify({
-                    text = string.format("Failed to get volume level: %s", stderr)
-                })
-                return
-            end
-            local _pct = stdout:match("Playback [%d]+ %[([%d]+)%%%]")
-            if _pct ~= nil then
-                for _, _listener in ipairs(_vol_change_listeners) do
-                    _listener.update(_pct)
-                end
-            end
-        end
-    )
-end
-
 local function set_vol_change_timer()
     _vol_change_timer = timer({timeout = 1})
     _vol_change_timer:connect_signal("timeout", function()
-        print("prout")
         if _vol_change_enabled then
             volume_update_widgets()
         end
@@ -80,11 +80,22 @@ function volume_down()
     )
 end
 
-function volume_mute()
+function volume_toggle()
     awful.spawn.easy_async(
         "amixer -D pulse sset Master toggle",
         get_spawn_cb("Failed togle volume mute: %s")
     )
+end
+
+function volume_run_mixer()
+    awful.spawn.easy_async("pavucontrol", function(stdout, stderr, reason, exit_code)
+        if exit_code ~= 0 then
+            naughty.notify({
+                text = string.format("Failed to run mixer", stderr)
+            })
+            return
+        end
+    end)
 end
 
 function add_vol_change_listener(listener)

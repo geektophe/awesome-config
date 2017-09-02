@@ -43,25 +43,24 @@ function widget(icon, max_value, width, height)
     local _widget = wibox.widget {
         _icon,
         {
-            {
-                widget = _graph,
-            },
-            {
-                widget = _text,
-            },
+            _graph,
+            _text,
             layout = wibox.layout.stack
         },
         layout = wibox.layout.fixed.horizontal
     }
 
     local _container = wibox.container.margin(_widget, 0, 0, 2, 1, "#00000000")
+    local _current_value = nil
 
     _container.update = function (value)
-         local _bg_color = beautiful.graph_background_color or "#00000066"
-         local _markup = '<span bgcolor="%s"> %d %% </span>'
-         local _display = string.format(_markup, _bg_color, value)
-         _text:set_markup(_display)
-         _graph:set_value(value)
+        if value ~= _current_value then
+             local _bg_color = beautiful.graph_background_color or "#00000066"
+             local _markup = '<span bgcolor="%s"> %d %% </span>'
+             local _display = string.format(_markup, _bg_color, value)
+             _text:set_markup(_display)
+             _graph:set_value(value)
+         end
      end
 
      return _container
