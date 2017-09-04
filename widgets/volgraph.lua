@@ -46,7 +46,7 @@ function widget(icon, max_value, bars_count, bar_width, height)
             widget           = wibox.widget.progressbar,
         }
         _bars[i] = _bar
-        local _bar_height = height / (bars_count + 2) * (i + 2)
+        local _bar_height = height / (bars_count + 1) * (i + 1)
         local _margin = height - _bar_height
         _bar_widgets[i] = wibox.container.margin(_bar, 0, 0, _margin, 1)
     end
