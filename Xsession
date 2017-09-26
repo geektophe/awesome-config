@@ -22,7 +22,7 @@ else
 	eval $(/usr/bin/ssh-agent)
 
 	# Starts pulseaudio
-	/usr/bin/start-pulseaudio-x11
+	/usr/bin/pulseaudio --start
 
 	# Starts other components in the background
 	/usr/bin/compton -b
