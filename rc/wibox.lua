@@ -3,7 +3,7 @@ wide = utils.screen.width() > 1280
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
-    -- set_wallpaper(s)
+    set_wallpaper(s)
 
     -- Creates tags
     tag_names = {}

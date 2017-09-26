@@ -88,7 +88,7 @@ end
 -- {{{ titlebar_toggle
 -- Toggles titlebar on client depending on floating state
 function titlebar_toggle(c)
-    c.ontop = awful.client.floating.get(c)
+    c.ontop = c.floating
 
     if c.ontop then
         awful.titlebar.show(c, {modkey=modkey})

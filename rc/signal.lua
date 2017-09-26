@@ -13,7 +13,7 @@ client.connect_signal("manage", function (c, startup)
         end)
 
     -- Makes client floating ontop
-    c.ontop = awful.client.floating.get(c)
+    c.ontop = c.floating
 
     c:connect_signal("property::floating", utils.client.titlebar_toggle)
 
@@ -30,7 +30,7 @@ client.connect_signal("manage", function (c, startup)
 end)
 
 client.connect_signal("focus", function(c)
-    if not awful.client.ismarked(c) then
+    if not c.marked then
         c.border_color = beautiful.border_focus
     end
     utils.client.opacity_toggle(c)
@@ -38,7 +38,7 @@ client.connect_signal("focus", function(c)
 end)
 
 client.connect_signal("unfocus", function(c)
-    if not awful.client.ismarked(c) then
+    if not c.marked then
         c.border_color = beautiful.border_normal
     end
     utils.client.opacity_toggle(c)

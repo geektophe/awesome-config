@@ -139,7 +139,7 @@ global_keys = awful.util.table.join(
     awful.key({ modkey,           }, "i",     utils.client.info),
 
     -- Prompt
-    awful.key({ modkey },            "l",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey },            "l",     function () awful.screen.focused().mypromptbox:run() end),
 
     -- Volume management
     awful.key({}, "XF86AudioMute",        utils.pulseaudio.volume_mute),

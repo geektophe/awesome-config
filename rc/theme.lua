@@ -4,8 +4,9 @@
 beautiful.init(themes .. themename .. "/theme.lua")
 
 -- Sets wallpapers
-local function set_wallpaper(s)
+function set_wallpaper(s)
     -- Wallpaper
+    print("wallpaper: " .. beautiful.wallpaper)
     if beautiful.wallpaper then
         local wallpaper = beautiful.wallpaper
         -- If wallpaper is a function, call it with the screen

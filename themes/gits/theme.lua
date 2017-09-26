@@ -3,6 +3,12 @@ require("awful.util")
 require("utils.system")
 require("utils.process")
 
+local theme_assets = require("beautiful.theme_assets")
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
+
+local gfs = require("gears.filesystem")
+local themes_path = gfs.get_themes_dir()
 
 theme = {}
 
@@ -19,12 +25,8 @@ sharedthemes  = shared .. "/themes"
 themes        = config .. "/themes"
 themename     = "/gits"
 themedir      = themes .. themename
-theme.wallpaper     = themedir .. "/background_default.jpg"
+theme.wallpaper = themedir .. "/background_default.jpg"
 theme.wallpaper_cmd = { "awsetbg -a " .. theme.wallpaper }
-
-if awful.util.file_readable(config .. "/vain/init.lua") then
-    theme.useless_gap_width  = "3"
-end
 --}}}
 
 -- {{{ Styles
@@ -43,6 +45,8 @@ theme.bg_naughty = "#475F61bb"
 -- }}}
 
 -- {{{ Borders
+theme.useless_gap   = dpi(0)
+theme.border_width  = dpi(1)
 theme.border_width  = "1"
 theme.border_normal = "#777777"
 theme.border_focus  = "#FFB30198"
@@ -89,9 +93,9 @@ theme.mouse_finder_color = "#CC9393"
 
 theme.menu_bg_normal = "#00000075"
 theme.menu_bg_focus = "#FF6B0175"
-theme.menu_border_width = "0"
-theme.menu_height = "18"
-theme.menu_width  = "130"
+theme.menu_border_width = dpi(0)
+theme.menu_height = dpi(18)
+theme.menu_width  = dpi(130)
 -- }}}
 
 -- {{{ Icons
@@ -165,6 +169,20 @@ theme.widget_mpd_stop  = themedir.."/icons/mpd_stop.png"
 theme.widget_im        = themedir.."/icons/im.png"
 theme.widget_gmail     = themedir.."/icons/gmail.png"
 -- }}}
+
+-- Generate taglist squares:
+local taglist_square_size = dpi(4)
+theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
+    taglist_square_size, theme.fg_normal
+)
+theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
+    taglist_square_size, theme.fg_normal
+)
+
+-- Generate Awesome icon:
+-- theme.awesome_icon = theme_assets.awesome_icon(
+--     theme.menu_height, theme.bg_focus, theme.fg_focus
+-- )
 
 return theme
 

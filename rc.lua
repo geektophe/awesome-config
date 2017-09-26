@@ -1,6 +1,5 @@
 -- {{{ Includes
 -- Sets locale
-package.path = string.gsub(package.path, ".config/awesome", ".config/awesome42")
 print(package.path)
 os.setlocale("fr_FR.UTF-8")
 
