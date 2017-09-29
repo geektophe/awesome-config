@@ -167,6 +167,10 @@ awful.rules.rules = {
     -- Image tools
     { rule_any   = { class = {"Dia", "Gimp", "Pinta"} },
       properties = { tag = tags[1][9] } },
+
+    -- Pavucontrol is on top
+    { rule       = { class = "Pavucontrol" },
+      properties = { floating = true } },
 }
 -- }}}
 

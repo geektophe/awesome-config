@@ -67,7 +67,7 @@ function core2widget(wide)
         -- _core2widget:set_filled(true)
         _core2widget:set_h_margin(2)
         -- _core2widget:set_graph_background_color("#00000033")
-        vicious.register(_core2widget, vicious.widgets.cpu, "$2")
+        vicious.register(_core2widget, vicious.widgets.cpu, "$3")
     end
     return _core2widget
 end
