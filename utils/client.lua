@@ -328,9 +328,9 @@ end
 function move_to_screen(c, direction)
     if c then
         s = awful.util.cycle(
-            screen.count(),
-            c.screen + direction)
-        awful.client.movetoscreen(c, s)
+            screen:count(),
+            c.screen.index + direction)
+        c.move_to_screen(c, s)
         awful.screen.focus(mouse.screen)
         c:raise()
     end

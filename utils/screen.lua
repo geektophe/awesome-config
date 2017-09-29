@@ -63,8 +63,8 @@ end
 -- {{{ focusnext
 -- Focus next screen
 function focusnext()
-    if screen.count() > 1 then
-        awful.screen.focus(awful.util.cycle(screen.count(), mouse.screen + 1))
+    if screen:count() > 1 then
+        awful.screen.focus(awful.util.cycle(screen:count(), mouse.screen.index + 1))
     end
 end
 --}}}
