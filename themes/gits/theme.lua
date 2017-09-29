@@ -30,7 +30,7 @@ theme.wallpaper_cmd = { "awsetbg -a " .. theme.wallpaper }
 --}}}
 
 -- {{{ Styles
-theme.font      = "dejavu sans 8"
+theme.font      = "sans 8"
 
 -- {{{ Colors
 theme.fg_normal = "#ffffff"
