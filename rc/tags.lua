@@ -75,6 +75,10 @@ awful.rules.rules = {
       callback     = awful.placement.centered
     },
 
+    { rule       = { class = "qjackctl" },
+      properties = { floating = true, size_hints_honor = true }
+    },
+
     -- Web
     { rule   = { class = "Firefox", role = "Preferences" },
       properties = { floating = true }
@@ -145,7 +149,6 @@ awful.rules.rules = {
     { rule       = { class = "Gajim" },
       properties = { tag = "7:im" }
     },
-
 
     -- Libreoffice
     { rule_any   = { class = { "libreoffice-startcenter",
