@@ -1,8 +1,8 @@
 -- MEM widget definition
 
-local vicious = require("vicious")
 local graph = require("widgets.graph")
 local beautiful = beautiful
+local vicious = vicious
 
 module("widgets.mem")
 

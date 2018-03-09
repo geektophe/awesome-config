@@ -6,7 +6,6 @@
 --
 -- Note that he theme should have widget_mem attribute set
 
-local vicious = require("vicious")
 local awful = require("awful")
 local naughty = require("naughty")
 local gears = require("gears")

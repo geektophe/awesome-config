@@ -2,9 +2,9 @@
 
 -- MEM widget definition
 
-local vicious = require("vicious")
 local cpusage = require("widgets.cpusage")
 local beautiful = beautiful
+local vicious = vicious
 
 module("widgets.cpu")
 

@@ -1,9 +1,9 @@
 -- Widget that monitors battery life
 
-local vicious = require("vicious")
 local progress = require("widgets.progress")
 local naughty = require("naughty")
 local beautiful = beautiful
+local vicious = vicious
 local string = string
 
 module("widgets.bat")

@@ -1,9 +1,9 @@
 -- File system size widget definition
 
 
-local vicious = require("vicious")
 local progress = require("widgets.progress")
 local beautiful = beautiful
+local vicious = vicious
 
 module("widgets.fs")
 

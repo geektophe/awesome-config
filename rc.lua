@@ -12,6 +12,7 @@ wibox = require("wibox")
 -- Theme handling library
 beautiful = require("beautiful")
 gears = require("gears")
+vicious = require("vicious")
 -- Revelation library
 --revelation = require("revelation")
 -- Eminent library
@@ -38,8 +39,6 @@ widgets.mem = require("widgets.mem")
 -- widgets.net = require("widgets.net")
 widgets.spacer = require("widgets.spacer")
 widgets.volume = require("widgets.volume")
-widgets.im = require("widgets.im")
-widgets.gmail = require("widgets.gmail")
 widgets.mode = require("widgets.mode")
 -- widgets.calendar = require("widgets.calendar")
 -- }}}
