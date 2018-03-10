@@ -21,6 +21,30 @@ XTerm*toolBar:            true
 !*customization:           -color
 XTerm*tremName:           xterm-256color
 !xterm*loginshell:         true
+! Color scheme
+XTerm*color0  : #2E3436
+XTerm*color8  : #555753
+! red
+XTerm*color1  : #CC0000
+XTerm*color9  : #EF2929
+! green
+XTerm*color2  : #4E9A06
+XTerm*color10 : #8AE234
+! yellow
+XTerm*color3  : #C4A000
+XTerm*color11 : #FCE94F
+! blue
+XTerm*color4  : #3465A4
+XTerm*color12 : #729FCF
+! magenta
+XTerm*color5  : #75507B
+XTerm*color13 : #AD7FA8
+! cyan
+XTerm*color6  : #06989A
+XTerm*color14 : #34E2E2
+! white
+XTerm*color7  : #D3D7CF
+XTerm*color15 : #EEEEEC
 
 !
 ! URxvt settings
