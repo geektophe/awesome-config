@@ -18,7 +18,7 @@ function widget(wide)
         vicious.register(
             _widget.widget,
             vicious.widgets.fs,
-            function (widget, args) _widget.update(args["{/ used_p}"]) end,
+            function (widget, args) _widget.update(args["{/home used_p}"]) end,
             120
         )
     end

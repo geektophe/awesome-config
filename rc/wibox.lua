@@ -48,20 +48,20 @@ awful.screen.connect_for_each_screen(function(s)
     -- Widgets that are aligned to the left
     local right_layout = wibox.layout.fixed.horizontal()
     right_layout:add(widgets.mode.widget())
-    right_layout:add(widgets.spacer.widget())
-    right_layout:add(widgets.volume.widget(utils.pulseaudio))
+    -- right_layout:add(widgets.spacer.widget())
+    -- right_layout:add(widgets.volume.widget(utils.pulseaudio))
     right_layout:add(widgets.spacer.widget())
     right_layout:add(widgets.cpu.widget(wide))
-    right_layout:add(widgets.spacer.widget())
-    right_layout:add(widgets.mem.widget(wide))
+    -- right_layout:add(widgets.spacer.widget())
+    -- right_layout:add(widgets.mem.widget(wide))
     right_layout:add(widgets.spacer.widget())
     right_layout:add(widgets.fs.widget(wide))
     right_layout:add(widgets.spacer.widget())
 
-    if utils.system.hasbattery() then
+    -- if utils.system.hasbattery() then
         right_layout:add(widgets.bat.widget(wide))
         right_layout:add(widgets.spacer.widget())
-    end
+    -- end
     if s.index == 1 then right_layout:add(wibox.widget.systray()) end
     -- right_layout:add(widgets.calendar.widget())
     right_layout:add(widgets.clock.widget())

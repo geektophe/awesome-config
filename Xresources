@@ -6,7 +6,7 @@ XTerm*background:         black
 XTerm*foreground:         white
 XTerm*cursorColor:        white
 XTerm*geometry:           80x25
-XTerm*faceName:           DejaVu_Sans_Mono_for_Powerline.otf:normal:pixelsize=12
+XTerm*faceName:           xft:DejaVu Sans Mono for Powerline:style=Book:pixelsize=12
 XTerm*dynamicColors:      true
 XTerm*utf8:               2
 XTerm*eightBitInput:      true

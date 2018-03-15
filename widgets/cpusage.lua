@@ -25,15 +25,15 @@ function widget(icon, max_value, core_width, graph_width, height)
     _icon:set_image(awesome.load_image(icon))
 
     -- Count CPU cores
-    local _num_cores = 0
-    for line in io.lines("/proc/cpuinfo") do
-        for k, v in string.gmatch(line, "([%a%s]+)[%s]+:[%s]([%d]+).-$") do
-            if k == "processor" then
-                _num_cores = _num_cores + 1
-            end
-        end
-    end
-
+    local _num_cores = 2
+--    for line in io.lines("/proc/cpuinfo") do
+--        for k, v in string.gmatch(line, "([%a%s]+)[%s]+:[%s]([%d]+).-$") do
+--            if k == "processor" then
+--                _num_cores = _num_cores + 1
+--            end
+--        end
+--    end
+--
     local _cores = {}
     local _cores_widgets = {
         spacing          = 3,

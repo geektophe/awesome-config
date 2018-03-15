@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Configures screen on identified hostname
 case $(hostname) in

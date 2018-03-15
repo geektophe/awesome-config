@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 CMD=$HOME/.mcabber/mcabber.fifo
 BGI=$HOME/.lockscreen.png
 
