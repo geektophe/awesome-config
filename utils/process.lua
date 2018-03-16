@@ -69,7 +69,7 @@ function run_or_raise(cmd, properties)
         if table.getn(ctags) == 0 then
             -- ctags is empty, show client on current tag
             local curtag = awful.tag.selected()
-            awful.client.movetotag(curtag, c)
+            c:move_to_tag(curtag)
         else
             -- Otherwise, pop to first tag client is visible on
             tag = ctags[1]

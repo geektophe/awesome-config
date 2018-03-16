@@ -39,7 +39,7 @@ for i = 1, keynumber do
                     local screen = awful.screen.focused()
                     local tag = screen.tags[i]
                     if client.focus and tag then
-                        awful.client.movetotag(tag)
+                        client.focus:move_to_tag(tag)
                         tag:view_only()
                     end
                 end),

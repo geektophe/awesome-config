@@ -287,7 +287,7 @@ end
 function marked_to_tag(t)
     local last = nil
     for _, c in pairs(awful.client.getmarked()) do
-        awful.client.movetotag(t, c)
+        c:move_to_tag(t)
         c.border_color = beautiful.border_normal
         last = c
     end
