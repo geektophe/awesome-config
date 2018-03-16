@@ -26,7 +26,7 @@ function toscreen()
     local scr = awful.util.cycle(screen.count(), tag.screen + 1)
     awful.tag.history.restore()
     tag = shifty.tagtoscr(scr, tag)
-    awful.tag.viewonly(tag)
+    tag:view_only()
 end
 --}}}
 

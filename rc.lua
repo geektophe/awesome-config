@@ -1,6 +1,5 @@
 -- {{{ Includes
 -- Sets locale
-print(package.path)
 os.setlocale("fr_FR.UTF-8")
 
 -- Standard awesome library
@@ -28,6 +27,11 @@ utils.screen = require("utils.screen")
 utils.system = require("utils.system")
 utils.tag = require("utils.tag")
 utils.tag = require("utils.mode")
+if utils.pulseaudio.has_pulseaudio() then
+    utils.volume_manager = utils.pulseaudio
+else
+    utils.volume_manager = nil
+end
 
 -- Loads widgets libraries
 widgets = {}

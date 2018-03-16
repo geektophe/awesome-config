@@ -130,7 +130,7 @@ global_keys = awful.util.table.join(
     awful.key({ modkey,           }, "h", function () utils.screen.focusnext() end),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "l",      awesome.restart),
     awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
@@ -147,11 +147,11 @@ global_keys = awful.util.table.join(
     awful.key({}, "XF86AudioRaiseVolume", utils.pulseaudio.volume_up),
 
     -- lock screen management
-    awful.key({}, "XF86ScreenSaver",      function () awful.util.spawn(xlock) end),
-    awful.key({"Control", "Mod1"},   "l", function () awful.util.spawn(xlock) end),
+    awful.key({}, "XF86ScreenSaver",      function () awful.spawn(xlock) end),
+    awful.key({"Control", "Mod1"},   "l", function () awful.spawn(xlock) end),
 
     -- screen config management
-    awful.key({}, "XF86Display",     function () awful.util.spawn("screen-config") end),
+    awful.key({}, "XF86Display",     function () awful.spawn("screen-config") end),
 
     -- moves selected clients to current tag
     awful.key({ modkey },            "v", utils.client.marked_to_client_tag),
@@ -164,7 +164,7 @@ global_keys = awful.util.table.join(
             "' -sb '" .. string.sub(beautiful.bg_focus, 0, 7) ..
             "' -sf '" .. string.sub(beautiful.fg_focus, 0, 7) ..
             "' -fn 'dejavu sans-8'"
-        awful.util.spawn(cmd)
+        awful.spawn(cmd)
     end)
 )
 -- }}}

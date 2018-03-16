@@ -48,8 +48,10 @@ awful.screen.connect_for_each_screen(function(s)
     -- Widgets that are aligned to the left
     local right_layout = wibox.layout.fixed.horizontal()
     right_layout:add(widgets.mode.widget())
-    -- right_layout:add(widgets.spacer.widget())
-    -- right_layout:add(widgets.volume.widget(utils.pulseaudio))
+    if utils.volume_manager then
+        right_layout:add(widgets.spacer.widget())
+        right_layout:add(widgets.volume.widget(utils.volume_manager))
+    end
     right_layout:add(widgets.spacer.widget())
     right_layout:add(widgets.cpu.widget(wide))
     -- right_layout:add(widgets.spacer.widget())

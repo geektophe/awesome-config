@@ -6,7 +6,7 @@ XTerm*background:         black
 XTerm*foreground:         white
 XTerm*cursorColor:        white
 XTerm*geometry:           80x25
-XTerm*faceName:           xft:DejaVu Sans Mono for Powerline:style=Book:pixelsize=12
+XTerm*faceName:           xft:DejaVu Sans Mono for Powerline:style=Book:pixelsize=12:antialias=true
 XTerm*dynamicColors:      true
 XTerm*utf8:               2
 XTerm*eightBitInput:      true
@@ -62,11 +62,13 @@ URxvt.depth: 32
 Xft.dpi:        96
 Xft.antialias:  true
 Xft.rgba:       rgb
+Xft.lcdfilter:  lcddefault
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
+
 !URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:antialias=true:hinting=true
 !URxvt.font: xft:DejaVu Sans Mono-11,xft:PowerLineSymbols-11
-URxvt.font: xft:DejaVu Sans Mono:style=Book:pixelsize=12,xft:DejaVu Sans Mono for Powerline
+URxvt.font: xft:DejaVu\ Sans\ Mono\ for\ Powerline:style=Book:pixelsize=12:antialias=true
 !URxvt.font: xft:DejaVu Sans Mono-10,xft:DejaVu Sans Mono for Powerline
 URxvt*letterSpace: -1
 

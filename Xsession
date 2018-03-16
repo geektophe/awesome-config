@@ -17,21 +17,25 @@ if [ "$SESSION" == "gnome" ]; then
 	exec gnome-session
 else
 	# Starts gnome-keyring-daemon and exports its variables
-	eval $(gnome-keyring-daemon --start --components=pkcs11,secrets )
+	# eval $(gnome-keyring-daemon --start --components=secrets )
 	# Starts ssh agent and exports its variables
 	eval $(ssh-agent)
 
 	# Starts pulseaudio
-	pulseaudio --start
+	if [ $(which pulseaudio) != "" ]; then
+	    pulseaudio --start
+	fi
 
 	# Starts other components in the background
 	compton -b
 	parcellite &
-	dropbox &
+	if [ $(which dropbox) != "" ]; then
+	    dropbox &
+	fi
 	xautolock -detectsleep -time 10 -locker "$HOME/.config/awesome/bin/xlock" &
 
 	# Starts polkit server
-	/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+	#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 	# Starts polkit dependant services
 	nm-applet &

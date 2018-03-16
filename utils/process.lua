@@ -72,7 +72,8 @@ function run_or_raise(cmd, properties)
             awful.client.movetotag(curtag, c)
         else
             -- Otherwise, pop to first tag client is visible on
-            awful.tag.viewonly(ctags[1])
+            tag = ctags[1]
+            tag:view_only()
         end
         -- And then focus the client
         if client.focus == c then
@@ -83,7 +84,7 @@ function run_or_raise(cmd, properties)
         end
         return
     end
-    awful.util.spawn(cmd, false)
+    awful.spawn(cmd, false)
 end
 --}}}
 

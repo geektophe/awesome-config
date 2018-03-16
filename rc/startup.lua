@@ -12,11 +12,11 @@ utils.process.run_once("/usr/bin/nm-applet")
 -- utils.process.run_once("update-notifier")
 
 if utils.system.hostname() == "thor" then
-    awful.util.spawn("/usr/bin/xrandr --output DVI-1 --right-of DVI-0")
+    awful.spawn("/usr/bin/xrandr --output DVI-1 --right-of DVI-0")
 end
 
 -- Reinitializes wallapper replaced by gnome-settings-daemon
-awful.util.spawn(beautiful.wallpaper_cmd[0])
+awful.spawn(beautiful.wallpaper_cmd[0])
 
 
 

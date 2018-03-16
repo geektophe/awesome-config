@@ -17,7 +17,7 @@ config        = awful.util.getdir("config")
 shared        = "/usr/share/awesome"
 
 if not awful.util.file_readable(shared .. "/icons/awesome16.png") then
-    shared    = "/usr/share/local/awesome"
+    shared    = "/usr/local/share/awesome"
 end
 
 sharedicons   = shared .. "/icons"

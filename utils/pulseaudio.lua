@@ -15,12 +15,17 @@ local awful = awful
 local print = print
 local ipairs = ipairs
 local timer = timer
+local gears = gears
 
 module("utils.pulseaudio")
 
 local _vol_change_listeners = {}
 local _vol_change_timer = nil
 local _vol_change_enabled = true
+
+function has_pulseaudio()
+    return gears.filesystem.file_readable("/usr/bin/pulseaudio")
+end
 
 local function volume_update_widgets()
     awful.spawn.easy_async("amixer -D pulse sget Master",
@@ -64,7 +69,9 @@ local function set_vol_change_timer()
     _vol_change_timer:start()
 end
 
-set_vol_change_timer()
+if has_pulseaudio() then
+    set_vol_change_timer()
+end
 
 function volume_up()
     awful.spawn.easy_async(
