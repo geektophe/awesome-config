@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export LANG=fr_FR.UTF-8
+
 # Configures screen on identified hostname
 case $(hostname) in
 	thor) /usr/local/bin/screen-config;;
