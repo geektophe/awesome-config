@@ -1,6 +1,6 @@
 -- Naughty configuration
 
-naughty.config.defaults.timeout = 30
+naughty.config.defaults.timeout = 60
 naughty.config.defaults.margin  = 4
 naughty.config.defaults.gap     = 1
 naughty.config.defaults.bg = 1
