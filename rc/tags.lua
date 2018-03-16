@@ -115,6 +115,11 @@ awful.rules.rules = {
       properties = { tag = "5:sys", floating=true }
     },
 
+    -- cssh
+    { rule       = { class = "Cssh" },
+      properties = { floating=true }
+    },
+
     -- Wireshark
     { rule       = { class = "Wireshark" },
       properties = { tag = "5:sys" }

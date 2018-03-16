@@ -63,8 +63,7 @@ awful.screen.connect_for_each_screen(function(s)
     -- if utils.system.hasbattery() then
         right_layout:add(widgets.bat.widget(wide))
         right_layout:add(widgets.spacer.widget())
-    -- end
-    if s.index == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(wibox.widget.systray())
     -- right_layout:add(widgets.calendar.widget())
     right_layout:add(widgets.clock.widget())
     right_layout:add(widgets.spacer.widget())

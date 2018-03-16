@@ -58,6 +58,28 @@ do
         in_error = false
     end)
 end
--- }}}
+
+-- Handles tags move when connecting or leaving docking station.
+tag.connect_signal("request::screen", function(t)
+    local fallback_tag = nil
+
+    -- find tag with same name on any other screen
+    for other_screen in screen do
+        if other_screen ~= t.screen then
+            fallback_tag = awful.tag.find_by_name(other_screen, t.name)
+            if fallback_tag ~= nil then
+                break
+            end
+        end
+    end
+
+    -- no tag with same name exists, chose random one
+    if fallback_tag == nil then
+        fallback_tag = awful.tag.find_fallback()
+    end
+
+    -- delete the tag and move it to other screen
+    t:delete(fallback_tag, true)
+end)
 
 -- vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
