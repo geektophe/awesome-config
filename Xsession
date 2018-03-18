@@ -13,7 +13,7 @@ xset -b
 
 # Loads X applications configuration
 xrdb -load ~/.Xresources
-setxkbmap fr bepo
+#setxkbmap fr bepo
 
 if [ "$SESSION" == "gnome" ]; then
 	exec gnome-session
