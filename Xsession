@@ -18,6 +18,11 @@ xrdb -load ~/.Xresources
 if [ "$SESSION" == "gnome" ]; then
 	exec gnome-session
 else
+	# Calibrates screen colors
+    if [ -f /usr/local/share/color/icc/colord/X220.icc ]; then
+		xcalib -d :0 -s 0 /usr/local/share/color/icc/colord/X220.icc
+	fi
+
 	# Starts gnome-keyring-daemon and exports its variables
 	# eval $(gnome-keyring-daemon --start --components=secrets )
 	# Starts ssh agent and exports its variables
@@ -34,13 +39,13 @@ else
 	if [ $(which dropbox) != "" ]; then
 	    dropbox &
 	fi
-	xautolock -detectsleep -time 10 -locker "$HOME/.config/awesome/bin/xlock" &
+	xidle -timeout 600 -program "$HOME/.config/awesome/bin/xlock" &
 
 	# Starts polkit server
 	#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 	# Starts polkit dependant services
-	nm-applet &
+	#nm-applet &
 
 	# Starts autossh tunnel to honir
 	#if [ -f ~/.ssh/config ]; then
@@ -53,5 +58,8 @@ else
 	#	fi
 	#fi
 
+	if [ -x /usr/local/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+        eval `dbus-launch --sh-syntax --exit-with-x11`
+	fi
 	exec awesome
 fi
