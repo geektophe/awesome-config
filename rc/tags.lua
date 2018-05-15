@@ -22,7 +22,7 @@ tags_settings = {
     },
     {
         name = "5:sys",
-        layout = awful.layout.suit.tile,
+        layout = awful.layout.suit.fair,
     },
     {
         name = "6:fs",
@@ -35,7 +35,7 @@ tags_settings = {
     },
     {
         name = "8:off",
-        layout = awful.layout.suit.tile,
+        layout = awful.layout.suit.max,
     },
     {
         name = "9:img",
